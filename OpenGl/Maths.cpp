@@ -4,6 +4,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <sstream>
+
 Vector2::Vector2()
 {
 	x = 0;
