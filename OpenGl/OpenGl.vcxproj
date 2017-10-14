@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\include\freeglut;$(SolutionDir)\include\glew-2.1.0;$(SolutionDir)\include\SDL2-2.0.5;$(SolutionDir)\include\SDL2_mixer-2.0.1;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\lib\freeglut;$(SolutionDir)\lib\SDL2-2.0.5\x86;$(SolutionDir)\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\..\..\C++ Libraries\freeglut\include;$(SolutionDir)..\..\..\C++ Libraries\glew-2.1.0\include;$(SolutionDir)..\..\..\C++ Libraries\SDL2-2.0.5\include;$(SolutionDir)..\..\..\C++ Libraries\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\..\C++ Libraries\glew-2.1.0\lib\Release\Win32;$(SolutionDir)..\..\..\C++ Libraries\freeglut\lib;$(SolutionDir)..\..\..\C++ Libraries\SDL2-2.0.5\lib\x86;$(SolutionDir)..\..\..\C++ Libraries\SDL2_mixer-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
