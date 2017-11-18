@@ -18,9 +18,7 @@ bool jump = true;
 Vector2 input;
 
 Vector3 velocity{ 0,0,0 };
-
-tri p1({ 15,0,15 }, { -15,0,15 }, { 15,0,-15 });
-tri p2({ 15,0,-15}, { -15,0,-15 }, { -15,0,15 });
+Vector3 rot{ 0,0,0 };
 
 AudioClip steps[4] = { "stone1.ogg" , "stone2.ogg" ,"stone3.ogg" ,"stone4.ogg" };
 int cIndex = 0;
@@ -43,18 +41,31 @@ void Reshape(int w, int h) {
 	glMatrixMode(GL_MODELVIEW);
 }
 void DoTheInput() {
-	input = Vector2::zero;
+	input.print("input: ");
+	//input = Vector2::zero;
 	if (Input::Keys['w']) {
 		input.y += 1;
 	}
-	if (Input::Keys['s']) {
+	else if (Input::Keys['s']) {
 		input.y -= 1;
+	}
+	else if(input.y > 0){
+		input.y -= .0001f;
+	}
+	else {
+		input.y = 0;
 	}
 	if (Input::Keys['a']) {
 		input.x += 1;
 	}
-	if (Input::Keys['d']) {
+	else if (Input::Keys['d']) {
 		input.x -= 1;
+	}
+	else if (input.x > 0) {
+		input.x -= .0001f;
+	}
+	else {
+		input.x = 0;
 	}
 	if (Input::Keys[' '] ) {
 		if (jump && grounded) {
@@ -99,7 +110,6 @@ void DoTheInput() {
 		}
 	}
 }
-
 void Render()
 {
 
@@ -108,15 +118,15 @@ void Render()
 	glLoadIdentity();
 	Input::cam.Render();
 
-	
+	rot = Vector3(Input::cam.rotation.x, Input::cam.rotation.y,0);
 	//glUseProgram(shader);
 	
 	glEnable(GL_DEPTH_TEST);
-	Debug::DrawAxes({ 0,0,-3 });
-	Debug::DrawAxes({ 0,0,3 });
-	Debug::DrawAxes({ 3,0,0 });
-	Debug::DrawAxes({ -3,0,0 });
-	Debug::DrawAxes({ 0,3,0 });
+	Debug::DrawAxes({ 0,0,-3 },rot);
+	Debug::DrawAxes({ 0,0,3 }, rot);
+	Debug::DrawAxes({ 3,0,0 }, rot);
+	Debug::DrawAxes({ -3,0,0 }, rot);
+	Debug::DrawAxes({ 0,3,0 }, rot);
 	
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, plane.vertexbuffer);
@@ -129,9 +139,12 @@ void Render()
 		(void*)0            // array buffer offset
 	);
 	glColor3f(.5f,.5f,.5f);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glEnable(GL_CULL_FACE);
 	glDrawArrays(GL_TRIANGLES, 0, plane.vertices.size()); // Starting from vertex 0; 3 vertices total -> 1 triangle
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(0, 0, 0);
+	glDrawArrays(GL_TRIANGLES, 0, plane.vertices.size()); // Starting from vertex 0; 3 vertices total -> 1 triangle
+	glPolygonMode(GL_FRONT, GL_FILL);
 	glDisableVertexAttribArray(0);
 	//Debug::DrawAxes({ 0,0,0 });
 	
@@ -139,28 +152,17 @@ void Render()
 }
 void Update()
 {
-	if (Input::cam.position.y > .7f) grounded = false;
-	else grounded = true;
-	
 	Time::setDeltaTime();
 
 	DoTheInput();
-	if (input.magnitude() > 0 && stepTimer < .5 && grounded) {
+	if (input.magnitude() > 0 && stepTimer < .5) {
 		stepTimer += Time::deltaTime;
 	}
 	if(stepTimer >= .5) {
-		cout << "d00k: " << Input::cam.position.ToString() <<endl;
 		source.Play(steps[cIndex],48);
 		cIndex++;
 		if (cIndex >= sizeof(steps) / sizeof(*steps)) cIndex = 0;
 		stepTimer = 0;
-	}
-	if (Input::cam.position.y > .7f) grounded = false;
-	else grounded = true;
-	if(grounded) Input::cam.position.y = .7f;
-	else {
-		velocity.y += gravity * Time::deltaTime;
-		Input::cam.position.y += velocity.y;
 	}
 	SDL_Delay(16.667);
 	Render();
@@ -351,7 +353,7 @@ bool Initialize()
 		return false;
 	}
 	shader = LoadShaders("vertex.glsl","frag.glsl");
-	plane = ObjLoader::loadOBJ("plane.obj");
+	plane = ObjLoader::loadOBJ("room.obj");
 	Input::SetupInput();
 	glutReshapeFunc(Reshape);
 	glutIdleFunc(Update);

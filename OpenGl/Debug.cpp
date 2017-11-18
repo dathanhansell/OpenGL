@@ -1,6 +1,6 @@
 #include "Debug.h"
 
-void Debug::DrawCardWireSphere(Vector3 p, float size, int verts) {
+void Debug::DrawCardWireSphere(Vector3 p, float size, int verts,Vector3 angle) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	verts /= 2;
 	glPushMatrix();
@@ -42,23 +42,26 @@ void Debug::DrawWireSphere(Vector3 p, float size , Vector3 color , int verts ) {
 	glPopMatrix();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
-void Debug::DrawAxes(Vector3 p) {
+void Debug::DrawAxes(Vector3 p, Vector3 angle) {
 	glPushMatrix();
 	DrawCardWireSphere(p);
 	glBegin(GL_LINES);
-	Vector3 f = Vector3::forward;
-	Vector3 u = Vector3::up;
-	Vector3 r = Vector3::right;
+	Vector3 f = Vector3::forward; 
+	Vector3 r = Vector3::right; 
+	Vector3 u = Vector3::up; 
 	glTranslatef(p.x, p.y, p.z);
-	glColor3f(u.x, u.y, u.z);
-	glVertex3f(p.x, p.y, p.z);
-	glVertex3f(p.x + u.x, p.y + u.y, p.z + u.z);
-	glColor3f(r.x, r.y, r.z);
-	glVertex3f(p.x, p.y, p.z);
-	glVertex3f(p.x + r.x, p.y + r.y, p.z + r.z);
 	glColor3f(f.x, f.y, f.z);
 	glVertex3f(p.x, p.y, p.z);
+	f = Vector3::EulerToForwardVector2(angle);
 	glVertex3f(p.x + f.x, p.y + f.y, p.z + f.z);
+	glColor3f(r.x, r.y, r.z);
+	glVertex3f(p.x, p.y, p.z);
+	r = Vector3::Cross(u, f).normalized();
+	glVertex3f(p.x + r.x, p.y + r.y, p.z + r.z);
+	glColor3f(u.x, u.y, u.z);
+	glVertex3f(p.x, p.y, p.z);
+	u = Vector3::Cross(f, r);
+	glVertex3f(p.x + u.x, p.y + u.y, p.z + u.z);
 	glEnd();
 	glPopMatrix();
 	glPushMatrix();

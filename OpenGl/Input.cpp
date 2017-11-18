@@ -35,7 +35,7 @@ void Input::MousePassive(int X, int Y)
 	oldMouse = Vector2(X, Y);
 	
 }
-Camera Input::cam = { { 0,0 },{ 3,.7f,-3 } };
+Camera Input::cam = { { 0,0 },{ 3,1.7f,-3 } };
 void Input::SetupInput()
 {
 	glutPassiveMotionFunc(MousePassive);
