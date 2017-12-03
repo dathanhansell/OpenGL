@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <gtest\gtest.h>
-#include <Maths.h>
+#include <Maths.cpp>
 
 TEST(Quaternions, QuatRotation)
 {
