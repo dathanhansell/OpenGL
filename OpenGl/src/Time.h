@@ -3,12 +3,14 @@
 
 class Time
 {
-	static float deltaReturn;
-	static float deltaTMP;
+	 float deltaReturn;
+	 float deltaTMP;
 public:
-	static float deltaTime;
-	static void setDeltaTime();
-	static void SetStartTicks();
-	static Uint32 GetTicks();
+	Time();
+	~Time();
+	 float deltaTime;
+	 void setDeltaTime();
+	 void SetStartTicks();
+	 Uint32 GetTicks();
 };
 

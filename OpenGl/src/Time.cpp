@@ -3,13 +3,18 @@
 #include <SDL.h>
 
 Uint32 startTime;
+Time::Time()
+{
+	SetStartTicks();
+}
+Time::~Time()
+{
+
+}
 void Time::SetStartTicks()
 {
 	startTime = SDL_GetTicks();
 }
-float Time::deltaTMP = 0;
-float Time::deltaReturn = 0;
-float Time::deltaTime;
 void Time::setDeltaTime() {
 	deltaReturn =   SDL_GetTicks() - deltaTMP;
 	deltaTMP = SDL_GetTicks();

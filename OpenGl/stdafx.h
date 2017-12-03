@@ -14,6 +14,11 @@
 #include <tchar.h>
 
 #include "Maths.h"
+#include "Audio.h"
+#include "Game.h"
+#include "Graphics.h"
+#include "Input.h"
+#include "Time.h"
 
 
 // TODO: reference additional headers your program requires here
