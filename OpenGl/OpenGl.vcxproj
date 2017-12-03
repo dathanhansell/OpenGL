@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\include\freeglut;$(SolutionDir)\include\glew-2.1.0;$(SolutionDir)\include\SDL2-2.0.5;$(SolutionDir)\include\SDL2_mixer-2.0.1;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\lib\freeglut;$(SolutionDir)\lib\SDL2-2.0.5\x86;$(SolutionDir)\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\mid\include\SDL2-2.0.5;$(SolutionDir)\mid\include\SDL2_mixer-2.0.1;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(SolutionDir)\mid\lib\SDL2-2.0.5\x86;$(SolutionDir)\mid\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,6 +93,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,37 +146,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioClip.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="AudioSource.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Maths.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ObjLoader.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="src\AudioClip.cpp" />
+    <ClCompile Include="src\AudioManager.cpp" />
+    <ClCompile Include="src\AudioSource.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Debug.cpp" />
+    <ClCompile Include="src\Display.cpp" />
+    <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\Maths.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\ObjLoader.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Time.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioClip.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="AudioSource.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Maths.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="ObjLoader.h" />
+    <ClInclude Include="src\AudioClip.h" />
+    <ClInclude Include="src\AudioManager.h" />
+    <ClInclude Include="src\AudioSource.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Debug.h" />
+    <ClInclude Include="src\Display.h" />
+    <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\Maths.h" />
+    <ClInclude Include="src\Model.h" />
+    <ClInclude Include="src\ObjLoader.h" />
+    <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\Transform.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
