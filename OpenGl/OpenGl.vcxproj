@@ -146,36 +146,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="src\AudioClip.cpp" />
     <ClCompile Include="src\Audio.cpp" />
     <ClCompile Include="src\AudioSource.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Debug.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Graphics.cpp" />
     <ClCompile Include="src\Input.cpp" />
-    <ClCompile Include="src\Maths.cpp" />
+    <ClCompile Include="src\Mat4x4.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ObjLoader.cpp" />
+    <ClCompile Include="src\Quaternion.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Time.cpp" />
     <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\Vector2.cpp" />
+    <ClCompile Include="src\Vector3.cpp" />
+    <ClCompile Include="src\Vector4.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
     <ClInclude Include="src\AudioClip.h" />
     <ClInclude Include="src\Audio.h" />
     <ClInclude Include="src\AudioSource.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Debug.h" />
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Graphics.h" />
     <ClInclude Include="src\Input.h" />
-    <ClInclude Include="src\Maths.h" />
+    <ClInclude Include="src\Mat4x4.h" />
     <ClInclude Include="src\Model.h" />
     <ClInclude Include="src\ObjLoader.h" />
+    <ClInclude Include="src\Quaternion.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Vector2.h" />
+    <ClInclude Include="src\Vector3.h" />
+    <ClInclude Include="src\Vector4.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
