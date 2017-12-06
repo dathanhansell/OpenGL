@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Audio.h"
-
+#include <iostream>
 void Init();
 
 Audio::Audio()
@@ -18,7 +18,6 @@ void Audio::Init() {
 	{
 		printf("Initialize Error: %s\n", SDL_GetError());
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Initialize Error", "Couldn't initialize SDL Audio", NULL);
-		exit(-2);
 		return;
 	}
 	std::cout << "Setting Up Audio Channels..." << std::endl;

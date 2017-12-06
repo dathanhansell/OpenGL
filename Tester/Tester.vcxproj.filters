@@ -31,11 +31,14 @@
     <ClCompile Include="Tester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Quaternions.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
     <ClCompile Include="..\mid\gtest\src\gtest-all.cc">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tQuaternion.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="tVector3.cpp">
+      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "Graphics.h"
-#include <gl\glut.h>
 #include <gl\glew.h>
+#include <gl\glut.h>
+
 #include <iostream>
 #include <SDL.h>
 
@@ -15,7 +16,19 @@ using namespace std;
 	{
 
 	}
+	void Update() {
 
+	}
+	void Render() {
+
+	}
+	void Reshape(int w, int h) {
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glViewport(0, 0, w, h);
+		gluPerspective(90.0f, (GLfloat)w / h, 0.1, 100);
+		glMatrixMode(GL_MODELVIEW);
+	}
 	void Graphics::Init()
 	{
 		width = 1280;
@@ -25,19 +38,17 @@ using namespace std;
 		if (!InitGL())
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Initialize Error", "Unable to initialize OpenGL!", NULL);
-			exit(-4);
 			return;
 		}
 		cout << "Initializing GLEW..." << endl;
 		if (!InitGLEW())
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Initialize Error", "Unable to initialize GLEW!", NULL);
-			exit(-5);
 			return;
 		}
 		glutReshapeFunc(Reshape);
 		glutIdleFunc(Update);
-		//glutDisplayFunc(Render);
+		glutDisplayFunc(Render);
 		glutMainLoop();
 	}
 
@@ -63,7 +74,6 @@ using namespace std;
 		if (glewError != GLEW_OK)
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Initialize Error", "Couldn't initialize Glew", NULL);
-			exit(-3);
 		}
 		return true;
 	}
@@ -71,13 +81,4 @@ using namespace std;
 		glutReshapeWindow(width, height);
 		glutPositionWindow(0, 0);
 	}
-	void Reshape(int w, int h) {
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glViewport(0, 0, w, h);
-		gluPerspective(90.0f, (GLfloat)w / h, 0.1, 100);
-		glMatrixMode(GL_MODELVIEW);
-	}
-	void Update() {
 
-	}

@@ -17,11 +17,15 @@ Game::Game()
 
 Game::~Game()
 {
+	delete audio;
+	delete input;
+	delete time;
 }
 
 void Game::Init() {
+	
 	audio = new Audio();
-	game = new Game();
+	graphics = new Graphics();
 	input = new Input();
 	time = new Time();
 	glutMainLoop();
