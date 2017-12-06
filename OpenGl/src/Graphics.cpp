@@ -36,7 +36,7 @@ using namespace std;
 		bool fullscreen = false;
 		cout << "Initializing OpenGL..." << endl;
 		if (!InitGL())
-		{
+		{gggggggg
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Initialize Error", "Unable to initialize OpenGL!", NULL);
 			return;
 		}
@@ -48,7 +48,11 @@ using namespace std;
 		}
 		glutReshapeFunc(Reshape);
 		glutIdleFunc(Update);
+<<<<<<< HEAD
+		//glutDisplayFunc(Render);
+=======
 		glutDisplayFunc(Render);
+>>>>>>> 629832113a54c57b774468ecd427e6aafed3b83d
 		glutMainLoop();
 	}
 
