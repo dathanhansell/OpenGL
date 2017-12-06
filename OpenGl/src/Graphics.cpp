@@ -37,7 +37,6 @@ using namespace std;
 		}
 		glutReshapeFunc(Reshape);
 		glutIdleFunc(Update);
-		cin >> width;
 		//glutDisplayFunc(Render);
 		glutMainLoop();
 	}
