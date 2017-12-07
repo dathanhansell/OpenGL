@@ -25,9 +25,10 @@ Game::~Game()
 void Game::Init() {
 	
 	audio = new Audio();
-	graphics = new Graphics();
+	
 	input = new Input();
 	time = new Time();
-	glutMainLoop();
+	graphics = new Graphics();
+	
 	return;
 }

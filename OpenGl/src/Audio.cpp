@@ -2,7 +2,7 @@
 #include "Audio.h"
 #include <iostream>
 void Init();
-
+using namespace std;
 Audio::Audio()
 {
 	Init();
@@ -13,7 +13,7 @@ Audio::~Audio()
 {
 }
 void Audio::Init() {
-	std::cout << "Initializing SDL Audio..." << std::endl;
+	cout << "Initializing Audio Module..." << endl;
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 	{
 		printf("Initialize Error: %s\n", SDL_GetError());
@@ -25,4 +25,5 @@ void Audio::Init() {
 	{
 		fprintf(stderr, "SDL_Mixer Error: %s\n", Mix_GetError());
 	}
+	cout << "Done!" << endl;
 }

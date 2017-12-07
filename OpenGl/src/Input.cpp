@@ -26,10 +26,9 @@ void MousePassive(int X, int Y)
 }
 void Input::Init()
 {
-	int a;
-	cin >> a;
+	cout << "Initializing Input Module..." << endl;
 	glutPassiveMotionFunc(MousePassive);
-	cin >> a;
 	glutKeyboardFunc(Key);
 	glutKeyboardUpFunc(KeyUp);
+	cout << "Done!" << endl;
 }
