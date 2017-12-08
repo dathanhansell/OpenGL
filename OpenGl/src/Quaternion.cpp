@@ -55,6 +55,33 @@ void Quaternion::Normalize(){
 	}
 
 Vector3 Quaternion::ToEuler() {
+	/*
+	///////
+	//Method1
+	///////
+	this->Normalize();
+	Vector3 e;
+	Quaternion q = { this->x,this->y,this->z,this->w };
+	e.x = atan2(2.0f * (q.y * q.z + q.w * q.x), q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z);
+	e.y = asin(std::max(-1.0f, std::min(-2 * (q.x * q.z - q.w * q.y), 1.0f)));
+	e.z = atan2(2.0f * (q.x * q.y + q.w * q.z), q.w * q.w + q.x * q.x - q.y * q.y - q.z * q.z);
+	return e* RAD2DEG;
+	///////
+	//Method2
+	///////
+	float sqw = w*w;
+	float sqx = x*x;
+	float sqy = y*y;
+	float sqz = z*z;
+
+	Vector3 euler;
+	euler.x = atan2f(2.f * (z*y + x*w), 1 - 2 * (sqx + sqy));
+	euler.y = asinf(-2.f * (x*z - y*w));
+	euler.z = atan2f(2.f * (x*y + z*w), 1 - 2 * (sqy + sqz));
+	return euler * RAD2DEG;
+	///////
+	//Method3
+	///////
 	Vector3 e;
 	float sx = 2 * (w * x + y * z);
 	float cx = 1 - 2 * (x * x + y * y);
@@ -69,9 +96,36 @@ Vector3 Quaternion::ToEuler() {
 	float sz = 2 * (w * z + x * y);
 	float cz = 1 - 2 * (y * y + z * z);
 	e.z = atan2(sy, cz); 
-	e *= RAD2DEG;
-		e.print("\nTOEULERCALL: ");
+	e ;
+	
 	return e;
+	///////
+	//Method4
+	///////
+	Vector3 e;
+	double sqw = w*w;
+	double sqx = x*x;
+	double sqy = y*y;
+	double sqz = z*z;
+	double unit = sqx + sqy + sqz + sqw; // if normalised is one, otherwise is correction factor
+	double test = x*y + z*w;
+	if (test > 0.499*unit) { // singularity at north pole
+		e.x = 2 * atan2(x,w);
+		e.y = M_PI / 2;
+		e.z = 0;
+		return e;
+	}
+	if (test < -0.499*unit) { // singularity at south pole
+		e.x = -2 * atan2(x,w);
+		e.y = -M_PI / 2;
+		e.z = 0;
+		return e;
+	}
+	e.x = atan2(2 * y*w - 2 * x*z, sqx - sqy - sqz + sqw);
+	e.y = asin(2 * test / unit);
+	e.z = atan2(2 * x*w - 2 * y*z, -sqx + sqy - sqz + sqw);
+	return e ;
+	*/
 }
 std::string Quaternion::ToString() {
 	std::stringstream ss;
