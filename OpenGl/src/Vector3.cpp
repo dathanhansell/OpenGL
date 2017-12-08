@@ -45,12 +45,8 @@ Vector3& Vector3::operator*=(const Vector3& a)
 	z *= a.z;
 	return *this;
 }
-Vector3& Vector3::operator-() const {
-	Vector3 tmp;
-	tmp.x = -tmp.x;
-	tmp.y = -tmp.y;
-	tmp.z = -tmp.z;
-	return tmp;
+Vector3 Vector3::operator-() const {
+	return Vector3(-x,-y,-z);
 }
 Vector3& Vector3::operator*(const float& a)
 {

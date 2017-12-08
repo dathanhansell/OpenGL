@@ -4,6 +4,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <sstream>
+#include <algorithm>
 const float DEG2RAD = M_PI / 180.0f;
 const float RAD2DEG = 180.0f / M_PI;
 const float EPSILON = 0.00001f;
@@ -21,31 +22,56 @@ Quaternion& Quaternion::Rotate(float X, float Y, float Z) {
 	Y *= DEG2RAD;
 	Z *= DEG2RAD;
 
-	float c2 = cos(Z * 0.5)
-		, s2 = sin(Z * 0.5)
-		, c1 = cos(Y * 0.5)
-		, s1 = sin(Y * 0.5)
-		, c0 = cos(X * 0.5)
-		, s0 = sin(X * 0.5);
+	float cz = cos(Z * .5)
+		, sz = sin(Z * .5)
+		, cy = cos(Y * .5)
+		, sy = sin(Y * .5)
+		, cx = cos(X * .5)
+		, sx = sin(X * .5);
 
-	x = c1 * c2 * s0 + s1 * s2 * c0;
-	y = s1 * c2 * c0 - c1 * s2 * s0;
-	z = c1 * s2 * c0 - s1 * c2 * s0;
-	w = c1 * c2 * c0 + s1 * s2 * s0;
+	x = cy * cz * sx + sy * sz * cx;
+	y = sy * cz * cx - cy * sz * sx;
+	z = cy * sz * cx - sy * cz * sx;
+	w = cy * cz * cx + sy * sz * sx;
+	/*
+	x = cos(Y/2) * cos(Z/2) * sin(X/2) + sin(Y/2) * sin(Z/2) * cos(X/2);
+	y = sin(Y/2) * cos(Z/2) * cos(X/2) - cos(Y/2) * sin(Z/2) * sin(X/2);
+	z = cos(Y/2) * sin(Z/2) * cos(X/2) - sin(Y/2) * cos(Z/2) * sin(X/2);
+	w = cos(Y/2) * cos(Z/2) * cos(X/2) + sin(Y/2) * sin(Z/2) * sin(X/2);
 
+	x = cos(60 * (M_PI / 180) * .5) * cos(90 * (M_PI / 180) * .5) * sin(30 * (M_PI / 180) * .5) + sin(60 * (M_PI / 180) * .5) * sin(90 * (M_PI / 180) * .5) * cos(30 * (M_PI / 180) * .5);
+	y = sin(60 * (M_PI / 180) * .5) * cos(90 * (M_PI / 180) * .5) * cos(30 * (M_PI / 180) * .5) - cos(60 * (M_PI / 180) * .5) * sin(90 * (M_PI / 180) * .5) * sin(30 * (M_PI / 180) * .5);
+	z = cos(60 * (M_PI / 180) * .5) * sin(90 * (M_PI / 180) * .5) * cos(30 * (M_PI / 180) * .5) - sin(60 * (M_PI / 180) * .5) * cos(90 * (M_PI / 180) * .5) * sin(30 * (M_PI / 180) * .5);
+	w = cos(60 * (M_PI / 180) * .5) * cos(90 * (M_PI / 180) * .5) * cos(30 * (M_PI / 180) * .5) + sin(60 * (M_PI / 180) * .5) * sin(90 * (M_PI / 180) * .5) * sin(30 * (M_PI / 180) * .5);
+	*/
 	return *this;
 }
+void Quaternion::Normalize(){
+	float magnitude = sqrt(pow(w, 2) + pow(x, 2) + pow(y, 2) + pow(z, 2));
+	w = w / magnitude;
+	x = x / magnitude;
+	y = y / magnitude;
+	z = z / magnitude;
+	}
+
 Vector3 Quaternion::ToEuler() {
-	float v = (y*z) + (x*w);
-	if (abs(v - 0.5) < 1e-12) {
-		return Vector3(2 * atan2(y, x), M_PI / 2, 0);
-	}
-	if (abs(v + 0.5) < 1e-12) {
-		return Vector3(-2 * atan2(y, x), -M_PI / 2, 0);
-	}
-	return Vector3(atan2(2 * (x*z - y*w), 1 - 2 * (z*z + w*w)),
-		asin(2 * v),
-		atan2(2 * (x*y - z*w), 1 - 2 * (y*y + w*w)));
+	Vector3 e;
+	float sx = 2 * (w * x + y * z);
+	float cx = 1 - 2 * (x * x + y * y);
+	e.x = atan2(sx, cx);
+
+	float sy = 2 * (w * y - z * x);
+	if (fabs(sx) >= 1)
+		e.y = copysign(M_PI / 2, sx);
+	else
+		e.y = asin(sx);
+
+	float sz = 2 * (w * z + x * y);
+	float cz = 1 - 2 * (y * y + z * z);
+	e.z = atan2(sy, cz); 
+	e *= RAD2DEG;
+		e.print("\nTOEULERCALL: ");
+	return e;
 }
 std::string Quaternion::ToString() {
 	std::stringstream ss;

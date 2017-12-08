@@ -11,6 +11,7 @@ public:
 	Vector3 ToEuler();
 	Quaternion& Rotate(Vector3 angle);
 	Quaternion& Rotate(float X, float Y, float Z);
+	void Normalize();
 	std::string ToString();
 	void Print(std::string title = "");
 };

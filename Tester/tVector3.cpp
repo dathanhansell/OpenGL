@@ -13,8 +13,6 @@ TEST(tVector3, Addition)
 	EXPECT_EQ(6, A.z);
 }
 
-
-
 TEST(tVector3, Subtraction)
 {
 	Vector3 A, B;
@@ -115,5 +113,33 @@ TEST(tVector3, Unary_Minus)
 	EXPECT_EQ(9, A.x);
 	EXPECT_EQ(25, A.y);
 	EXPECT_EQ(6, A.z);
+}
 
+TEST(tVector3, Cross)
+{
+	Vector3 A, B, C;
+	A = { 4,10,6 };
+	B = { -5,-15,-0 };
+	C = Vector3::Cross(A,B);
+	EXPECT_EQ(90, C.x);
+	EXPECT_EQ(-30, C.y);
+	EXPECT_EQ(-10, C.z);
+	C = Vector3::Cross(B, A);
+	EXPECT_EQ(-90, C.x);
+	EXPECT_EQ(30, C.y);
+	EXPECT_EQ(10, C.z);
+}
+
+TEST(tVector3, Dot)
+{
+	Vector3 A, B;
+	float C;
+	A = { 4,10,6 };
+	B = { -5,-15,-0 };
+	C = Vector3::Dot(A, B);
+	EXPECT_EQ(-170, C);
+	A = { 289,-212,204 };
+	B = { -96,-208,248 };
+	C = Vector3::Dot(A, B);
+	EXPECT_EQ(66944, C);
 }
