@@ -24,16 +24,17 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OpenGl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>Engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,16 +73,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\mid\include\SDL2-2.0.5;$(SolutionDir)\mid\include\SDL2_mixer-2.0.1;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(SolutionDir)\mid\lib\SDL2-2.0.5\x86;$(SolutionDir)\mid\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\mid\include\SDL2-2.0.5;$(SolutionDir)\mid\include\SDL2_mixer-2.0.1;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(SolutionDir)\mid\lib\SDL2-2.0.5\x86;$(SolutionDir)\mid\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(SolutionDir)\OpenGL\src\game;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -94,11 +95,19 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>stdafx.h;MGLE.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -121,12 +130,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>stdafx.h;MGLE.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,44 +156,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\AudioClip.cpp" />
-    <ClCompile Include="src\Audio.cpp" />
-    <ClCompile Include="src\AudioSource.cpp" />
-    <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\Debug.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\Graphics.cpp" />
-    <ClCompile Include="src\Input.cpp" />
-    <ClCompile Include="src\Mat4x4.cpp" />
-    <ClCompile Include="src\Model.cpp" />
-    <ClCompile Include="src\ObjLoader.cpp" />
-    <ClCompile Include="src\Quaternion.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Time.cpp" />
-    <ClCompile Include="src\Transform.cpp" />
-    <ClCompile Include="src\Vector2.cpp" />
-    <ClCompile Include="src\Vector3.cpp" />
-    <ClCompile Include="src\Vector4.cpp" />
+    <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\game\Input.cpp" />
+    <ClCompile Include="src\game\Time.cpp" />
+    <ClCompile Include="src\game\Timer.cpp" />
+    <ClCompile Include="src\graphics\Debug.cpp" />
+    <ClCompile Include="src\graphics\Graphics.cpp" />
+    <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\math\Mat4x4.cpp" />
+    <ClCompile Include="src\math\Quaternion.cpp" />
+    <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\math\Vector3.cpp" />
+    <ClCompile Include="src\math\Vector4.cpp" />
+    <ClCompile Include="src\resources\Model.cpp" />
+    <ClCompile Include="src\resources\ObjLoader.cpp" />
+    <ClCompile Include="src\scene\Transform.cpp" />
+    <ClCompile Include="src\Scratch.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AudioClip.h" />
-    <ClInclude Include="src\Audio.h" />
-    <ClInclude Include="src\AudioSource.h" />
-    <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\Debug.h" />
-    <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\Graphics.h" />
-    <ClInclude Include="src\Input.h" />
-    <ClInclude Include="src\Mat4x4.h" />
-    <ClInclude Include="src\Model.h" />
-    <ClInclude Include="src\ObjLoader.h" />
-    <ClInclude Include="src\Quaternion.h" />
-    <ClInclude Include="src\Time.h" />
-    <ClInclude Include="src\Transform.h" />
-    <ClInclude Include="src\Vector2.h" />
-    <ClInclude Include="src\Vector3.h" />
-    <ClInclude Include="src\Vector4.h" />
+    <ClInclude Include="MGLE.h" />
+    <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\game\Input.h" />
+    <ClInclude Include="src\game\Time.h" />
+    <ClInclude Include="src\game\Timer.h" />
+    <ClInclude Include="src\graphics\Debug.h" />
+    <ClInclude Include="src\graphics\Graphics.h" />
+    <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\math\Mat4x4.h" />
+    <ClInclude Include="src\math\Maths.h" />
+    <ClInclude Include="src\math\Quaternion.h" />
+    <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\math\Vector3.h" />
+    <ClInclude Include="src\math\Vector4.h" />
+    <ClInclude Include="src\resources\Model.h" />
+    <ClInclude Include="src\resources\ObjLoader.h" />
+    <ClInclude Include="src\scene\Transform.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

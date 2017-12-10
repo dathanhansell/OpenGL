@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <gtest\gtest.h>
-#include <Vector3.cpp>
+#include <Vector3.h>
 
 TEST(tVector3, Addition)
 {

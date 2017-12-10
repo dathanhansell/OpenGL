@@ -59,6 +59,19 @@ glDisable(GL_ALPHA_TEST);
 glDisable(GL_DITHER);
 //glActiveTexture(GL_TEXTURE0);
 }
+///////////////////////////
+// Cam
+///////////////////////////
+Maths::Clamp(rotation.y, 89, -89);
+Maths::Eulerize(rotation.x);
+forward = Vector3::forward;
+forward = Vector3::EulerToForwardVector({rotation.x,rotation.y,0});
+up = Vector3::up;
+up = Vector3::EulerToForwardVector({ rotation.x,rotation.y + 90,0 });
+right = Vector3::Cross(up,forward);
+gluLookAt(position.x, position.y, position.z,
+forward.x + position.x, forward.y + position.y, forward.z + position.z,
+0.0, 1.0, 0.0);
 */
 ///////////////////////////
 // Reshape

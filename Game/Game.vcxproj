@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\mid\include\SDL2-2.0.5;$(SolutionDir)\mid\include\SDL2_mixer-2.0.1;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGl\src\graphics;$(SolutionDir)\OpenGl\src\game;$(SolutionDir)\OpenGl\src\math;$(SolutionDir)\OpenGl\src\resources;$(SolutionDir)\OpenGl\src\scene;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(SolutionDir)\mid\lib\SDL2-2.0.5\x86;$(SolutionDir)\mid\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -80,8 +80,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\mid\include\SDL2-2.0.5;$(SolutionDir)\mid\include\SDL2_mixer-2.0.1;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(SolutionDir)\mid\lib\SDL2-2.0.5\x86;$(SolutionDir)\mid\lib\SDL2_mixer-2.0.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\OpenGl\src;$(SolutionDir)\OpenGl;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGl\src\graphics;$(SolutionDir)\OpenGl\src\game;$(SolutionDir)\OpenGl\src\math;$(SolutionDir)\OpenGl\src\resources;$(SolutionDir)\OpenGl\src\scene;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\lemon\Desktop\OpenGL\Release;$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -97,7 +97,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\lemon\Desktop\OpenGL\OpenGl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,13 +123,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,6 +162,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenGl\OpenGl.vcxproj">
+      <Project>{2f1282cb-2cb5-4b2a-ac48-ab55c1a5219e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

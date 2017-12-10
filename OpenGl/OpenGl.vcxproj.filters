@@ -1,137 +1,127 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Dump">
       <UniqueIdentifier>{b7f83f8b-f728-4727-85ad-ce036643d674}</UniqueIdentifier>
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{5bef589a-d916-4099-bdc9-40303643928c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{6992bb14-b5c4-4651-a580-8136205c3158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{84d3e04b-24ef-441a-8b1f-df3ccaf92665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{725159a7-512c-43c1-8c7f-496482d4cfc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{996d17a1-a149-429d-9507-441f40d84cd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ObjLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AudioClip.cpp">
+    <ClCompile Include="src\Scratch.cpp">
       <Filter>Dump</Filter>
     </ClCompile>
-    <ClCompile Include="src\AudioSource.cpp">
-      <Filter>Dump</Filter>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="src\game\Game.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\Input.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Audio.cpp">
-      <Filter>Dump</Filter>
+    <ClCompile Include="src\game\Time.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Graphics.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\graphics\Graphics.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vector3.cpp">
+    <ClCompile Include="src\graphics\Window.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Debug.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\ObjLoader.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\Model.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\Transform.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\Quaternion.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vector4.cpp">
+    <ClCompile Include="src\math\Vector2.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mat4x4.cpp">
+    <ClCompile Include="src\math\Vector3.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quaternion.cpp">
+    <ClCompile Include="src\math\Vector4.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vector2.cpp">
+    <ClCompile Include="src\math\Mat4x4.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\Timer.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MGLE.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="src\game\Game.h">
+      <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\Input.h">
+      <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Debug.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\Time.h">
+      <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Input.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\graphics\Graphics.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\Model.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\graphics\Window.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\ObjLoader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\graphics\Debug.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\Time.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\resources\ObjLoader.h">
+      <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Transform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\resources\Model.h">
+      <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\AudioClip.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scene\Transform.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\AudioSource.h">
-      <Filter>Dump</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Audio.h">
-      <Filter>Dump</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Vector2.h">
+    <ClInclude Include="src\math\Maths.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vector3.h">
+    <ClInclude Include="src\math\Quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vector4.h">
+    <ClInclude Include="src\math\Vector2.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mat4x4.h">
+    <ClInclude Include="src\math\Vector3.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quaternion.h">
+    <ClInclude Include="src\math\Vector4.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\math\Mat4x4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Timer.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,19 +6,15 @@
 #pragma once
 
 #include "targetver.h"
+#include <stdio.h>
+
+#include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <stdio.h>
-#include <tchar.h>
-
-#include "Maths.h"
-#include "Audio.h"
-#include "Game.h"
-#include "Graphics.h"
-#include "Input.h"
-#include "Time.h"
-
+#include <sstream> 
+#include <cassert>
+#include <cstdlib>
+#include <chrono>
 
 // TODO: reference additional headers your program requires here

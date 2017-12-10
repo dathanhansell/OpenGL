@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <gtest\gtest.h>
-#include <Quaternion.cpp>
+#include <Quaternion.h>
 
 TEST(tQuaternion, Rotation_Identity)
 {
