@@ -9,60 +9,56 @@ using namespace std;
 
 	Graphics::~Graphics()
 	{
-
+		delete renderer;
 		delete window;
 	}
-	void Update() {
-		//SDL_Delay(16.6667);
-	}
-	void Graphics::Render() {
-		cout << "Elapsed Ms: " << frameTimer.ElapsedMilliseconds() << endl;
-		cout << "Running: " << frameTimer.IsRunning() << endl;
+	void Graphics::FPS() {
 		if (frameTimer.IsRunning() && frameTimer.ElapsedMilliseconds() >= 1000)
 		{
-			cout << "Elapsed Ms: " << frameTimer.ElapsedMilliseconds() << endl;
 			cout << "FPS: " << frameCount << endl;
 			frameCount = 0;
 			frameTimer.Stop();
 			frameTimer.Start();
 		}
-		else frameTimer.Start();
+		else if (!frameTimer.IsRunning()) frameTimer.Start();
+	}
+	void Graphics::Render() {	
+		FPS();
 		glClearColor(.1f, .1f, .1f, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		Debug::DrawWireSphere(Vector3::zero);
 		glutSwapBuffers();
-		frameCount++;
+		
 	}
-	Graphics* instance;
-	void Graphics::RenderCallBack() {
-		instance->Render();
-	}
-	
+
 	void Graphics::Init()
 	{
+		
 		cout << "Initializing Graphics Module..." << endl;
 		
 		bool fullscreen = false;
-		cout << "Initializing OpenGL..." << endl;
+		cout << "Initializing OpenGL " << context.getSettings().majorVersion << "." << context.getSettings().minorVersion << "..."<<endl;
+
 		if (!InitGL())
 		{
 			return;
 		}
+		
 		cout << "Initializing GLEW..." << endl;
 		if (!InitGLEW())
 		{
 			return;
 		}
-		instance = this;
-		glutIdleFunc(Update);
-		::glutDisplayFunc(Graphics::RenderCallBack);
-		glutMainLoop();
+		cout << "Creating Renderer..." << endl;
+		renderer = new Renderer();
 		cout << "Done!" << endl;
+
 	}
 
 	bool Graphics::InitGL()
 	{
+		context.setActive(true);
 		window = new Window();
 		return true;
 	}

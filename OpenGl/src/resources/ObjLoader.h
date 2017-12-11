@@ -1,10 +1,10 @@
 #pragma once
-#include <vector>
-#include "Maths.h"
-#include "Model.h"
+#include "stdafx.h"
+#include "MGLE.h"
+class Model;
 class ObjLoader
 {
 public:
-	static Model loadOBJ(const char * File);
+	Model loadOBJ(std::string File);
 };
 

@@ -1,13 +1,13 @@
 #pragma once
 
 
-class Time
+class Clock
 {
 	 float deltaReturn;
 	 float deltaTMP;
 public:
-	Time();
-	~Time();
+	Clock();
+	~Clock();
 	 float deltaTime;
 	 void setDeltaTime();
 	 void SetStartTicks();

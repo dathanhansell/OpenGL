@@ -12,7 +12,9 @@
 
 #include "Graphics.h"
 #include "Window.h"
+#include "Renderer.h"
 
+#include "Resources.h"
 #include "Model.h"
 #include "ObjLoader.h"
 

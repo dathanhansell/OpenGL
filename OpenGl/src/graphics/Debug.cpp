@@ -63,22 +63,4 @@ void Debug::DrawAxes(Vector3 p, Vector3 angle) {
 	u = Vector3::Cross(f, r);
 	glVertex3f(p.x + u.x, p.y + u.y, p.z + u.z);
 	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glColor3f(f.x, f.y, f.z);
-	glTranslatef(p.x + f.x, p.y + f.y, p.z + f.z);
-	glutSolidCone(.025, .1, 64, 1);
-	glPopMatrix();
-	glPushMatrix();
-	glColor3f(r.x, r.y, r.z);
-	glTranslatef(p.x + r.x, p.y + r.y, p.z + r.z);
-	glRotatef(90, 0, 1, 0);
-	glutSolidCone(.025, .1, 64, 1);
-	glPopMatrix();
-	glPushMatrix();
-	glColor3f(u.x, u.y, u.z);
-	glTranslatef(p.x + u.x, p.y + u.y, p.z + u.z);
-	glRotatef(-90, 1, 0, 0);
-	glutSolidCone(.025, .1, 64, 1);
-	glPopMatrix();
 }

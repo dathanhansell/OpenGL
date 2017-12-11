@@ -31,9 +31,6 @@
     <ClCompile Include="src\game\Input.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\Time.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -70,6 +67,15 @@
     <ClCompile Include="src\game\Timer.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Clock.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Renderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\Resources.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGLE.h" />
@@ -79,9 +85,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Input.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\Time.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Graphics.h">
@@ -122,6 +125,15 @@
     </ClInclude>
     <ClInclude Include="src\game\Timer.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Clock.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Renderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\Resources.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

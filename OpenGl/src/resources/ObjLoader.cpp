@@ -1,35 +1,19 @@
 #include "ObjLoader.h"
-#include <iostream>
-#include <fstream>
 
-#include <gl\glew.h>
-
-#include "Model.h"
 using namespace std;
-Model ObjLoader::loadOBJ(const char * File) {
-	/*
-	int lines = 0;
+
+Model ObjLoader::loadOBJ(std::string File) {
+
 	vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 	vector< Vector3 > temp_vertices;
 	vector< Vector2 > temp_uvs;
 	vector< Vector3 > temp_normals;
-	const char *path = new char[strlen((const char*)SDL_GetBasePath()) + strlen(File) + 1];
-	strcpy((char*)path, SDL_GetBasePath());
-	strcat((char*)path, File);
-	cout << "Loading .obj: " << path << std::endl;
-	ifstream obj;
-	obj.open(path);
 
-	delete path;
+	cout << "Loading .obj: " << File << std::endl;
+	ifstream obj;
+	obj.open(File);
 	if (!obj.is_open()) {
-		const char *error;
-		error = new char[strlen("Failure to open file : ") + strlen(SDL_GetBasePath()) + strlen(File) + strlen("\n") + 1];
-		strcpy((char*)error, "Failure to open file: ");
-		strcat((char*)error, SDL_GetBasePath());
-		strcat((char*)error, File);
-		strcat((char*)error, "\n");
-		printf(error);
-		delete error;
+		cout << "Couldn't open: " << File << endl;
 		return Model();
 	}
 
@@ -62,7 +46,7 @@ Model ObjLoader::loadOBJ(const char * File) {
 			if (matches != 9) {
 				int matches = sscanf(line, "f %d//%d %d//%d %d//%d\n", &vertexIndex[0], &normalIndex[0], &vertexIndex[1], &normalIndex[1], &vertexIndex[2], &normalIndex[2]); //second scan// first scan of line
 				if (matches != 6) {
-					SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OBJLoader Error", "OBJ ERROR :<", NULL);
+					cout << "Unknown OBJ Loading Error :<" << endl;
 					return Model();
 				}
 
@@ -88,9 +72,8 @@ Model ObjLoader::loadOBJ(const char * File) {
 		vertices.push_back(vertex);
 	}
 	obj.close();
-	
+	cout << "Done!" << endl;
 	return Model(vertices, uvs, normals);
-	*/
-	return Model();
 }
+
 	

@@ -5,14 +5,17 @@
 
 class Timer;
 class Window;
+class Renderer;
 class Graphics
 {
-	static void RenderCallBack();
+	sf::Context context;
+	Renderer* renderer;
 	Timer frameTimer;
 	int frameCount;
 	bool InitGL();
 	bool InitGLEW();
 	void Render();
+	void FPS();
 	void Init();
 public:
 	Window* window;

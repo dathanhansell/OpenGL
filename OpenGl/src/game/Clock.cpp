@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "Time.h"
+#include "Clock.h"
 
 //Uint32 startTime;
-Time::Time()
+Clock::Clock()
 {
 	SetStartTicks();
 }
-Time::~Time()
+Clock::~Clock()
 {
 
 }
-void Time::SetStartTicks()
+void Clock::SetStartTicks()
 {
 	//startTime = SDL_GetTicks();
 }
-void Time::setDeltaTime() {
+void Clock::setDeltaTime() {
 	//deltaReturn =   SDL_GetTicks() - deltaTMP;
 	//deltaTMP = SDL_GetTicks();
 	//deltaTime =  deltaReturn/1000;

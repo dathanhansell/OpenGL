@@ -26,8 +26,7 @@ double Timer::ElapsedMilliseconds() {
 	{
 		now = endTime;
 	}
-
-	return std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+	return std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime).count();
 }
 bool Timer::IsRunning()
 {

@@ -1,21 +1,19 @@
 #include "Window.h"
 
-void Reshape(int w, int h) {
+void Window::Reshape(int w, int h) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, w, h);
 	gluPerspective(90.0f, (GLfloat)w / h, 0.1, 100);
+	 width = w; height = h;
 	glMatrixMode(GL_MODELVIEW);
 }
 void Window::Init() {
 	std::cout << "Creating Window..." << std::endl;
-	width = 1280;
-	height = 720;
+	width = 1200;
+	height = 1200;
+	window.create(sf::VideoMode(width,height),title);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(width, height);
-	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - width) / 2,(glutGet(GLUT_SCREEN_HEIGHT) - height) / 2);
-	glutCreateWindow("Game");
-	glutReshapeFunc(Reshape);
 }
 void Window::ResetWindow() {
 	glutReshapeWindow(width, height);
@@ -33,4 +31,24 @@ int Window::GetHeight() {
 
 int Window::GetWidth() {
 	return width;
+}
+
+bool Window::Open() {
+	return window.isOpen();
+}
+
+void Window::PollEvents() {
+	sf::Event e;
+	while (window.pollEvent(e)) {
+		
+		if (e.type == sf::Event::Closed)
+			window.close();
+		if (e.type == sf::Event::Resized)
+		{
+			Reshape(e.size.width, e.size.height);
+		}
+	}
+}
+void Window::Display() {
+	window.display();
 }
