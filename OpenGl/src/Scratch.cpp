@@ -1,3 +1,41 @@
+/*
+Debug::DrawWireSphere(Vector3::zero);
+//Mercury
+Planet(.2f, 5, 8, { .2f,.2f,.2f });
+//Venus
+Planet(.5f, 12, 7, { .7f,.7f,.2f });
+//Earth
+Planet(.5f, 20, 6, { .2f,.2f,.8f });
+//Mars
+Planet(.37f, 50, 5, { .8f,.2f,.1f });
+//Jupiter
+Planet(20, 200, 4, { 1,.5f,.2f });
+//Saturn
+Planet(15, 300, 3, { .6f,.5f,.2f });
+//Neptune
+Planet(8, 400, 2, { .2f,.2f,.6f });
+//Uranus
+Planet(7, 500, 1, { .3f,.4f,.8f });
+
+
+Debug::DrawWireSphere(Vector3::zero,4.32);
+//Mercury
+Planet(.015f, 360, 8, { .2f,.2f,.2f });
+//Venus
+Planet(.038f, 672, 7, { .7f,.7f,.2f });
+//Earth
+Planet(.04f, 930, 6, { .2f,.2f,.8f });
+//Mars
+Planet(.021f, 1496, 5, { .8f,.2f,.1f });
+//Jupiter
+Planet(.44, 4836, 4, { 1,.5f,.2f });
+//Saturn
+Planet(.36, 8867, 3, { .6f,.5f,.2f });
+//Neptune
+Planet(.153, 17840, 2, { .2f,.2f,.6f });
+//Uranus
+Planet(.16, 27944, 1, { .3f,.4f,.8f });
+*/
 //SDL_Delay(16.667);
 //Time::setDeltaTime();
 

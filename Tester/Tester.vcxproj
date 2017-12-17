@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(IncludePath)$(SolutionDir)\mid\gtest;$(SolutionDir)\OpenGl\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)$(SolutionDir)\mid\gtest;$(SolutionDir)\mid\include\SFML;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -42,6 +42,18 @@ void Debug::DrawWireSphere(Vector3 p, float size , Vector3 color , int verts ) {
 	glPopMatrix();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
+void Debug::DrawWireCircle(Vector3 p, float size, Vector3 color, int verts) {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	verts /= 2;
+	glPushMatrix();
+	glColor3f(color.x, color.y, color.z);
+	glBegin(GL_POLYGON);
+	for (double i = 0; i < 2 * M_PI; i += M_PI / verts) //<-- Change this Value
+		glVertex3f(p.x + sin(i) * size, p.y, p.z + cos(i) * size);
+	glEnd();
+	glPopMatrix();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
 void Debug::DrawAxes(Vector3 p, Vector3 angle) {
 	glPushMatrix();
 	DrawCardWireSphere(p);
@@ -63,4 +75,36 @@ void Debug::DrawAxes(Vector3 p, Vector3 angle) {
 	u = Vector3::Cross(f, r);
 	glVertex3f(p.x + u.x, p.y + u.y, p.z + u.z);
 	glEnd();
+}
+void Debug::DrawWireBox(Vector3 p, Vector3 d,Vector3 color) {
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPushMatrix();
+		glColor3f(color.x, color.y, color.z);
+		glBegin(GL_POLYGON);
+		glVertex3f(p.x + d.x, p.y + d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + d.y, p.z + -d.z);
+		glVertex3f(p.x + d.x, p.y + d.y, p.z + -d.z);
+		glEnd();
+		glBegin(GL_POLYGON);
+		glVertex3f(p.x + d.x, p.y + -d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + -d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + -d.y, p.z + -d.z);
+		glVertex3f(p.x + d.x, p.y + -d.y, p.z + -d.z);
+		glEnd();
+		glBegin(GL_LINES);
+		glVertex3f(p.x + d.x, p.y + -d.y, p.z + d.z);
+		glVertex3f(p.x + d.x, p.y + d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + -d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + d.y, p.z + d.z);
+		glVertex3f(p.x + -d.x, p.y + -d.y, p.z + -d.z);
+		glVertex3f(p.x + -d.x, p.y + d.y, p.z + -d.z);
+		glVertex3f(p.x + d.x, p.y + -d.y, p.z + -d.z);
+		glVertex3f(p.x + d.x, p.y + d.y, p.z + -d.z);
+
+		glEnd();
+		glPopMatrix();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	
 }

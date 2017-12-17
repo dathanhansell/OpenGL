@@ -10,8 +10,8 @@ void Window::Reshape(int w, int h) {
 }
 void Window::Init() {
 	std::cout << "Creating Window..." << std::endl;
-	width = 1200;
-	height = 1200;
+	width = 800;
+	height = 800;
 	window.create(sf::VideoMode(width,height),title);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 }

@@ -60,6 +60,9 @@ Vector3 Quaternion::ToEuler() {
 	e.y = asin(std::max(-1.0f, std::min(-2 * (q.x * q.z - q.w * q.y), 1.0f)));
 	e.z = atan2(2.0f * (q.x * q.y + q.w * q.z), q.w * q.w + q.x * q.x - q.y * q.y - q.z * q.z);
 	return e* RAD2DEG;
+	
+	*/
+
 	///////
 	//Method2
 	///////
@@ -73,6 +76,8 @@ Vector3 Quaternion::ToEuler() {
 	euler.y = asinf(-2.f * (x*z - y*w));
 	euler.z = atan2f(2.f * (x*y + z*w), 1 - 2 * (sqy + sqz));
 	return euler * RAD2DEG;
+	
+	/*
 	///////
 	//Method3
 	///////
@@ -90,9 +95,9 @@ Vector3 Quaternion::ToEuler() {
 	float sz = 2 * (w * z + x * y);
 	float cz = 1 - 2 * (y * y + z * z);
 	e.z = atan2(sy, cz); 
-	e ;
+	return e * RAD2DEG;
 	
-	return e;
+	
 	///////
 	//Method4
 	///////
@@ -107,20 +112,20 @@ Vector3 Quaternion::ToEuler() {
 		e.x = 2 * atan2(x,w);
 		e.y = M_PI / 2;
 		e.z = 0;
-		return e;
+		return e* RAD2DEG;
 	}
 	if (test < -0.499*unit) { // singularity at south pole
 		e.x = -2 * atan2(x,w);
 		e.y = -M_PI / 2;
 		e.z = 0;
-		return e;
+		return e* RAD2DEG;
 	}
 	e.x = atan2(2 * y*w - 2 * x*z, sqx - sqy - sqz + sqw);
 	e.y = asin(2 * test / unit);
 	e.z = atan2(2 * x*w - 2 * y*z, -sqx + sqy - sqz + sqw);
-	return e ;
+	return e * RAD2DEG;
 	*/
-	return Vector3::zero;
+	//return Vector3::zero;
 }
 std::string Quaternion::ToString() {
 	std::stringstream ss;
