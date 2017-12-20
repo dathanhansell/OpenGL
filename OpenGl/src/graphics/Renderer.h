@@ -1,9 +1,11 @@
 #pragma once
-class Renderer
-{
-public:
-	Renderer();
-	~Renderer();
-	void Init();
-};
+namespace MGLE {
+	class Renderer
+	{
+	public:
+		Renderer();
+		~Renderer();
+		void Init();
+	};
+}
 

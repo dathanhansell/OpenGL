@@ -15,6 +15,7 @@
 #include "Renderer.h"
 
 #include "Resources.h"
+#include "LowLevelSystem.h"
 #include "Model.h"
 #include "ObjLoader.h"
 

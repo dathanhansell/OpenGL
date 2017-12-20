@@ -76,6 +76,9 @@
     <ClCompile Include="src\resources\Resources.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\resources\LowLevelSystem.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGLE.h" />
@@ -133,6 +136,9 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\resources\Resources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\LowLevelSystem.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>

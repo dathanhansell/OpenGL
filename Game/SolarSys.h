@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include <MGLE.h>
+using namespace MGLE;
 class Sys {
 	
 

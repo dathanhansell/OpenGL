@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <MGLE.h>
 #include "SolarSys.h"
-
+using namespace MGLE;
 	Sys::Sys(Game* g) {
 		m_g = g;
 	}
@@ -16,6 +16,7 @@
 	}
 
 	void Sys::Run() {
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		w = m_g->graphics->window->GetWidth();
 		h = m_g->graphics->window->GetHeight();
 		c += .0016;
