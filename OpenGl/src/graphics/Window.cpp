@@ -23,7 +23,8 @@ namespace MGLE {
 		Init();
 	}
 	Window::~Window() {
-		glutDestroyWindow(0);
+		window.close();
+		window.~Window();
 	}
 	int Window::GetHeight() {
 		return height;

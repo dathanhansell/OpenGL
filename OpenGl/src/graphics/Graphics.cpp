@@ -10,6 +10,7 @@ namespace MGLE {
 	Graphics::~Graphics()
 	{
 		delete renderer;
+		
 		delete window;
 	}
 	void Graphics::FPS() {

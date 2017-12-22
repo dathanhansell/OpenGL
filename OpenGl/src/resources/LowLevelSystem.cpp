@@ -18,26 +18,30 @@ namespace MGLE {
 		Log("MGLE ENGINE LOG : %i-%i-%i %i:%i:%i\n", localtime(&t)->tm_year + 1900, localtime(&t)->tm_mon + 1, localtime(&t)->tm_mday, localtime(&t)->tm_hour, localtime(&t)->tm_min, localtime(&t)->tm_sec);
 		Log("--------------------------------------------------------\n");
 	}
+	void cLogger::Dispose() {
+
+	}
 	cLogger::~cLogger()
 	{
-		if (mpFile) fclose(mpFile);
-		delete mpFile;
+		Dispose();
 	}
+	
 	void cLogger::Print(const string& asMessage)
 	{
-		if (!mpFile) ReopenFile();
+		
+		if (!stream.is_open()) ReopenFile();
 
-		if (mpFile)
+		if (stream.is_open())
 		{
-			fprintf_s(mpFile, asMessage.c_str());
+			stream << asMessage;
 			cout << asMessage;
-			fflush(mpFile);
+			stream.flush();
 		}
 	}
 	void cLogger::Clear()
 	{
 		ReopenFile();
-		if (mpFile) fflush(mpFile);
+		if (stream.is_open()) stream.flush();
 	}
 	void cLogger::SetFileName(const string asFile)
 	{
@@ -48,14 +52,9 @@ namespace MGLE {
 	}
 	void cLogger::ReopenFile()
 	{
-		if (mpFile) fclose(mpFile);
+		if (stream.is_open()) stream.close();
 
-#ifdef WIN32
-
-		fopen_s(&mpFile, msFileName.c_str(), ("w"));
-#else
-		mpFile = fopen(std::string::To8Char(msFileName).c_str(), "w");
-#endif
+		stream.open(msFileName.c_str());
 
 	}
 	////////////////////////////
@@ -66,7 +65,7 @@ namespace MGLE {
 		GetAbsolutePath();
 	}
 	cLowLevelSystem::~cLowLevelSystem() {
-
+		mLogger.Dispose();
 	}
 	string SetAbsolutePath() {
 		HMODULE hModule = GetModuleHandle(NULL);

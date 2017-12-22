@@ -7,20 +7,18 @@
 namespace MGLE {
 	class cLogger
 	{
+		void ReopenFile();
+		std::ofstream stream;
+		std::string msFileName;
 	public:
 		cLogger(const std::string asDefaultFile);
 		~cLogger();
-
+		void Dispose();
 		void Print(const std::string& asMessage);
 		void Clear();
 
 		void SetFileName(const std::string asFile);
 
-	private:
-		void ReopenFile();
-
-		FILE *mpFile;
-		std::string msFileName;
 	};
 	
 	//extern void SetLogFile(const std::string &asFile);
