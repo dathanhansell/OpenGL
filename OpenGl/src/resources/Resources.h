@@ -8,7 +8,7 @@ namespace MGLE {
 	class cLowLevelSystem;
 	class Resources
 	{
-		GLuint LoadShaders(std::string vertex_file_path, std::string fragment_file_path);
+		
 	public:
 		Resources();
 		~Resources();

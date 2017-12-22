@@ -9,29 +9,32 @@ namespace MGLE {
 		Init();
 		
 	}
-
+	Mat4x4 mat;
+	Shader* shad;
+	//Model* mod;
 	Game::~Game()
 	{
 		delete resources;
 		delete input;
 		delete graphics;
+		delete shad;
 	}
-	Model model;
+	
 	void Game::Init() {
+
 		graphics = new Graphics();
 		input = new Input();
 		resources = new Resources();
 		
-		model = resources->objloader->loadOBJ("test.obj");
-		glClearColor(.05f, .05f, .05f, 1);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glViewport(0, 0, graphics->window->GetWidth(), graphics->window->GetHeight());
-		gluPerspective(90, graphics->window->GetWidth() / graphics->window->GetHeight(), .1, 50);
-		glMatrixMode(GL_MODELVIEW);
-		//gluLookAt(1, 4, 0, .8f, 0, 0, 0, 1, 0);
+		mat.Perspective(90, 16 / 9, 0.001f, 1000);
+		shad = new Shader("shaders\\vert.glsl", "shaders\\frag.glsl");
+		shad->AddUniform("MVP");
+		//mod = &resources->objloader->loadOBJ("test.obj");
 	}
 	void Game::Update() {
 		input->Update();
+		//shad->SetUniform("MVP",mat);
+		//glUseProgram(shad->GetProgramID());
+		//mod->Draw();
 	}
 }

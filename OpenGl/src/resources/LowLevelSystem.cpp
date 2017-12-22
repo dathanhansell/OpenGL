@@ -1,6 +1,5 @@
 #include "LowLevelSystem.h"
 
-#define _UNICODE
 using namespace std;
 namespace MGLE {
 	////////////////////////////
@@ -9,11 +8,15 @@ namespace MGLE {
 	string SetAbsolutePath();
 	static string msAbsolutePath = SetAbsolutePath();
 	static cLogger mLogger("MGLE.log");
-	
+
 	cLogger::cLogger(const string asFileName)
 	{
-		msFileName = GetAbsolutePath()+asFileName;
-		cout << "New Logger: " << msFileName << endl;
+		msFileName = GetAbsolutePath() + asFileName;
+		time_t t = time(0);
+
+		Log("--------------------------------------------------------\n");
+		Log("MGLE ENGINE LOG : %i-%i-%i %i:%i:%i\n", localtime(&t)->tm_year + 1900, localtime(&t)->tm_mon + 1, localtime(&t)->tm_mday, localtime(&t)->tm_hour, localtime(&t)->tm_min, localtime(&t)->tm_sec);
+		Log("--------------------------------------------------------\n");
 	}
 	cLogger::~cLogger()
 	{
@@ -26,9 +29,9 @@ namespace MGLE {
 
 		if (mpFile)
 		{
-			fprintf(mpFile, asMessage.c_str());
+			fprintf_s(mpFile, asMessage.c_str());
+			cout << asMessage;
 			fflush(mpFile);
-			
 		}
 	}
 	void cLogger::Clear()
@@ -49,7 +52,7 @@ namespace MGLE {
 
 #ifdef WIN32
 
-		 fopen_s(&mpFile,msFileName.c_str(), ("w"));
+		fopen_s(&mpFile, msFileName.c_str(), ("w"));
 #else
 		mpFile = fopen(std::string::To8Char(msFileName).c_str(), "w");
 #endif
@@ -101,13 +104,14 @@ namespace MGLE {
 		if (fmt == NULL)
 			return;
 		va_start(ap, fmt);
-		vsprintf(text, fmt, ap);
+		vsprintf_s(text, fmt, ap);
 		va_end(ap);
 
 		string sMess = "";
 		sMess += text;
-		cout << sMess;
+
 		mLogger.Print(sMess);
+
 	}
 	void FatalError(const char* fmt, ...)
 	{
@@ -116,17 +120,22 @@ namespace MGLE {
 		if (fmt == NULL)
 			return;
 		va_start(ap, fmt);
-		vsprintf(text, fmt, ap);
+		vsprintf_s(text, fmt, ap);
 		va_end(ap);
 
-		string sMess = "FATAL ERROR: ";
+		string sMess = "";
 		sMess += text;
-		cout << sMess;
-		mLogger.Print(sMess);
 
-#ifdef WIN32
-		//MessageBox(NULL, cString::To16Char(text).c_str(), _W("FATAL ERROR"), MB_ICONERROR);
-#endif
+#ifdef  WIN32
+		string sBox = sMess + "\nSee log for details!";
+		wstring wsTemp;
+		size_t needed = mbstowcs(NULL, &sBox[0], 0);
+		wsTemp.resize(needed);
+		mbstowcs(&wsTemp[0], &sBox[0], needed);
+		MessageBox(NULL, wsTemp.c_str(), (L"FATAL ERROR"), MB_ICONERROR);
+#endif //  WIN32
+		sMess = "FATAL ERROR: " + sMess;
+		mLogger.Print(sMess);
 
 		exit(1);
 	}
@@ -137,12 +146,11 @@ namespace MGLE {
 		if (fmt == NULL)
 			return;
 		va_start(ap, fmt);
-		vsprintf(text, fmt, ap);
+		vsprintf_s(text, fmt, ap);
 		va_end(ap);
 
 		string sMess = "ERROR: ";
 		sMess += text;
-		cout << sMess;
 		mLogger.Print(sMess);
 	}
 	void Warning(const char* fmt, ...)
@@ -152,12 +160,11 @@ namespace MGLE {
 		if (fmt == NULL)
 			return;
 		va_start(ap, fmt);
-		vsprintf(text, fmt, ap);
+		vsprintf_s(text, fmt, ap);
 		va_end(ap);
 
 		string sMess = "WARNING: ";
 		sMess += text;
-		cout << sMess;
 		mLogger.Print(sMess);
 	}
 }

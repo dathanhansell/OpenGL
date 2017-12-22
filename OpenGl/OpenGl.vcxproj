@@ -173,6 +173,7 @@
     <ClCompile Include="src\resources\Model.cpp" />
     <ClCompile Include="src\resources\ObjLoader.cpp" />
     <ClCompile Include="src\resources\Resources.cpp" />
+    <ClCompile Include="src\resources\Shader.cpp" />
     <ClCompile Include="src\scene\Transform.cpp" />
     <ClCompile Include="src\Scratch.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\resources\Model.h" />
     <ClInclude Include="src\resources\ObjLoader.h" />
     <ClInclude Include="src\resources\Resources.h" />
+    <ClInclude Include="src\resources\Shader.h" />
     <ClInclude Include="src\scene\Transform.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

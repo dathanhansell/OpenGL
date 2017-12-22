@@ -6,6 +6,7 @@ namespace MGLE {
 	class Resources;
 	class Input;
 	class Timer;
+
 	class Game {
 	public:
 		Input* input;

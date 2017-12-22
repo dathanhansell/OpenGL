@@ -18,6 +18,7 @@
 #include "LowLevelSystem.h"
 #include "Model.h"
 #include "ObjLoader.h"
+#include "Shader.h"
 
 #include "Transform.h"
 

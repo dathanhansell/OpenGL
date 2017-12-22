@@ -9,6 +9,7 @@ public:
 		float m04, float m05, float m06, float m07,
 		float m08, float m09, float m10, float m11,
 		float m12, float m13, float m14, float m15);
+
 	Mat4x4& Translate(const Vector3& v);
 	Mat4x4& Translate(float x, float y, float z);
 	Mat4x4& Scale(float s);

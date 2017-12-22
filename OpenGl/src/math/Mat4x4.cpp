@@ -28,6 +28,7 @@ Mat4x4::Mat4x4(float m00, float m01, float m02, float m03,
 	m[2] = m02; m[6] = m06;	m[10] = m10; m[14] = m14;
 	m[3] = m03; m[7] = m07;	m[11] = m11; m[15] = m15;
 }
+\
 Mat4x4& Mat4x4::Translate(const Vector3& v)
 {
 	return Translate(v.x, v.y, v.z);
