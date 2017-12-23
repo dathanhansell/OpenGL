@@ -51,10 +51,12 @@ namespace MGLE {
 	}
 	Mat4x4& Mat4x4::Translate(float x, float y, float z)
 	{
+		/*
 		m[0] += m[3] * x;   m[4] += m[7] * x;   m[8] += m[11] * x;   m[12] += m[15] * x;
 		m[1] += m[3] * y;   m[5] += m[7] * y;   m[9] += m[11] * y;   m[13] += m[15] * y;
 		m[2] += m[3] * z;   m[6] += m[7] * z;   m[10] += m[11] * z;   m[14] += m[15] * z;
-
+		*/
+		m[3] = x; m[7] = y; m[11] = z;
 		return *this;
 	}
 	Mat4x4& Mat4x4::Scale(float s)

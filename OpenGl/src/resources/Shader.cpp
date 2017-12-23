@@ -148,7 +148,7 @@ namespace MGLE {
 	void Shader::SetUniform(tString uniformName, Mat4x4 value)
 	{
 		try {
-			glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()), 1, GL_FALSE, &value.m[0]);
+			glUniformMatrix4fv(mUniforms.at(uniformName), 1, GL_TRUE, &value.m[0]);
 		}
 		catch (const std::out_of_range& e) {
 			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
@@ -157,7 +157,7 @@ namespace MGLE {
 	void Shader::SetUniform(tString uniformName, glm::mat4 value)
 	{
 		try {
-			glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()) , 1, GL_FALSE, glm::value_ptr(value));
+			glUniformMatrix4fv(mUniforms.at(uniformName), 1, GL_FALSE, glm::value_ptr(value));
 		}
 		catch (const std::out_of_range& e) {
 			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
