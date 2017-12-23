@@ -19,6 +19,9 @@
     <Filter Include="Game">
       <UniqueIdentifier>{996d17a1-a149-429d-9507-441f40d84cd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{451662e4-5f7a-47a6-9c3e-63006bc4ac1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Scratch.cpp">
@@ -76,15 +79,19 @@
     <ClCompile Include="src\resources\Resources.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="src\resources\LowLevelSystem.cpp">
+    <ClCompile Include="src\resources\Shader.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="src\resources\Shader.cpp" />
+    <ClCompile Include="src\system\LowLevelSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\tString.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGLE.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="src\game\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -139,11 +146,14 @@
     <ClInclude Include="src\resources\Resources.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\resources\LowLevelSystem.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="src\resources\Shader.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\system\LowLevelSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\system\tString.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

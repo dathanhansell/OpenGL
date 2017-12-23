@@ -7,11 +7,11 @@ namespace MGLE {
 	////////////////////////////
 	string SetAbsolutePath();
 	static string msAbsolutePath = SetAbsolutePath();
-	static cLogger mLogger("MGLE.log");
+	static cLogger mLogger(L"MGLE.log");
 
-	cLogger::cLogger(const string asFileName)
+	cLogger::cLogger(const tWString asFileName)
 	{
-		msFileName = GetAbsolutePath() + asFileName;
+		msFileName =cString::To16( GetAbsolutePath()) + asFileName;
 		time_t t = time(0);
 
 		Log("--------------------------------------------------------\n");
@@ -26,7 +26,7 @@ namespace MGLE {
 		Dispose();
 	}
 	
-	void cLogger::Print(const string& asMessage)
+	void cLogger::Print(const tString asMessage)
 	{
 		
 		if (!stream.is_open()) ReopenFile();
@@ -43,7 +43,7 @@ namespace MGLE {
 		ReopenFile();
 		if (stream.is_open()) stream.flush();
 	}
-	void cLogger::SetFileName(const string asFile)
+	void cLogger::SetFileName(const tWString asFile)
 	{
 		if (msFileName == asFile) return;
 

@@ -15,7 +15,6 @@
 #include "Renderer.h"
 
 #include "Resources.h"
-#include "LowLevelSystem.h"
 #include "Model.h"
 #include "ObjLoader.h"
 #include "Shader.h"
@@ -24,3 +23,5 @@
 
 #include "Maths.h"
 
+#include "tString.h"
+#include "LowLevelSystem.h"

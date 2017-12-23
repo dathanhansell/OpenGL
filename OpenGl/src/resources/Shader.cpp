@@ -2,24 +2,98 @@
 
 
 namespace MGLE {
-	Shader::Shader(std::string sVPath, std::string sFPath)
+	Shader::Shader(tString sVPath, tString sFPath)
 	{
-		LoadFromFile(sVPath, sFPath);
+		Log("Loading Shader Program...\n");
+		Log("--------------------------------------------------------\n");
+		program  = glCreateProgram();
+		GLuint v = AddShader(LoadShader(sVPath), GL_VERTEX_SHADER);
+		GLuint f = AddShader(LoadShader(sFPath), GL_FRAGMENT_SHADER);
+		CompileProgram(v,f);
+		AddUniform("MVP");
 	}
-
-
 	Shader::~Shader()
 	{
 		glDeleteProgram(program);
 	}
+	GLuint Shader::GetProgramID() {
+		return program;
+	}
+	void Shader::Bind() {
+		glUseProgram(program);
+	}
+	tString Shader::LoadShader(tString asFilePath) {
+		tString shaderSource;
+		asFilePath = GetAbsolutePath() + asFilePath;
+		Log("Loading Shader: %s\n", asFilePath.c_str());
+		std::ifstream shaderReader(asFilePath, std::ios::in);
+		if (shaderReader.is_open()) {
+			tString Line = "";
+			while (getline(shaderReader, Line))
+				shaderSource += "\n" + Line;
+			//TODO: pass in lines to uniform func
+		}
+		else {
+			FatalError("Couldn't open shader: %s. Is the directory correct?\n", asFilePath.c_str());
+		}
+		shaderReader.close();
+		return shaderSource;
+	}
+	GLuint Shader::AddShader(tString sSource, int type)
+	{
+		GLuint shader = glCreateShader(type);
 
-	void Shader::AddUniform(std::string sUniform) {
+		if (shader == 0)
+			FatalError("Shader creation failed: Could not find valid memory location when adding shader");
+
+		const char* cSource = sSource.c_str();
+		glShaderSource(shader, 1, &cSource, NULL);
+		glCompileShader(shader);
+		GLint Result = GL_FALSE;
+		GLint InfoLogLength;
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &Result);
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &InfoLogLength);
+		if (InfoLogLength > 0) {
+			std::vector<char> VertexShaderErrorMessage(InfoLogLength + 1);
+			glGetShaderInfoLog(shader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+			FatalError("Shader compile error:\n%s\n %s.\n", sSource.c_str(), &VertexShaderErrorMessage[0]);
+		}
+		glAttachShader(program, shader);
+		return shader;
+	}
+	void Shader::CompileProgram(GLuint v, GLuint f)
+	{
+		GLint Result = GL_FALSE;
+		GLint InfoLogLength;
+		glLinkProgram(program);
+		glGetProgramiv(program, GL_LINK_STATUS, &Result);
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &InfoLogLength);
+		if (InfoLogLength > 0) {
+			GLchar* strInfoLog = new GLchar[InfoLogLength + 1];
+			glGetProgramInfoLog(program, InfoLogLength, NULL, strInfoLog);
+			FatalError("Shader Link Error: %s. \n", strInfoLog);
+		}
+		glDetachShader(program, v);
+		glDetachShader(program, f);
+
+		glDeleteShader(v);
+		glDeleteShader(f);
+
+		glValidateProgram(program);
+		glGetProgramiv(program, GL_VALIDATE_STATUS, &Result);
+		if (Result == GL_FALSE) {
+			std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
+			glGetProgramInfoLog(program, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+			FatalError("Shader Validate Error: %s. \n", &ProgramErrorMessage[0]);
+		}
+	}
+
+	void Shader::AddUniform(tString sUniform) {
 		GLint iLocation = glGetUniformLocation(program, sUniform.c_str());
 		if (iLocation == 0xFFFFFFFF)
 		{
 			FatalError("Couldn't find uniform: %s Location = %i\n", sUniform.c_str(), iLocation);
 		}
-
 		GLint iUniforms;
 		glGetProgramiv(program, GL_ACTIVE_UNIFORMS, &iUniforms);
 		int size = (mUniforms.size() + 1);
@@ -38,10 +112,7 @@ namespace MGLE {
 			Log("Uniform %s added to program!\n", sUniform.c_str());
 		}
 	}
-	GLuint Shader::GetProgramID() {
-		return program;
-	}
-	void Shader::SetUniform(std::string uniformName, int value)
+	void Shader::SetUniform(tString uniformName, int value)
 	{
 		try {
 			int size = mUniforms.size();
@@ -52,8 +123,7 @@ namespace MGLE {
 			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
 		}
 	}
-
-	void Shader::SetUniform(std::string uniformName, float value)
+	void Shader::SetUniform(tString uniformName, float value)
 	{
 		try {
 			int size = mUniforms.size();
@@ -64,8 +134,7 @@ namespace MGLE {
 			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
 		}
 	}
-
-	void Shader::SetUniform(std::string uniformName, Vector3 value)
+	void Shader::SetUniform(tString uniformName, Vector3 value)
 	{
 		try {
 			int size = mUniforms.size();
@@ -76,130 +145,22 @@ namespace MGLE {
 			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
 		}
 	}
-
-	void Shader::SetUniform(std::string uniformName, Mat4x4 value)
+	void Shader::SetUniform(tString uniformName, Mat4x4 value)
 	{
 		try {
-			int size = mUniforms.size();
-			//if (size > 0)
-				glUniformMatrix4fv(mUniforms.at(uniformName), 1, GL_FALSE, value.m);
+			glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()), 1, GL_FALSE, &value.m[0]);
 		}
 		catch (const std::out_of_range& e) {
-			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n",uniformName.c_str(),e.what());
+			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
 		}
 	}
-	GLuint Shader::LoadFromFile(std::string sVPath, std::string sFPath) {
-
-		// Create the shaders
-		GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-		GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-
-		// Vertex Shader
-		sVPath = GetAbsolutePath() + sVPath;
-		Log("Loading Shader Program...\n");
-		Log("--------------------------------------------------------\n");
-		Log("Loading Vertex Shader: %s\n", sVPath.c_str());
-		std::string VertexShaderCode;
-		std::ifstream VertexShaderStream(sVPath, std::ios::in);
-		if (VertexShaderStream.is_open()) {
-			std::string Line = "";
-			while (getline(VertexShaderStream, Line))
-				VertexShaderCode += "\n" + Line;
-			VertexShaderStream.close();
+	void Shader::SetUniform(tString uniformName, glm::mat4 value)
+	{
+		try {
+			glUniformMatrix4fv(glGetUniformLocation(program, uniformName.c_str()) , 1, GL_FALSE, glm::value_ptr(value));
 		}
-		else {
-			FatalError("Couldn't open Vert Shader: %s. Is the directory correct?\n", sVPath.c_str());
-			return 0;
+		catch (const std::out_of_range& e) {
+			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
 		}
-
-		// Fragment Shader
-
-		sFPath = GetAbsolutePath() + sFPath;
-		Log("Loading Fragment Shader: %s\n", sFPath.c_str());
-		std::string FragmentShaderCode;
-		std::ifstream FragmentShaderStream(sFPath, std::ios::in);
-		if (FragmentShaderStream.is_open()) {
-			std::string Line = "";
-			while (getline(FragmentShaderStream, Line))
-				FragmentShaderCode += "\n" + Line;
-			FragmentShaderStream.close();
-		}
-		else {
-			FatalError("Couldn't open Frag Shader: %s. Is the directory correct?\n", sFPath.c_str());
-			return 0;
-		}
-
-
-		GLint Result = GL_FALSE;
-		GLint InfoLogLength;
-
-
-		// Compile Vertex Shader
-		Log("Compiling Vertex shader : %s\n", sVPath.c_str());
-		char const * VertexSourcePointer = VertexShaderCode.c_str();
-		glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
-		glCompileShader(VertexShaderID);
-
-		// Check Vertex Shader
-		glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
-		glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-		if (InfoLogLength > 0) {
-			std::vector<char> VertexShaderErrorMessage(InfoLogLength + 1);
-			glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-			FatalError("Vert Shader:%s Compile Error: %s. \n", sVPath.c_str(), &VertexShaderErrorMessage[0]);
-		}
-
-
-
-		// Compile Fragment Shader
-		Log("Compiling Fragment shader : %s\n", sFPath.c_str());
-		char const * FragmentSourcePointer = FragmentShaderCode.c_str();
-		glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
-		glCompileShader(FragmentShaderID);
-
-		// Check Fragment Shader
-		glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
-		glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-		if (InfoLogLength > 0) {
-			std::vector<char> FragmentShaderErrorMessage(InfoLogLength + 1);
-			glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-			FatalError("Frag Shader:%s Compile Error: %s. \n", sFPath.c_str(), &FragmentShaderErrorMessage[0]);
-		}
-
-
-		// Link the program
-		Log("Linking program\n");
-		GLuint ProgramID = glCreateProgram();
-		glAttachShader(ProgramID, VertexShaderID);
-		glAttachShader(ProgramID, FragmentShaderID);
-		glLinkProgram(ProgramID);
-
-		// Check the program
-		glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-		glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-		if (InfoLogLength > 0) {
-			std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
-			glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-			FatalError("Shader Link Error: %s. \n", &ProgramErrorMessage[0]);
-		}
-
-		glDetachShader(ProgramID, VertexShaderID);
-		glDetachShader(ProgramID, FragmentShaderID);
-
-		glDeleteShader(VertexShaderID);
-		glDeleteShader(FragmentShaderID);
-
-		glValidateProgram(ProgramID);
-		glGetProgramiv(ProgramID, GL_VALIDATE_STATUS, &Result);
-		if (Result == GL_FALSE) {
-			std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
-			glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-			FatalError("Shader Validate Error: %s. \n", &ProgramErrorMessage[0]);
-		}
-		Log("Done!\n");
-		Log("--------------------------------------------------------\n");
-		//delete VertexSourcePointer;
-		//delete FragmentSourcePointer;
-		return ProgramID;
 	}
 }

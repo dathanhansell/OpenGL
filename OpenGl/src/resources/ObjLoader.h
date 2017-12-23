@@ -1,11 +1,10 @@
 #pragma once
-#include "stdafx.h"
-#include "MGLE.h"
+#include "Model.h"
+#include "tString.h"
 namespace MGLE {
-	class Model;
-	class ObjLoader
-	{
+	class cModel;
+	class ObjLoader {
 	public:
-		Model loadOBJ(std::string File);
+		cModel LoadOBJ(tString asFileName);
 	};
 }

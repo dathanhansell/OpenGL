@@ -1,22 +1,32 @@
 #pragma once
 #include "stdafx.h"
 #include "MGLE.h"
+#include <glm.hpp>
+#include <gtc/type_ptr.hpp>
 #include <map>
+
 namespace MGLE {
+	typedef std::string tString;
 	class Shader
 	{
-		std::map<std::string, GLint> mUniforms;
+		std::map<tString, GLint> mUniforms;
 		GLuint program;
-		GLuint LoadFromFile(std::string sVPath, std::string sFPath);
+		tString LoadShader(tString asFilePath);
+		GLuint AddShader(tString sSource, int type);
+		void CompileProgram(GLuint v, GLuint f);
+		void AddAllUniforms();
+		GLuint LoadFromFile(tString sVPath, tString sFPath);
 	public:
 		Shader(std::string sVPath, std::string sFPath);
 		~Shader();
 		GLuint GetProgramID();
-		void SetUniform(std::string uniformName, int value);
-		void SetUniform(std::string uniformName, float value);
-		void SetUniform(std::string uniformName, Vector3 value);
-		void SetUniform(std::string uniformName, Mat4x4 value);
-		void AddUniform(std::string uniform);
+		void Bind();
+		void SetUniform(tString uniformName, int value);
+		void SetUniform(tString uniformName, float value);
+		void SetUniform(tString uniformName, Vector3 value);
+		void SetUniform(tString uniformName, Mat4x4 value);
+		void SetUniform(tString uniformName, glm::mat4 value);
+		void AddUniform(tString uniform);
 	};
 }
 

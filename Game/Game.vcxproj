@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mid\include\SFML;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\mid\glm;$(SolutionDir)\mid\include\SFML;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(SolutionDir)\OpenGL\src\system;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\mid\lib\SFML;$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mid\include\SFML;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\mid\include\SFML;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(SolutionDir)\OpenGL\src\system;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\mid\lib\SFML;$(SolutionDir)\mid\lib\glew-2.1.0\Release\Win32;$(SolutionDir)\mid\lib\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

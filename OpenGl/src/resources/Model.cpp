@@ -1,6 +1,6 @@
 #include "Model.h"
 namespace MGLE {
-	Model::Model(std::vector< Vector3 > Vertices,
+	cModel::cModel(std::vector< Vector3 > Vertices,
 		std::vector< Vector2 > Uvs,
 		std::vector< Vector3 > Normals)
 	{
@@ -13,16 +13,16 @@ namespace MGLE {
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vector3), &vertices[0], GL_STATIC_DRAW);
 	}
 
-	Model::Model()
+	cModel::cModel()
 	{
 
 	}
 
-	Model::~Model()
+	cModel::~cModel()
 	{
 	}
 
-	void Model::Draw() {
+	void cModel::Draw() {
 		//glUseProgram(shader);
 
 		glEnableVertexAttribArray(0);
@@ -35,19 +35,9 @@ namespace MGLE {
 			0,                  // stride
 			(void*)0            // array buffer offset
 		);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-
-
-		glColor3f(.9f, .9f, .9f);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glDrawArrays(GL_TRIANGLES, 0, this->vertices.size());
-		glColor3f(.1f, .1f, .1f);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawArrays(GL_TRIANGLES, 0, this->vertices.size());
 		glDisableVertexAttribArray(0);
-
-		//glutSwapBuffers();
 	}
 
 }
