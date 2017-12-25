@@ -145,18 +145,16 @@ namespace MGLE {
 		*/
 		return *this;
 	}
-	/*
-	Mat4x4& Mat4x4::rotate(Vector3 angle)
+
+	Mat4x4& Mat4x4::rotate(float angle, Vector3 axis)
 	{
-	return rotate(angle.x, angle.y, angle.z);
+	return rotate(angle, axis.x, axis.y, axis.z);
 	}
 
-	Mat4x4& Mat4x4::rotate(float x, float y, float z)
+	Mat4x4& Mat4x4::rotate(float angle,float x, float y, float z)
 	{
-	float c = 0;
-	float s = 0;
-	//float c = cosf(angle * DEG2RAD);
-	//float s = sinf(angle * DEG2RAD);
+	float c = cosf(angle * DEG2RAD);
+	float s = sinf(angle * DEG2RAD);
 	float c1 = 1.0f - c;
 	float m0 = m[0], m4 = m[4], m8 = m[8], m12 = m[12],
 	m1 = m[1], m5 = m[5], m9 = m[9], m13 = m[13],
@@ -189,7 +187,8 @@ namespace MGLE {
 
 	return *this;
 	}
-	*/
+
+	/*
 	Vector3& Mat4x4::Rotate(Vector3 angle)
 	{
 		Vector3 f = Vector3::forward;
@@ -203,4 +202,5 @@ namespace MGLE {
 		//m[0] = cos(x) * -sin(y)
 		return Vector3(0, 0, 0);
 	}
+	*/
 }

@@ -19,6 +19,7 @@ namespace MGLE {
 		vector< Vector2 > temp_uvs;
 		vector< Vector3 > temp_normals;
 		asFileName = GetAbsolutePath() + asFileName;
+		Log("--------------------------------------------------------\n");
 		Log("Loading OBJ: %s\n", asFileName.c_str());
 		ifstream obj;
 		obj.open(asFileName);
@@ -72,10 +73,7 @@ namespace MGLE {
 				normalIndices.push_back(normalIndex[2]);
 			}
 		}
-		Log("TEMP V Size: %i\n",temp_vertices.size());
-		Log("TEMP i Size: %i\n", vertexIndices.size());
 		MeshData out;
-		Log("o V Size: %i\n", out.vertices.size());
 
 		for (unsigned int i = 0; i<vertexIndices.size(); i++) {
 
@@ -88,33 +86,25 @@ namespace MGLE {
 			out.vertices.push_back(vertex);
 			out.normals.push_back(normal);
 		}
-		Log("O V Size: %i\n", out.vertices.size());
-
 
 		obj.close();
 		Log("Done Loading...\n");
 		out = indexVBO(out);
-		Log("I Size: %i\n", out.indices.size());
 		AddData(out);
-		
 	}
 	void cMeshRes::AddData(MeshData data) {
 		vbo = 0;
 		nbo = 0;
 		mData = data;
-		Log("V Size: %i\n", mData.vertices.size());
-		Log("N Size: %i\n", mData.normals.size());
-		Log("I Size: %i\n", mData.indices.size());
-		for (int i = 0; i<(mData.vertices.size() - 1) / 2; ++i) {
-			//swap(mData.vertices[i], mData.vertices[mData.vertices.size() - 2 - i]);
-		}
-		Log("V3: %i 3F: %i\n", mData.vertices.size() * sizeof(Vector3), mData.vertices.size() * 3 * sizeof(float));
+		Log("Adding data...\n");
+		Log("Vertex count: %i\n", mData.vertices.size());
+		Log("Normal count: %i\n", mData.normals.size());
+		Log("Index count: %i\n", mData.indices.size());
 		if (mData.vertices.size() > 0) {
 			glGenBuffers(1, &vbo);
 			glBindBuffer(GL_ARRAY_BUFFER, vbo);
 			glBufferData(GL_ARRAY_BUFFER, mData.vertices.size() * sizeof(Vector3), &mData.vertices[0], GL_STATIC_DRAW);
 		}
-		
 		else {
 			Error("Model has no verts.");
 		}
@@ -126,9 +116,6 @@ namespace MGLE {
 		else {
 			Error("Model has no normals.");
 		}
-		for (int i = 0; i<(mData.indices.size() - 1)/ mData.indices.size(); i++) {
-			//swap(mData.indices[i], mData.indices[mData.indices.size() - 2 - i]);
-		}
 		if (mData.indices.size() > 0) {
 		glGenBuffers(1, &ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
@@ -137,7 +124,8 @@ namespace MGLE {
 		else {
 			Error("Something went wrong with the indices.");
 		}
-		
+		Log("Done!\n");
+		Log("--------------------------------------------------------\n\n");
 	}
 	bool cMeshRes::is_near(float v1, float v2) {
 		return fabs(v1 - v2) < 0.01f;
@@ -189,8 +177,7 @@ namespace MGLE {
 				VertexToOutIndex[packed] = newindex;
 			}
 		}
-		Log("Indices: %i\n",out_indices.size());
-		Log("Done!\n");
+		Log("Done Indexing...\n");
 		return MeshData(out_vertices,out_normals, out_indices);
 	}
 }

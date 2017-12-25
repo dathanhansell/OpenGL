@@ -15,9 +15,10 @@ namespace MGLE {
 		bool InitGL();
 		bool InitGLEW();
 		void Render();
-		void FPS();
+		
 		void Init();
 	public:
+		void FPS();
 		Window* window;
 		Graphics();
 		~Graphics();

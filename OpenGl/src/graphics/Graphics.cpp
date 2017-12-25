@@ -24,12 +24,7 @@ namespace MGLE {
 		else if (!frameTimer.IsRunning()) frameTimer.Start();
 	}
 	void Graphics::Render() {
-		FPS();
-		glClearColor(.1f, .1f, .1f, 1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
-		Debug::DrawWireSphere(Vector3::zero);
-		glutSwapBuffers();
+		
 
 	}
 
@@ -63,12 +58,7 @@ namespace MGLE {
 
 	bool Graphics::InitGL()
 	{
-		
-		
-		
 		window = new Window();
-		
-		Log("Initializing OpenGL %i%s%i%s", 0, ".", 0, "...\n");
 		return true;
 	}
 

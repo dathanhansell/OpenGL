@@ -11,6 +11,9 @@ namespace MGLE {
 		GLuint f = AddShader(LoadShader(sFPath), GL_FRAGMENT_SHADER);
 		CompileProgram(v,f);
 		AddUniform("MVP");
+		AddUniform("M");
+		AddUniform("V");
+		AddUniform("base_color");
 	}
 	Shader::~Shader()
 	{

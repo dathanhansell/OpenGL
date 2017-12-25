@@ -20,9 +20,9 @@ namespace MGLE {
 		Mat4x4& Orthographic(float left, float right, float bottom, float top, float near, float far);
 		Mat4x4& View(Vector3 eye, Vector3 target, Vector3 up);
 		Mat4x4& setFrustum(float fovY, float aspect, float front, float back);
-		//Mat4x4& rotate(Vector3 angle);
-		//Mat4x4& rotate(float x, float y, float z);
-		Vector3& Rotate(Vector3 angle);
+		Mat4x4& rotate(float angle, Vector3 axis);
+		Mat4x4& rotate(float angle, float x, float y, float z);
+		//Vector3& Rotate(Vector3 angle);
 		tString toString();
 
 		inline Mat4x4 Mat4x4::operator+(const Mat4x4& rhs) const

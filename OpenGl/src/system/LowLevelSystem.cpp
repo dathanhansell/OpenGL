@@ -133,7 +133,7 @@ namespace MGLE {
 		mbstowcs(&wsTemp[0], &sBox[0], needed);
 		MessageBox(NULL, wsTemp.c_str(), (L"FATAL ERROR"), MB_ICONERROR);
 #endif //  WIN32
-		sMess = "FATAL ERROR: " + sMess;
+		sMess = "FATAL ERROR: " + sMess + "\n--------------------------------------------------------\nExit Failure!\n";
 		mLogger.Print(sMess);
 
 		exit(1);

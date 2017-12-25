@@ -1,16 +1,6 @@
 #include "tString.h"
 namespace MGLE {
 
-
-	cString::cString()
-	{
-	}
-
-
-	cString::~cString()
-	{
-	}
-
 	tWString cString::To16(const tString &asString)
 	{
 		tWString wsTemp;
