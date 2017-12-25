@@ -9,11 +9,19 @@ namespace MGLE {
 		glMatrixMode(GL_MODELVIEW);
 	}
 	void Window::Init() {
+		  // Request 2 levels of antialiasing
 		Log( "Creating Window...\n" );
+		
 		width = 800;
 		height = 800;
-		window.create(sf::VideoMode(width, height), title);
-		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+		sf::ContextSettings settings;
+		settings.depthBits = 24;
+		settings.stencilBits = 8;
+		settings.antialiasingLevel = 4;
+		settings.majorVersion = 3;
+		settings.minorVersion = 0;
+
+		window = new sf::Window(sf::VideoMode(width, height, 32), "SFML Window", sf::Style::Default, settings);
 	}
 	void Window::ResetWindow() {
 		glutReshapeWindow(width, height);
@@ -23,8 +31,8 @@ namespace MGLE {
 		Init();
 	}
 	Window::~Window() {
-		window.close();
-		window.~Window();
+		window->close();
+		window->~Window();
 	}
 	int Window::GetHeight() {
 		return height;
@@ -35,15 +43,15 @@ namespace MGLE {
 	}
 
 	bool Window::Open() {
-		return window.isOpen();
+		return window->isOpen();
 	}
 
 	void Window::PollEvents() {
 		sf::Event e;
-		while (window.pollEvent(e)) {
+		while (window->pollEvent(e)) {
 
 			if (e.type == sf::Event::Closed)
-				window.close();
+				window->close();
 			if (e.type == sf::Event::Resized)
 			{
 				Reshape(e.size.width, e.size.height);
@@ -51,6 +59,7 @@ namespace MGLE {
 		}
 	}
 	void Window::Display() {
-		window.display();
+		window->display();
+		
 	}
 }

@@ -54,9 +54,9 @@ namespace MGLE {
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &Result);
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &InfoLogLength);
 		if (InfoLogLength > 0) {
-			std::vector<char> VertexShaderErrorMessage(InfoLogLength + 1);
-			glGetShaderInfoLog(shader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-			FatalError("Shader compile error:\n%s\n %s.\n", sSource.c_str(), &VertexShaderErrorMessage[0]);
+			GLchar* strInfoLog = new GLchar[InfoLogLength + 1];
+			glGetShaderInfoLog(shader, InfoLogLength, NULL, strInfoLog);
+			FatalError("Shader compile error:\n%s\n %s.\n", sSource.c_str(), strInfoLog);
 		}
 		glAttachShader(program, shader);
 		return shader;
@@ -149,15 +149,6 @@ namespace MGLE {
 	{
 		try {
 			glUniformMatrix4fv(mUniforms.at(uniformName), 1, GL_TRUE, &value.m[0]);
-		}
-		catch (const std::out_of_range& e) {
-			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());
-		}
-	}
-	void Shader::SetUniform(tString uniformName, glm::mat4 value)
-	{
-		try {
-			glUniformMatrix4fv(mUniforms.at(uniformName), 1, GL_FALSE, glm::value_ptr(value));
 		}
 		catch (const std::out_of_range& e) {
 			FatalError("Failure to set uniform %s : Out of Range Exception: %s\n", uniformName.c_str(), e.what());

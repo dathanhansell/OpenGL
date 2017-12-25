@@ -1,17 +1,20 @@
 #pragma once
-#include "MGLE.h"
+#include <gl\glew.h>
+#include <gl\glut.h>
+#include "LowLevelSystem.h"
+#include "tString.h"
+#include "MeshRes.h"
 namespace MGLE {
+	class cMeshRes;
 	class cModel
 	{
+		tString mFileName;
+		cMeshRes* res;
 	public:
-		GLuint vbo;
-		std::vector< Vector3 > vertices;
-		std::vector< Vector2 > uvs;
-		std::vector< Vector3 > normals;
-		cModel(std::vector< Vector3 > Vertices,
-			std::vector< Vector2 > Uvs,
-			std::vector< Vector3 > Normals);
+		cMeshRes* GetMeshData();
+		void LoadFromFile(tString asFileName);
 		cModel();
+		cModel(tString asFileName);
 		~cModel();
 		void Draw();
 	};

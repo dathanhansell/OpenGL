@@ -1,43 +1,47 @@
 #include "Model.h"
+#include <vector>
+#include <map>
+#include "Maths.h"
+#include "LowLevelSystem.h"
+#include "tString.h"
 namespace MGLE {
-	cModel::cModel(std::vector< Vector3 > Vertices,
-		std::vector< Vector2 > Uvs,
-		std::vector< Vector3 > Normals)
-	{
-		vbo = 0;
-		vertices = Vertices;
-		uvs = Uvs;
-		normals = Normals;
-		glGenBuffers(1, &vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vector3), &vertices[0], GL_STATIC_DRAW);
-	}
 
+	void cModel::LoadFromFile(tString asFileName) {
+		//TODO read from filename to get extension and use different loaders depending on extension
+		mFileName = asFileName;
+		res->LoadOBJ(asFileName);
+	}
 	cModel::cModel()
 	{
-
+		res = new cMeshRes();
 	}
-
+	cModel::cModel(tString asFileName)
+	{
+		LoadFromFile(asFileName);
+	}
 	cModel::~cModel()
 	{
+		delete res;
 	}
 
 	void cModel::Draw() {
-		//glUseProgram(shader);
 
 		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glDrawArrays(GL_TRIANGLES, 0, this->vertices.size());
+		glBindBuffer(GL_ARRAY_BUFFER, res->vbo);
+		glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,(void*)0);
+
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, res->nbo);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, res->ebo);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		//glDepthMask(GL_TRUE);
+		glDrawElements(GL_TRIANGLES,res->mData.indices.size(),GL_UNSIGNED_SHORT,(void*)0);
+
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 	}
 
 }

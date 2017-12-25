@@ -4,7 +4,7 @@
 #include "atlstr.h"
 #include "Pathcch.h"
 namespace MGLE {
-	class ObjLoader;
+
 	class cLowLevelSystem;
 	class Resources
 	{
@@ -13,7 +13,7 @@ namespace MGLE {
 		Resources();
 		~Resources();
 		cLowLevelSystem* mLowLevelSystem;
-		ObjLoader* objloader;
+
 
 	};
 }

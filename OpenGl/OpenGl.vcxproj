@@ -170,7 +170,7 @@
     <ClCompile Include="src\math\Vector3.cpp" />
     <ClCompile Include="src\math\Vector4.cpp" />
     <ClCompile Include="src\resources\Model.cpp" />
-    <ClCompile Include="src\resources\ObjLoader.cpp" />
+    <ClCompile Include="src\resources\MeshRes.cpp" />
     <ClCompile Include="src\resources\Resources.cpp" />
     <ClCompile Include="src\resources\Shader.cpp" />
     <ClCompile Include="src\scene\Transform.cpp" />
@@ -196,7 +196,7 @@
     <ClInclude Include="src\math\Vector3.h" />
     <ClInclude Include="src\math\Vector4.h" />
     <ClInclude Include="src\resources\Model.h" />
-    <ClInclude Include="src\resources\ObjLoader.h" />
+    <ClInclude Include="src\resources\MeshRes.h" />
     <ClInclude Include="src\resources\Resources.h" />
     <ClInclude Include="src\resources\Shader.h" />
     <ClInclude Include="src\scene\Transform.h" />

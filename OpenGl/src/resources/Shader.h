@@ -1,8 +1,6 @@
 #pragma once
 #include "stdafx.h"
 #include "MGLE.h"
-#include <glm.hpp>
-#include <gtc/type_ptr.hpp>
 #include <map>
 
 namespace MGLE {
@@ -25,7 +23,6 @@ namespace MGLE {
 		void SetUniform(tString uniformName, float value);
 		void SetUniform(tString uniformName, Vector3 value);
 		void SetUniform(tString uniformName, Mat4x4 value);
-		void SetUniform(tString uniformName, glm::mat4 value);
 		void AddUniform(tString uniform);
 	};
 }

@@ -7,11 +7,10 @@ namespace MGLE {
 		int height;
 		int width;
 		std::string title = "Game";
-		sf::Window window;
+		sf::Window* window;
 		bool fullscreen;
 		void Init();
 		void ResetWindow();
-
 	public:
 		Window();
 		~Window();

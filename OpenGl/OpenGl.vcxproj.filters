@@ -43,9 +43,6 @@
     <ClCompile Include="src\graphics\Debug.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\resources\ObjLoader.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="src\resources\Model.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -88,6 +85,9 @@
     <ClCompile Include="src\system\tString.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="src\resources\MeshRes.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGLE.h" />
@@ -106,9 +106,6 @@
     </ClInclude>
     <ClInclude Include="src\graphics\Debug.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\resources\ObjLoader.h">
-      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\resources\Model.h">
       <Filter>Resources</Filter>
@@ -154,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="src\system\tString.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\MeshRes.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

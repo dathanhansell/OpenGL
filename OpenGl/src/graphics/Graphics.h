@@ -8,7 +8,7 @@ namespace MGLE {
 	class Renderer;
 	class Graphics
 	{
-		sf::Context context;
+		
 		Renderer* renderer;
 		Timer frameTimer;
 		int frameCount;

@@ -16,7 +16,7 @@
 
 #include "Resources.h"
 #include "Model.h"
-#include "ObjLoader.h"
+#include "MeshRes.h"
 #include "Shader.h"
 
 #include "Transform.h"

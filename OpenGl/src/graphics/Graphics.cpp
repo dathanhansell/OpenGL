@@ -63,9 +63,12 @@ namespace MGLE {
 
 	bool Graphics::InitGL()
 	{
-		context.setActive(true);
-		Log("Initializing OpenGL %i%s%i%s", context.getSettings().majorVersion, ".", context.getSettings().minorVersion, "...\n");
+		
+		
+		
 		window = new Window();
+		
+		Log("Initializing OpenGL %i%s%i%s", 0, ".", 0, "...\n");
 		return true;
 	}
 
