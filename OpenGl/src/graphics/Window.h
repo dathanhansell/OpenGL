@@ -4,8 +4,8 @@
 #include<SFML/Window.hpp>
 namespace MGLE {
 	class Window {
-		int height;
-		int width;
+		static int height;
+		static int width;
 		std::string title = "Game";
 		sf::Window* window;
 		bool fullscreen;
@@ -14,8 +14,8 @@ namespace MGLE {
 	public:
 		Window();
 		~Window();
-		int GetWidth();
-		int GetHeight();
+		static int GetWidth();
+		static int GetHeight();
 		bool Open();
 		void PollEvents();
 		void Display();

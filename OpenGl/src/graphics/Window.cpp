@@ -8,6 +8,8 @@ namespace MGLE {
 		width = w; height = h;
 		glMatrixMode(GL_MODELVIEW);
 	}
+	int Window::height = 800;
+	int Window::width = 800;
 	void Window::Init() {
 		  // Request 2 levels of antialiasing
 		Log( "Creating Window...\n" );

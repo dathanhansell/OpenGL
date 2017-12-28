@@ -1,6 +1,7 @@
 #include "Debug.h"
 #define _USE_MATH_DEFINES
 namespace MGLE {
+	
 	void Debug::DrawCardWireSphere(Vector3 p, float size, int verts, Vector3 angle) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		verts /= 2;
@@ -53,6 +54,18 @@ namespace MGLE {
 			glVertex3f(p.x + sin(i) * size, p.y, p.z + cos(i) * size);
 		glEnd();
 		glPopMatrix();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	void Debug::DrawGrid(int size, Vector3 color) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glBegin(GL_LINES);
+		for (int x = -size; x < size+1; x++) {
+			glVertex3f(x, 0, -size);
+			glVertex3f(x, 0, size);
+			glVertex3f(-size, 0, x);
+			glVertex3f(size, 0, x);
+		}
+		glEnd();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 	void Debug::DrawAxes(Vector3 p, Vector3 angle) {

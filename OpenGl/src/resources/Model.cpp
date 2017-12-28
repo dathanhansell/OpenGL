@@ -6,18 +6,37 @@
 #include "tString.h"
 namespace MGLE {
 
+	void cModel::Init() {
+		cMeshRes::InitErrorMdl();
+	}
 	void cModel::LoadFromFile(tString asFileName) {
 		//TODO read from filename to get extension and use different loaders depending on extension
 		mFileName = asFileName;
-		res->LoadOBJ(asFileName);
+		res = new cMeshRes();
+		res->LoadOBJFromFile(asFileName);
+	}
+	void cModel::LoadFromSource(tString asSource) {
+		mFileName = "source";
+		res = new cMeshRes();
+		res->LoadOBJFromSource(asSource);
 	}
 	cModel::cModel()
 	{
-		res = new cMeshRes();
+		
 	}
-	cModel::cModel(tString asFileName)
+	cModel::cModel(tString asMisc, int loadType)
 	{
-		LoadFromFile(asFileName);
+		switch (loadType)
+		{
+		case 0:
+			LoadFromFile(asMisc);
+			break;
+		case 1:
+			LoadFromSource(asMisc);
+			break;
+		default:
+			break;
+		}
 	}
 	cModel::~cModel()
 	{
@@ -43,5 +62,7 @@ namespace MGLE {
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 	}
-
+	bool cModel::IsError() {
+		return res->mIsError;
+	}
 }

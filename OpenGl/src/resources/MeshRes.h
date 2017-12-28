@@ -20,12 +20,6 @@ namespace MGLE {
 	struct MeshData {
 		MeshData() {
 		}
-
-		MeshData(std::vector< Vector3 > Vertices,
-
-		std::vector< Vector3 > Normals) {
-			vertices = Vertices;  normals = Normals;
-		}
 		MeshData(std::vector< Vector3 > Vertices,
 
 			std::vector< Vector3 > Normals,
@@ -43,13 +37,18 @@ namespace MGLE {
 			std::map<PackedVertex, unsigned short> & VertexToOutIndex,
 			unsigned short & result
 		);
+		
 		MeshData indexVBO(MeshData in);
-		void cMeshRes::AddData(MeshData data);
+		void SetNull();
 	public:
+		static void InitErrorMdl();
+		void cMeshRes::AddData(MeshData data);
 		cMeshRes();
 		~cMeshRes();
 		MeshData mData;
 		GLuint vbo, nbo, ebo;
-		void LoadOBJ(tString asFileName);
+		bool mIsError = false;
+		void LoadOBJFromFile(tString asFileName);
+		void LoadOBJFromSource(tString asSource);
 	};
 }

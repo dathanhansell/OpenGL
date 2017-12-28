@@ -5,7 +5,7 @@ using namespace std;
 namespace MGLE {
 	void MousePassive(int X, int Y)
 	{
-		if (GetActiveWindow() == 00000000) return;
+		
 	}
 	Input::Input() {
 		Init();
@@ -23,7 +23,7 @@ namespace MGLE {
 
 	}
 	void Input::Update() {
-
+		
 		for (int i = 0; i < Key::KeyCount; i++) {
 			lastKeys[i] = sf::Keyboard::isKeyPressed(sf::Keyboard::Key(i));
 		}

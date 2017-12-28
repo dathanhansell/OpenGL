@@ -8,9 +8,11 @@ namespace MGLE {
 		Init();
 	}
 	Mat4x4 m, v, p, MVP;
-	Shader* shad;
-	cModel* mod;
-	cModel ico,suz;
+	Shader* activeShader;
+	Shader reg,err;
+	cModel* activeModel;
+	cModel suz;
+	
 	Game::~Game()
 	{
 		Log("Exiting\n");
@@ -19,62 +21,80 @@ namespace MGLE {
 		delete graphics;
 		Log("Done with Input\n");
 		delete input;
-		Log("Done with Resources\n");
+		
 		delete resources;
-		delete shad;
+		Log("Done with Resources\n");
+		//creates error cuz probably tries to delete a member called activeShader 
+		//but the compiler is talking about the one on the cpp
+		//delete activeShader;
+		Log("Done with activeShader\n");
+		//delete activeModel;
+		Log("Done with activeModel\n");
 		Log("--------------------------------------------------------\n");
 		Log("Exit Success!\n");
 	}
-	float x = 0;
-	float y = 1;
-	float z = 3;
+	float x = 7;
+	float y = 4;
+	float z = 7;
 	void Game::Init() {
 
 		graphics = new Graphics();
+		glClearColor(.85, .85, .85, 1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		graphics->window->Display();
 		input = new Input();
 		resources = new Resources();
-		shad = new Shader("shaders\\vert.glsl", "shaders\\frag.glsl");
-		ico.LoadFromFile("ico.obj");
-		suz.LoadFromFile("suz.obj");
-		mod = &suz;
+		Shader::Init();
+		cModel::Init();
+		reg.CreateFromFile("reg", "shaders\\solid_v.glsl", "shaders\\solid_f.glsl");
+		
+		reg.AddUniform("MVP");
+		reg.AddUniform("bobs");
+		err.CreateFromFile("error","shaders\\error_v.glsl", "shaders\\error_f.glsl");
+		err.AddUniform("MVP");
+		activeShader = &reg;
+		suz.LoadFromFile("erdror.obj");
+		activeModel = &suz;
 
 	}
 	float c;
-	Vector3 color = { 0,1,1 };
+	int size = 5;
 	bool is;
 	void Game::Update() {
-		glClearColor(.85, .85, .85, 1);
+		if (GetActiveWindow() == 00000000) return;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		
 		if (input->GetKey(input->W))       z -= .02f;
 		if (input->GetKey(input->S))       z += .02f;
 		if (input->GetKey(input->Space))   y += .02f;
 		if (input->GetKey(input->LControl))y -= .02f;
 		if (input->GetKey(input->D))       x += .02f;
 		if (input->GetKey(input->A))       x -= .02f;
-		if (input->GetKeyDown(input->E)) {
-			is = !is;
-			if (is)
-				mod = &ico;
-			else
-				mod = &suz;
-		}
-
+		if (input->GetKeyDown(input->E)) size++;
+		if (input->GetKeyDown(input->Q)) size--;
+		
 		c += 1;
-		color = { (sinf(c*.04)*.5f) + 1,(cosf(c*.02)*.5f)+1,(sinf(c*.01)*.5f) + 1 };
 		m.Identity();
-		p.Perspective(45, (float)graphics->window->GetWidth() / (float)graphics->window->GetHeight(), 0.1f, 100.0f);
+		p.Perspective(45, (float)graphics->window->GetWidth() / (float)graphics->window->GetHeight(), 0.1f, 200);
 		v.View({x,y,z}, { 0, 0, 0 }, { 0, 1, 0 });
-		m.Translate({0,sinf(c*.01)*.5f,0});
-		m.rotate(c,0,1,0);
+		m.Translate(0, 0, 0);
 		MVP = m*v*p;
-		shad->SetUniform("MVP", MVP);
-		shad->SetUniform("M", m);
-		shad->SetUniform("V", v);
-		shad->SetUniform("base_color", color);
-		shad->Bind();
-		mod->Draw();
+		activeShader = &err;
+		activeShader->Bind();
+		activeShader->SetUniform("MVP", MVP);
+		activeModel->Draw();
+
+		m.Identity();
+		MVP = m*v*p;
+		activeShader = &reg;
+		activeShader->Bind();
+		activeShader->SetUniform("MVP", MVP);
+		activeShader->SetUniform("bobs", { .4f,.4f,.4f });
+		
+		Debug::DrawGrid(size);
+		
 		input->Update();
+		graphics->window->Display();
 
 	}
 }
