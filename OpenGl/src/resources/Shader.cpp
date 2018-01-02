@@ -10,11 +10,8 @@ namespace MGLE {
 
 	}
 	void InitNull() {
-		Log("Loading Shader Program null...\n");
-		Log("--------------------------------------------------------\n");
-		null.CreateFromSource("null", nullVert, nullFrag);
+		null.CreateProgram("null", nullVert, nullFrag,FROM_SOURCE);
 		null.AddUniform("MVP");
-		Log("--------------------------------------------------------\n");
 	}
 	void Shader::SetNull() {
 		Log("shader %s setting to NULL\n",name.c_str());
@@ -24,30 +21,9 @@ namespace MGLE {
 	void Shader::Init() {
 		InitNull();
 	}
-	Shader::Shader(tString Name, tString sVPath, tString sFPath)
+	Shader::Shader(tString Name, tString sVMisc, tString sFMisc, int createType)
 	{
-		Log("Loading Shader Program %s...\n", Name.c_str());
-		Log("--------------------------------------------------------\n");
-		CreateFromFile(Name ,sVPath, sFPath);
-		
-	}
-	Shader::Shader(tString Name, tString Vertex, tString Fragment, int createType)
-	{
-		Log("Loading Shader Program %s...\n",Name.c_str());
-		Log("--------------------------------------------------------\n");
-		switch (createType)
-		{
-		case 0:
-			CreateFromFile(Name, Vertex, Fragment);
-			break;
-		case 1:
-			
-			CreateFromSource(Name, Vertex, Fragment);
-			break;
-		default:
-			break;
-		}
-		
+		CreateProgram(Name, sVMisc, sFMisc, createType);
 	}
 	Shader::~Shader()
 	{
@@ -92,16 +68,37 @@ namespace MGLE {
 	}
 	void Shader::CreateFromFile(tString Name, tString sVPath, tString sFPath) {
 		tString v, f;
+		
 		if(LoadShader(sVPath,v) && LoadShader(sFPath,f))CreateFromSource(Name,v, f);
 		else {
 			Error("Failure to load shader %s\n", Name.c_str());
 			return;
 		}
 	}
+	void Shader::CreateProgram(tString Name, tString sVMisc, tString sFMisc, int createType) {
+		switch (createType)
+		{
+		case 0:
+			Bar();
+			Log("Loading Shader Program %s...\n", Name.c_str());
+			OpenBar();
+			CreateFromFile(Name, sVMisc, sFMisc);
+			break;
+		case 1:
+			Bar();
+			Log("Creating Shader Program %s...\n", Name.c_str());
+			OpenBar();
+			CreateFromSource(Name, sVMisc, sFMisc);
+			break;
+		default:
+			break;
+		}
+		CloseBar();
+	}
 	bool Shader::LoadShader(tString asFilePath, tString& out) {
 		tString shaderSource;
 		asFilePath = GetAbsolutePath() + asFilePath;
-		Log("Loading Shader: %s\n", asFilePath.c_str());
+		
 		std::ifstream shaderReader(asFilePath, std::ios::in);
 		if (shaderReader.is_open()) {
 			tString Line = "";
@@ -116,12 +113,13 @@ namespace MGLE {
 		}
 		shaderReader.close();
 		out = shaderSource;
+		Log("Loaded Shader: %s\n", asFilePath.c_str());
 		return true;
 	}
 	bool Shader::AddShader(tString sSource, int type, GLuint& out)
 	{
 		GLuint shader = glCreateShader(type);
-
+		
 		if (shader == 0) {
 			Error("Shader creation failed: Could not find valid memory location when adding shader, setting null");
 			SetNull();
@@ -143,6 +141,8 @@ namespace MGLE {
 		}
 		glAttachShader(program, shader);
 		out = shader;
+		if (GL_VERTEX_SHADER == type) Log("Added vertex shader to program\n");
+		if (GL_FRAGMENT_SHADER == type) Log("Added fragment shader to program\n");
 		return true;
 	}
 	bool Shader::CompileProgram(GLuint v, GLuint f)
@@ -174,11 +174,11 @@ namespace MGLE {
 			SetNull();
 			return false;
 		}
+		Log("Compiled program \"%s\"\n",name.c_str());
 		return true;
 	}
 
 	void Shader::AddUniform(tString sUniform) {
-		Log("Adding Uniform %s\n",sUniform.c_str());
 		GLint iLocation = glGetUniformLocation(program, sUniform.c_str());
 		if (iLocation == 0xFFFFFFFF)
 		{

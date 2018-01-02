@@ -27,22 +27,18 @@ namespace MGLE {
 		
 
 	}
-
+	
 	void Graphics::Init()
 	{
-
 		Log("Initializing Graphics Module...\n");
-		Log("--------------------------------------------------------\n");
-
+		OpenBar();
 		bool fullscreen = false;
-		
-
 		if (!InitGL())
 		{
 			FatalError("OpenGL Failed To Initialize For Some Reason\n");
 			return;
 		}
-
+		
 		Log("Initializing GLEW...\n");
 		if (!InitGLEW())
 		{
@@ -52,8 +48,7 @@ namespace MGLE {
 		Log("Creating Renderer...\n");
 		renderer = new Renderer();
 		Log("Done!\n");
-		Log("--------------------------------------------------------\n");
-
+		CloseBar();
 	}
 
 	bool Graphics::InitGL()
@@ -63,7 +58,6 @@ namespace MGLE {
 	}
 
 	bool Graphics::InitGLEW() {
-
 		glewExperimental = GL_TRUE;
 		GLenum glewError = glewInit();
 		if (glewError != GLEW_OK)

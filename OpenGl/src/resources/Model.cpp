@@ -9,14 +9,14 @@ namespace MGLE {
 	void cModel::Init() {
 		cMeshRes::InitErrorMdl();
 	}
-	void cModel::LoadFromFile(tString asFileName) {
+	void cModel::LoadFromFile(tString Name, tString asFileName) {
 		//TODO read from filename to get extension and use different loaders depending on extension
-		mFileName = asFileName;
+		mFileName = Name;
 		res = new cMeshRes();
 		res->LoadOBJFromFile(asFileName);
 	}
-	void cModel::LoadFromSource(tString asSource) {
-		mFileName = "source";
+	void cModel::LoadFromSource(tString Name, tString asSource) {
+		mFileName = Name;
 		res = new cMeshRes();
 		res->LoadOBJFromSource(asSource);
 	}
@@ -24,19 +24,29 @@ namespace MGLE {
 	{
 		
 	}
-	cModel::cModel(tString asMisc, int loadType)
+	cModel::cModel(tString Name,tString asMisc, int createType)
 	{
-		switch (loadType)
+		CreateModel(Name,asMisc,createType);
+	}
+	void cModel::CreateModel(tString Name, tString asMisc, int createType) {
+		switch (createType)
 		{
 		case 0:
-			LoadFromFile(asMisc);
+			Bar();
+			Log("Loading Model From File: %s\n", asMisc.c_str());
+			OpenBar();
+			LoadFromFile(Name, asMisc);
 			break;
 		case 1:
-			LoadFromSource(asMisc);
+			Bar();
+			Log("Loading Model From Source: %s\n", asMisc.c_str());
+			OpenBar();
+			LoadFromSource(Name, asMisc);
 			break;
 		default:
 			break;
 		}
+		CloseBar();
 	}
 	cModel::~cModel()
 	{

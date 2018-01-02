@@ -96,6 +96,15 @@ namespace MGLE {
 	string GetAbsolutePath() {
 		return msAbsolutePath;
 	}
+	void OpenBar() {
+		Log("--------------------------------------------------------{\n");
+	}
+	void CloseBar() {
+		Log("--------------------------------------------------------}\n");
+	}
+	void Bar() {
+		Log("--------------------------------------------------------\n");
+	}
 	void Log(const char* fmt, ...)
 	{
 		char text[2048];

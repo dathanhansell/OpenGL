@@ -16,6 +16,7 @@ namespace MGLE {
 		~Window();
 		static int GetWidth();
 		static int GetHeight();
+		sf::Window* GetWindow();
 		bool Open();
 		void PollEvents();
 		void Display();

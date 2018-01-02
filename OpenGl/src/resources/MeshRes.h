@@ -11,8 +11,10 @@
 namespace MGLE {
 	struct PackedVertex {
 		Vector3 position;
-
+		Vector2 uv;
 		Vector3 normal;
+		PackedVertex() {
+		}
 		bool operator<(const PackedVertex that) const {
 			return memcmp((void*)this, (void*)&that, sizeof(PackedVertex))>0;
 		};
@@ -21,13 +23,14 @@ namespace MGLE {
 		MeshData() {
 		}
 		MeshData(std::vector< Vector3 > Vertices,
-
+			std::vector<Vector2> Uvs,
 			std::vector< Vector3 > Normals,
 			std::vector<unsigned short> Indices) {
-			vertices = Vertices;  normals = Normals; indices = Indices;
+			vertices = Vertices; uvs = Uvs;  normals = Normals; indices = Indices;
 		}
 		std::vector< Vector3 > vertices;
 		std::vector< Vector3 > normals;
+		std::vector< Vector2 > uvs;
 		std::vector<unsigned short> indices;
 	};
 	class cMeshRes {
@@ -46,7 +49,7 @@ namespace MGLE {
 		cMeshRes();
 		~cMeshRes();
 		MeshData mData;
-		GLuint vbo, nbo, ebo;
+		GLuint vbo, nbo,tbo, ebo;
 		bool mIsError = false;
 		void LoadOBJFromFile(tString asFileName);
 		void LoadOBJFromSource(tString asSource);

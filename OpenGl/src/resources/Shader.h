@@ -16,18 +16,17 @@ namespace MGLE {
 		bool AddShader(tString sSource, int type, GLuint& out);
 		bool CompileProgram(GLuint v, GLuint f);
 		void AddAllUniforms();
-		
+		void CreateFromSource(tString Name, tString sVSource, tString sFSource);
+		void CreateFromFile(tString Name, tString sVPath, tString sFPath);
 	public:
 		#define FROM_FILE  0
 		#define FROM_SOURCE  1
 		Shader();
 		static void Init();
-		Shader(tString Name, tString sVPath, tString sFPath);
-		Shader(tString Name, tString Vertex, tString Fragment, int createType);
+		Shader(tString Name, tString sVMisc, tString sFMisc, int createType = 0);
 		~Shader();
 		GLuint GetProgramID();
-		void CreateFromSource(tString Name, tString sVSource, tString sFSource);
-		void CreateFromFile(tString Name, tString sVPath, tString sFPath);
+		void CreateProgram(tString Name, tString sVMisc, tString sFMisc, int createType = 0);
 		void Bind();
 		void SetUniform(tString uniformName, int value);
 		void SetUniform(tString uniformName, float value);

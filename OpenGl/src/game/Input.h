@@ -1,19 +1,38 @@
 #pragma once
 #include "stdafx.h"
 #include <SFML/Window.hpp>
+#include "Maths.h"
 namespace MGLE {
 	class Input
 	{
 		bool lastKeys[101];
+		bool lastButton[5];
+		Vector2 lastMousePos;
 	public:
 		Input();
 		~Input();
 		enum Key;
+		enum Button;
+		static float scroll;
 		void Init();
 		void Update();
+		Vector2 GetMouse();
 		bool GetKey(Key keycode);
 		bool GetKeyDown(Key keycode);
 		bool GetKeyUp(Key keycode);
+		bool GetMouseButton(Button button);
+		float GetMouseScroll();
+		bool GetMouseButtonDown(Button button);
+		bool GetMouseButtonUp(Button button);
+		enum Button
+		{
+			Left,
+			Right,
+			Middle,
+			XButton1,
+			XButton2,
+			ButtonCount
+		};
 		enum Key {
 			Unknown = -1,
 			A = 0,
@@ -87,10 +106,10 @@ namespace MGLE {
 			Subtract,
 			Multiply,
 			Divide,
-			Left,
-			Right,
-			Up,
-			Down,
+			Key_Left,
+			Key_Right,
+			Key_Up,
+			Key_Down,
 			Numpad0,
 			Numpad1,
 			Numpad2,

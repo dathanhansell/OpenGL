@@ -26,7 +26,9 @@ namespace MGLE {
 	extern void Error(const char* fmt, ...);
 	extern void Warning(const char* fmt, ...);
 	extern void Log(const char* fmt, ...);
-	
+	extern void OpenBar();
+	extern void CloseBar();
+	extern void Bar();
 	extern tString GetAbsolutePath();
 	//extern void CreateMessageBox(const char* asCaption, const char *fmt, ...);
 	//extern bool FileExists(const tString& asFileName);

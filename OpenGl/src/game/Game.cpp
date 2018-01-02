@@ -1,6 +1,8 @@
 #include "Game.h"
+#include "GameObject.h"
 #include <stdio.h>
 #include <iostream>
+#include <math.h>
 using namespace std;
 namespace MGLE {
 	Game::Game()
@@ -9,77 +11,136 @@ namespace MGLE {
 	}
 	Mat4x4 m, v, p, MVP;
 	Shader* activeShader;
-	Shader reg,err;
+	Shader reg, err, bas;
 	cModel* activeModel;
-	cModel suz;
-	
+	cModel suz, mon;
+
 	Game::~Game()
 	{
-		Log("Exiting\n");
-		Log("--------------------------------------------------------\n");
-		Log("Done with Graphics\n");
-		delete graphics;
-		Log("Done with Input\n");
-		delete input;
 		
+		Log("Exiting\n");
+		OpenBar();
+		delete graphics;
+		Log("Done with Graphics\n");
+		delete input;
+		Log("Done with Input\n");
 		delete resources;
 		Log("Done with Resources\n");
-		//creates error cuz probably tries to delete a member called activeShader 
-		//but the compiler is talking about the one on the cpp
-		//delete activeShader;
-		Log("Done with activeShader\n");
-		//delete activeModel;
-		Log("Done with activeModel\n");
-		Log("--------------------------------------------------------\n");
+		CloseBar();
 		Log("Exit Success!\n");
 	}
-	float x = 7;
-	float y = 4;
-	float z = 7;
+	Vector3 pos, tar;
 	void Game::Init() {
-
+		
 		graphics = new Graphics();
+		
 		glClearColor(.85, .85, .85, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		graphics->window->Display();
 		input = new Input();
+		
 		resources = new Resources();
+		
 		Shader::Init();
 		cModel::Init();
-		reg.CreateFromFile("reg", "shaders\\solid_v.glsl", "shaders\\solid_f.glsl");
-		
+
+		reg.CreateProgram("reg", "shaders\\solid_v.glsl", "shaders\\solid_f.glsl");
 		reg.AddUniform("MVP");
 		reg.AddUniform("bobs");
-		err.CreateFromFile("error","shaders\\error_v.glsl", "shaders\\error_f.glsl");
-		err.AddUniform("MVP");
-		activeShader = &reg;
-		suz.LoadFromFile("erdror.obj");
-		activeModel = &suz;
 
+		err.CreateProgram("error", "shaders\\error_v.glsl", "shaders\\error_f.glsl");
+		err.AddUniform("MVP");
+
+		bas.CreateProgram("bas", "shaders\\vert.glsl", "shaders\\frag.glsl");
+		bas.AddUniform("MVP");
+		activeShader = &reg;
+		mon.CreateModel("sphere", "uvCube.obj");
+		suz.CreateModel("suzanne", "wrong_on_purpose.butts");
+		activeModel = &suz;
+		pos = { 0,0,4 };
 	}
-	float c;
+	float x, y, zm = 5;
 	int size = 5;
-	bool is;
+	bool wf;
+	
 	void Game::Update() {
-		if (GetActiveWindow() == 00000000) return;
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		if (input->GetKey(input->W))       z -= .02f;
-		if (input->GetKey(input->S))       z += .02f;
-		if (input->GetKey(input->Space))   y += .02f;
-		if (input->GetKey(input->LControl))y -= .02f;
-		if (input->GetKey(input->D))       x += .02f;
-		if (input->GetKey(input->A))       x -= .02f;
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		sf::Event e;
+		while (graphics->window->GetWindow()->pollEvent(e)) {
+			if (e.type == sf::Event::Closed)
+				graphics->window->GetWindow()->close();
+			if (e.type == sf::Event::Resized)
+			{
+				graphics->window->Reshape(e.size.width, e.size.height);
+			}
+			if (e.type == sf::Event::MouseWheelMoved)
+			{
+				zm += -e.mouseWheel.delta;
+				if (zm <= 0) zm = 1;
+			}
+		}
+		if (GetActiveWindow() == 00000000) return;
+		if (input->GetKeyDown(input->W))      zm--;
+		if (input->GetKeyDown(input->S))      zm++;
+		if (input->GetKey(input->Space));
+		if (input->GetKey(input->LControl));
+		if (input->GetKey(input->D));
+		if (input->GetKey(input->A));
 		if (input->GetKeyDown(input->E)) size++;
 		if (input->GetKeyDown(input->Q)) size--;
-		
-		c += 1;
+		if (input->GetKeyDown(input->F)) wf = !wf;
+		if (wf) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glEnable(GL_CULL_FACE);
+		}
+		else {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glDisable(GL_CULL_FACE);
+		}
+		pos = { 0,0,0 };
+		pos += { -sin(x)* cos(y),
+			sin(y),
+			cos(x) * cos(y)};
+		pos *= zm;
+		if (input->GetMouseButton(input->Middle)) {
+			if (!input->GetKey(input->LShift)) {
+				x += input->GetMouse().x;
+				y -= input->GetMouse().y;
+				if (y >= 1.57) y = 1.569f;
+				if (y <= -1.57) y = -1.569f;
+			}
+			else {
+				Vector3 f = pos.normalized();
+				Vector3 r = Vector3::Cross(f, { 0,1,0 });
+				f.y = 0;
+				r.Normalize();
+				f.Normalize();
+				f *= input->GetMouse().y;
+				r *= input->GetMouse().x;
+				f += r;
+				tar += f;
+			}
+		}
+
+		pos += tar;
 		m.Identity();
 		p.Perspective(45, (float)graphics->window->GetWidth() / (float)graphics->window->GetHeight(), 0.1f, 200);
-		v.View({x,y,z}, { 0, 0, 0 }, { 0, 1, 0 });
-		m.Translate(0, 0, 0);
+		//p.Orthographic(-.05,.05,-.05,.05,.1,100);
+		v.View({ pos.x,pos.y,pos.z }, { tar.x, tar.y, tar.z }, { 0, 1, 0 });
+		m.Translate(0, 0, -5);
 		MVP = m*v*p;
+		activeModel = &suz;
 		activeShader = &err;
+		activeShader->Bind();
+		activeShader->SetUniform("MVP", MVP);
+		activeModel->Draw();
+
+		m.Identity();
+		m.Translate(0, .5, 0);
+		MVP = m*v*p;
+		activeModel = &mon;
+		activeShader = &bas;
 		activeShader->Bind();
 		activeShader->SetUniform("MVP", MVP);
 		activeModel->Draw();
@@ -90,11 +151,17 @@ namespace MGLE {
 		activeShader->Bind();
 		activeShader->SetUniform("MVP", MVP);
 		activeShader->SetUniform("bobs", { .4f,.4f,.4f });
-		
-		Debug::DrawGrid(size);
-		
-		input->Update();
-		graphics->window->Display();
 
+		Debug::DrawGrid(size);
+		m.Translate(tar);
+		m.Scale(.1f, .1f, .1f);
+		MVP = m*v*p;
+		
+		activeShader->SetUniform("MVP", MVP);
+		activeShader->SetUniform("bobs", { 1,0,1 });
+		Debug::DrawWireSphere({ 0,0,0 });
+		input->Update();
+		
+		graphics->window->Display();
 	}
 }

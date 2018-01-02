@@ -9,4 +9,7 @@ namespace MGLE {
 	Scene::~Scene()
 	{
 	}
+	Camera& Scene::GetCamera() {
+		return mCamera;
+	}
 }

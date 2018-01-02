@@ -26,6 +26,7 @@ namespace MGLE {
 	}
 	void Debug::DrawWireSphere(Vector3 p, float size, Vector3 color, int verts) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDisable(GL_CULL_FACE);
 		verts /= 2;
 		glPushMatrix();
 		glColor3f(color.x, color.y, color.z);
@@ -42,6 +43,7 @@ namespace MGLE {
 			glVertex3f(p.x, p.y + cos(i) * size, p.z + sin(i) * size);
 		glEnd();
 		glPopMatrix();
+		glEnable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 	void Debug::DrawWireCircle(Vector3 p, float size, Vector3 color, int verts) {
