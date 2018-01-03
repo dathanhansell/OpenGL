@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
+#define STB_IMAGE_IMPLEMENTATION    
+#include "stb_image.h"
 using namespace std;
 namespace MGLE {
 	Game::Game()
@@ -30,6 +32,7 @@ namespace MGLE {
 		Log("Exit Success!\n");
 	}
 	Vector3 pos, tar;
+	GLuint texture;
 	void Game::Init() {
 		
 		graphics = new Graphics();
@@ -53,11 +56,34 @@ namespace MGLE {
 
 		bas.CreateProgram("bas", "shaders\\vert.glsl", "shaders\\frag.glsl");
 		bas.AddUniform("MVP");
+		bas.AddUniform("tex");
 		activeShader = &reg;
 		mon.CreateModel("sphere", "uvCube.obj");
 		suz.CreateModel("suzanne", "wrong_on_purpose.butts");
 		activeModel = &suz;
 		pos = { 0,0,4 };
+		
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		// set the texture wrapping/filtering options (on the currently bound texture object)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		// load and generate the texture
+		int width, height, nrChannels;
+		string path = GetAbsolutePath() + "bottle.jpg";
+		unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			Error("Failed to load texture\n");
+		}
+		stbi_image_free(data);
 	}
 	float x, y, zm = 5;
 	int size = 5;
@@ -76,7 +102,7 @@ namespace MGLE {
 			}
 			if (e.type == sf::Event::MouseWheelMoved)
 			{
-				zm += -e.mouseWheel.delta;
+				zm += -e.mouseWheel.delta*.5;
 				if (zm <= 0) zm = 1;
 			}
 		}
@@ -137,12 +163,15 @@ namespace MGLE {
 		activeModel->Draw();
 
 		m.Identity();
-		m.Translate(0, .5, 0);
+		m.Translate(0, 0, 0);
 		MVP = m*v*p;
 		activeModel = &mon;
 		activeShader = &bas;
 		activeShader->Bind();
 		activeShader->SetUniform("MVP", MVP);
+		
+		glBindTexture(GL_TEXTURE_2D, texture);
+		activeShader->SetUniform("tex",0);
 		activeModel->Draw();
 
 		m.Identity();

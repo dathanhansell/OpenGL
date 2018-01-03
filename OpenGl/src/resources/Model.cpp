@@ -63,6 +63,11 @@ namespace MGLE {
 		glBindBuffer(GL_ARRAY_BUFFER, res->nbo);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, res->tbo);
+		
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, res->ebo);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
