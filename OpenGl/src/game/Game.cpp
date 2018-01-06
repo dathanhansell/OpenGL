@@ -56,7 +56,7 @@ namespace MGLE {
 
 		bas.CreateProgram("bas", "shaders\\vert.glsl", "shaders\\frag.glsl");
 		bas.AddUniform("MVP");
-		bas.AddUniform("tex");
+		bas.AddUniform("tDiffuse");
 		activeShader = &reg;
 		mon.CreateModel("sphere", "uvCube.obj");
 		suz.CreateModel("suzanne", "wrong_on_purpose.butts");
@@ -72,7 +72,7 @@ namespace MGLE {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		// load and generate the texture
 		int width, height, nrChannels;
-		string path = GetAbsolutePath() + "bottle.jpg";
+		string path = GetAbsolutePath() + "bottfle.png";
 		unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
@@ -103,7 +103,7 @@ namespace MGLE {
 			if (e.type == sf::Event::MouseWheelMoved)
 			{
 				zm += -e.mouseWheel.delta*.5;
-				if (zm <= 0) zm = 1;
+				if (zm <= 0) zm = .5;
 			}
 		}
 		if (GetActiveWindow() == 00000000) return;
@@ -169,9 +169,10 @@ namespace MGLE {
 		activeShader = &bas;
 		activeShader->Bind();
 		activeShader->SetUniform("MVP", MVP);
-		
+
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
-		activeShader->SetUniform("tex",0);
+		activeShader->SetUniform("tDiffuse", 0);
 		activeModel->Draw();
 
 		m.Identity();

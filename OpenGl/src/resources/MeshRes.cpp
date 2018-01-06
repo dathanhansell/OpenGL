@@ -156,6 +156,7 @@ namespace MGLE {
 			{
 				Vector2 uv;
 				int match = sscanf_s(line, "vt %f %f\n", &uv.x, &uv.y);
+				uv.y = -uv.y;
 				temp_uvs.push_back(uv);
 			}
 			else if (line[0] == 'v')
@@ -239,51 +240,7 @@ namespace MGLE {
 		out = indexVBO(out);
 		AddData(out);
 	}
-	void cMeshRes::AddData(MeshData data) {
-		vbo = 0;
-		nbo = 0;
-		mData = data;
-		Log("Adding data...\n");
-		Log("Vertex count: %i\n", mData.vertices.size());
-		Log("Normal count: %i\n", mData.normals.size());
-		Log("Uv count: %i\n", mData.uvs.size());
-		Log("Index count: %i\n", mData.indices.size());
-		if (mData.vertices.size() > 0) {
-			glGenBuffers(1, &vbo);
-			glBindBuffer(GL_ARRAY_BUFFER, vbo);
-			glBufferData(GL_ARRAY_BUFFER, mData.vertices.size() * sizeof(Vector3), &mData.vertices[0], GL_STATIC_DRAW);
-		}
-		else {
-			Error("Model has no verts.\n");
-			SetNull();
-		}
-		if (mData.normals.size() > 0) {
-			glGenBuffers(1, &nbo);
-			glBindBuffer(GL_ARRAY_BUFFER, nbo);
-			glBufferData(GL_ARRAY_BUFFER, mData.normals.size() * sizeof(Vector3), &mData.normals[0], GL_STATIC_DRAW);
-		}
-		else {
-			Warning("Model has no normals.\n");
-		}
-		if (mData.uvs.size() > 0) {
-			glGenBuffers(1, &tbo);
-			glBindBuffer(GL_ARRAY_BUFFER, tbo);
-			glBufferData(GL_ARRAY_BUFFER, mData.uvs.size() * sizeof(Vector2), &mData.uvs[0], GL_STATIC_DRAW);
-		}
-		else {
-			Warning("Model has no uvs.\n");
-		}
-		if (mData.indices.size() > 0) {
-			glGenBuffers(1, &ebo);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, mData.indices.size() * sizeof(unsigned short), &mData.indices[0], GL_STATIC_DRAW);
-		}
-		else {
-			Error("Something went wrong with the indices.");
-			SetNull();
-		}
-		Log("Done!\n");
-	}
+	
 	bool cMeshRes::is_near(float v1, float v2) {
 		return fabs(v1 - v2) < 0.01f;
 	}
@@ -342,5 +299,50 @@ namespace MGLE {
 		}
 		Log("Done Indexing...\n");
 		return out;
+	}
+	void cMeshRes::AddData(MeshData data) {
+		vbo = 0;
+		nbo = 0;
+		mData = data;
+		Log("Adding data...\n");
+		Log("Vertex count: %i\n", mData.vertices.size());
+		Log("Normal count: %i\n", mData.normals.size());
+		Log("Uv count: %i\n", mData.uvs.size());
+		Log("Index count: %i\n", mData.indices.size());
+		if (mData.vertices.size() > 0) {
+			glGenBuffers(1, &vbo);
+			glBindBuffer(GL_ARRAY_BUFFER, vbo);
+			glBufferData(GL_ARRAY_BUFFER, mData.vertices.size() * sizeof(Vector3), &mData.vertices[0], GL_STATIC_DRAW);
+		}
+		else {
+			Error("Model has no verts.\n");
+			SetNull();
+		}
+		if (mData.normals.size() > 0) {
+			glGenBuffers(1, &nbo);
+			glBindBuffer(GL_ARRAY_BUFFER, nbo);
+			glBufferData(GL_ARRAY_BUFFER, mData.normals.size() * sizeof(Vector3), &mData.normals[0], GL_STATIC_DRAW);
+		}
+		else {
+			Warning("Model has no normals.\n");
+		}
+		if (mData.uvs.size() > 0) {
+			glGenBuffers(1, &tbo);
+			glBindBuffer(GL_ARRAY_BUFFER, tbo);
+			glBufferData(GL_ARRAY_BUFFER, mData.uvs.size() * sizeof(Vector2), &mData.uvs[0], GL_STATIC_DRAW);
+		}
+		else {
+			Warning("Model has no uvs.\n");
+		}
+		if (mData.indices.size() > 0) {
+			glGenBuffers(1, &ebo);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, mData.indices.size() * sizeof(unsigned short), &mData.indices[0], GL_STATIC_DRAW);
+		}
+		else {
+			Error("Something went wrong with the indices.");
+			SetNull();
+		}
+		Log("Done!\n");
 	}
 }
