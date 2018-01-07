@@ -43,9 +43,6 @@
     <ClCompile Include="src\graphics\Debug.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\resources\Model.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="src\scene\Transform.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -76,9 +73,6 @@
     <ClCompile Include="src\resources\Resources.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="src\resources\Shader.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="src\system\LowLevelSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
@@ -96,6 +90,21 @@
     </ClCompile>
     <ClCompile Include="src\scene\Camera.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Model.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Shader.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Cubemap.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Texture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\TextureRes.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="src\graphics\Debug.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\resources\Model.h">
-      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\Transform.h">
       <Filter>Scene</Filter>
@@ -152,9 +158,6 @@
     <ClInclude Include="src\resources\Resources.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\resources\Shader.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="src\system\LowLevelSystem.h">
       <Filter>System</Filter>
     </ClInclude>
@@ -172,6 +175,21 @@
     </ClInclude>
     <ClInclude Include="src\scene\Camera.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Model.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Shader.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Cubemap.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Texture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\TextureRes.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

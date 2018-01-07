@@ -59,6 +59,10 @@ namespace MGLE {
 		m[3] = x; m[7] = y; m[11] = z;
 		return *this;
 	}
+	Mat4x4& Mat4x4::Scale(const Vector3& v)
+	{
+		return Scale(v.x, v.y, v.z);
+	}
 	Mat4x4& Mat4x4::Scale(float s)
 	{
 		return Scale(s, s, s);
@@ -91,6 +95,7 @@ namespace MGLE {
 	}
 	Mat4x4& Mat4x4::Perspective(float fov, float aspectRatio, float zNear, float zFar)
 	{
+		fov *= DEG2RAD;
 		float tanHalfFOV = (float)tan(fov / 2);
 		float zRange = zNear - zFar;
 

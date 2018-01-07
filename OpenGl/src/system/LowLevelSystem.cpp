@@ -1,5 +1,6 @@
 #include "LowLevelSystem.h"
-
+#include "Shlwapi.h"
+#include "atlstr.h"
 using namespace std;
 namespace MGLE {
 	////////////////////////////
