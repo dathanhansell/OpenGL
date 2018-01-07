@@ -52,6 +52,7 @@ namespace MGLE {
 			{
 				Vector2 uv;
 				int match = sscanf_s(line, "vt %f %f\n", &uv.x, &uv.y);
+				uv.y = -uv.y;
 				temp_uvs.push_back(uv);
 			}
 			else if (line[0] == 'v')
@@ -76,9 +77,9 @@ namespace MGLE {
 					if (matches == 1) {
 						v = true;
 						u,n = false;
-						matches = sscanf_s(line, "f %d// %d// %d//\n", &vertexIndex[0], &vertexIndex[1], &vertexIndex[2]);
+						matches = sscanf_s(line, "f %d %d %d\n", &vertexIndex[0], &vertexIndex[1], &vertexIndex[2]);
 						//vertex only
-						if (matches != 1)
+						if (matches != 3)
 							Error("Umm... this tri has no face on line %i\n", linenum);
 					}
 				}
@@ -114,7 +115,7 @@ namespace MGLE {
 				Vector3 vertex = temp_vertices[vertexIndices[i] - 1];
 				out.vertices.push_back(vertex);
 			}
-			if (vertexIndices.size() == vertexIndices.size()) {
+			if (normalIndices.size() == vertexIndices.size()) {
 				Vector3 normal = temp_normals[normalIndices[i] - 1];
 				out.normals.push_back(normal);;
 			}
@@ -138,107 +139,16 @@ namespace MGLE {
 			SetNull();
 			return;
 		}
-		vector< unsigned int > vertexIndices, normalIndices, uvIndices;
-		vector< Vector3 > temp_vertices;
-		vector< Vector2 > temp_uvs;
-		vector< Vector3 > temp_normals;
+		tString source;
 		while (obj.peek() != EOF)
 		{
 			char line[128];
 			obj.getline(line, sizeof(line));
-			if (line[0] == 'v' && line[1] == 'n')
-			{
-				Vector3 normal;
-				int match = sscanf_s(line, "vn %f %f %f\n", &normal.x, &normal.y, &normal.z);
-				temp_normals.push_back(normal);
-			}
-			else if (line[0] == 'v' && line[1] == 't')
-			{
-				Vector2 uv;
-				int match = sscanf_s(line, "vt %f %f\n", &uv.x, &uv.y);
-				uv.y = -uv.y;
-				temp_uvs.push_back(uv);
-			}
-			else if (line[0] == 'v')
-			{
-				Vector3 vertex;
-				int match = sscanf_s(line, "v %f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-				temp_vertices.push_back(vertex);
-
-			}
-
-			
-
-			else if (line[0] == 'f')
-			{
-				bool v, u, n;
-				unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-				int matches = sscanf_s(line, "f %d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-				if (matches == 9)
-					v, u, n = true;
-				else if (matches == 1) {
-					//normal
-					matches = sscanf_s(line, "f %d//%d %d//%d %d//%d\n", &vertexIndex[0], &normalIndex[0], &vertexIndex[1], &normalIndex[1], &vertexIndex[2], &normalIndex[2]);
-					v, n = true;
-					u = false;
-					if (matches == 1) {
-						v = true;
-						u, n = false;
-						matches = sscanf_s(line, "f %d// %d// %d//\n", &vertexIndex[0], &vertexIndex[1], &vertexIndex[2]);
-						//vertex only
-						if (matches != 1)
-							Error("Umm... this tri has no face on line %i\n", linenum);
-					}
-				}
-				else if (matches == 2) {
-					v, u = true;
-					n = false;
-					matches = sscanf_s(line, "f %d/%d/ %d/%d/ %d/%d/\n", &vertexIndex[0], &uvIndex[0], &vertexIndex[1], &uvIndex[1], &vertexIndex[2], &uvIndex[2]);
-					//vertex and uv
-				}
-				if (v) {
-					vertexIndices.push_back(vertexIndex[0]);
-					vertexIndices.push_back(vertexIndex[1]);
-					vertexIndices.push_back(vertexIndex[2]);
-				}
-				if (u) {
-					uvIndices.push_back(uvIndex[0]);
-					uvIndices.push_back(uvIndex[1]);
-					uvIndices.push_back(uvIndex[2]);
-				}
-				if (n) {
-					normalIndices.push_back(normalIndex[0]);
-					normalIndices.push_back(normalIndex[1]);
-					normalIndices.push_back(normalIndex[2]);
-				}
-			}
-			linenum++;
+			source.append(line);
+			source+='\n';
 		}
-		MeshData out;
-
-		for (unsigned int i = 0; i < vertexIndices.size(); i++) {
-
-			if (vertexIndices.size() == vertexIndices.size()) {
-				Vector3 vertex = temp_vertices[vertexIndices[i] - 1];
-				out.vertices.push_back(vertex);
-			}
-			if (vertexIndices.size() == vertexIndices.size()) {
-				Vector3 normal = temp_normals[normalIndices[i] - 1];
-				out.normals.push_back(normal);;
-			}
-			if (uvIndices.size() == vertexIndices.size()) {
-
-				Vector2 uv = temp_uvs[uvIndices[i] - 1];
-				out.uvs.push_back(uv);
-			}
-		}
-
 		obj.close();
-
-		Log("Done Loading...\n");
-		mIsError = false;
-		out = indexVBO(out);
-		AddData(out);
+		LoadOBJFromSource(source);
 	}
 	
 	bool cMeshRes::is_near(float v1, float v2) {

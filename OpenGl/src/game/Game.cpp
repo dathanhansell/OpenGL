@@ -1,10 +1,10 @@
 #include "Game.h"
 #include "GameObject.h"
+#include "Cubemap.h"
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
-#define STB_IMAGE_IMPLEMENTATION    
-#include "stb_image.h"
+
 using namespace std;
 namespace MGLE {
 	Game::Game()
@@ -13,9 +13,10 @@ namespace MGLE {
 	}
 	Mat4x4 m, v, p, MVP;
 	Shader* activeShader;
-	Shader reg, err, bas;
+	Shader reg, ref, bas;
 	cModel* activeModel;
-	cModel suz, mon;
+	cModel testModel, sBox;
+	cCubemap cubemap;
 
 	Game::~Game()
 	{
@@ -32,7 +33,7 @@ namespace MGLE {
 		Log("Exit Success!\n");
 	}
 	Vector3 pos, tar;
-	GLuint texture;
+	
 	void Game::Init() {
 		
 		graphics = new Graphics();
@@ -51,46 +52,32 @@ namespace MGLE {
 		reg.AddUniform("MVP");
 		reg.AddUniform("bobs");
 
-		err.CreateProgram("error", "shaders\\error_v.glsl", "shaders\\error_f.glsl");
-		err.AddUniform("MVP");
+		ref.CreateProgram("reflective", "shaders\\reflective_v.glsl", "shaders\\reflective_f.glsl");
+		ref.AddUniform("M");
+		ref.AddUniform("V");
+		ref.AddUniform("P");
+		ref.AddUniform("cPos");
+		ref.AddUniform("cubemap");
 
-		bas.CreateProgram("bas", "shaders\\vert.glsl", "shaders\\frag.glsl");
-		bas.AddUniform("MVP");
-		bas.AddUniform("tDiffuse");
+		bas.CreateProgram("bas", "shaders\\skybox_v.glsl", "shaders\\skybox_f.glsl");
+		bas.AddUniform("VP");
+
+		bas.AddUniform("cubemap");
 		activeShader = &reg;
-		mon.CreateModel("sphere", "uvCube.obj");
-		suz.CreateModel("suzanne", "wrong_on_purpose.butts");
-		activeModel = &suz;
+		sBox.CreateModel("skybox", "uvCube.obj");
+		testModel.CreateModel("testModel", "suz.obj");
+		activeModel = &testModel;
 		pos = { 0,0,4 };
-		
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		// set the texture wrapping/filtering options (on the currently bound texture object)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		// load and generate the texture
-		int width, height, nrChannels;
-		string path = GetAbsolutePath() + "bottfle.png";
-		unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
-		if (data)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-		else
-		{
-			Error("Failed to load texture\n");
-		}
-		stbi_image_free(data);
+		cubemap.LoadFromFile("posx.jpg", "negx.jpg", "posy.jpg", "negy.jpg","posz.jpg", "negz.jpg");
+		//cubemap.LoadFromFile("posx1.jpg", "posx1.jpg", "posy1.jpg", "posy1.jpg", "posx1.jpg", "posx1.jpg");
+		//cubemap.LoadFromFile("null.png", "null.png", "null.png", "null.png", "null.png", "null.png");
+
 	}
 	float x, y, zm = 5;
 	int size = 5;
 	bool wf;
-	
+	Vector3 scale = { 1,1,1 };
 	void Game::Update() {
-		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		sf::Event e;
 		while (graphics->window->GetWindow()->pollEvent(e)) {
@@ -150,30 +137,44 @@ namespace MGLE {
 		}
 
 		pos += tar;
+
 		m.Identity();
-		p.Perspective(45, (float)graphics->window->GetWidth() / (float)graphics->window->GetHeight(), 0.1f, 200);
+		p.Perspective(90, (float)graphics->window->GetWidth() / (float)graphics->window->GetHeight(), 0.1f, 200);
 		//p.Orthographic(-.05,.05,-.05,.05,.1,100);
 		v.View({ pos.x,pos.y,pos.z }, { tar.x, tar.y, tar.z }, { 0, 1, 0 });
-		m.Translate(0, 0, -5);
-		MVP = m*v*p;
-		activeModel = &suz;
-		activeShader = &err;
-		activeShader->Bind();
-		activeShader->SetUniform("MVP", MVP);
-		activeModel->Draw();
 
+		glDisable(GL_DEPTH_TEST);
+		
+		input->Update();
 		m.Identity();
-		m.Translate(0, 0, 0);
-		MVP = m*v*p;
-		activeModel = &mon;
+		m.Translate(pos);
+		MVP = m*v * p;
+		activeModel = &sBox;
 		activeShader = &bas;
 		activeShader->Bind();
-		activeShader->SetUniform("MVP", MVP);
+		activeShader->SetUniform("VP", MVP);
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		activeShader->SetUniform("tDiffuse", 0);
+
+		cubemap.Bind();
+		activeShader->SetUniform("cubemap", 0);
 		activeModel->Draw();
+		glEnable(GL_DEPTH_TEST);
+
+
+		m.Identity();
+		MVP = m*v*p;
+		activeModel = &testModel;
+		activeShader = &ref;
+		activeShader->Bind();
+		activeShader->SetUniform("M", m);
+		activeShader->SetUniform("V", v);
+		activeShader->SetUniform("P", p);
+		activeShader->SetUniform("cPos", pos);
+		cubemap.Bind();
+		activeShader->SetUniform("cubemap", 0);
+		activeModel->Draw();
+
+		
 
 		m.Identity();
 		MVP = m*v*p;
@@ -190,7 +191,6 @@ namespace MGLE {
 		activeShader->SetUniform("MVP", MVP);
 		activeShader->SetUniform("bobs", { 1,0,1 });
 		Debug::DrawWireSphere({ 0,0,0 });
-		input->Update();
 		
 		graphics->window->Display();
 	}

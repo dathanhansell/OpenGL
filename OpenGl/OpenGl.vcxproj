@@ -160,19 +160,26 @@
     <ClCompile Include="src\game\Input.cpp" />
     <ClCompile Include="src\game\Clock.cpp" />
     <ClCompile Include="src\game\Timer.cpp" />
+    <ClCompile Include="src\graphics\Cubemap.cpp" />
     <ClCompile Include="src\graphics\Debug.cpp" />
     <ClCompile Include="src\graphics\Graphics.cpp" />
+    <ClCompile Include="src\graphics\Model.cpp" />
     <ClCompile Include="src\graphics\Renderer.cpp" />
+    <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\math\Mat4x4.cpp" />
     <ClCompile Include="src\math\Quaternion.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
     <ClCompile Include="src\math\Vector3.cpp" />
     <ClCompile Include="src\math\Vector4.cpp" />
-    <ClCompile Include="src\resources\Model.cpp" />
-    <ClCompile Include="src\resources\MeshRes.cpp" />
+    <ClCompile Include="src\resources\MeshRes.cpp">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">EnableAllWarnings</WarningLevel>
+    </ClCompile>
     <ClCompile Include="src\resources\Resources.cpp" />
-    <ClCompile Include="src\resources\Shader.cpp" />
+    <ClCompile Include="src\resources\TextureRes.cpp">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">EnableAllWarnings</WarningLevel>
+    </ClCompile>
     <ClCompile Include="src\scene\Camera.cpp" />
     <ClCompile Include="src\scene\GameObject.cpp" />
     <ClCompile Include="src\scene\Scene.cpp" />
@@ -188,9 +195,13 @@
     <ClInclude Include="src\game\Input.h" />
     <ClInclude Include="src\game\Clock.h" />
     <ClInclude Include="src\game\Timer.h" />
+    <ClInclude Include="src\graphics\Cubemap.h" />
     <ClInclude Include="src\graphics\Debug.h" />
     <ClInclude Include="src\graphics\Graphics.h" />
+    <ClInclude Include="src\graphics\Model.h" />
     <ClInclude Include="src\graphics\Renderer.h" />
+    <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\math\Mat4x4.h" />
     <ClInclude Include="src\math\Maths.h" />
@@ -198,10 +209,9 @@
     <ClInclude Include="src\math\Vector2.h" />
     <ClInclude Include="src\math\Vector3.h" />
     <ClInclude Include="src\math\Vector4.h" />
-    <ClInclude Include="src\resources\Model.h" />
     <ClInclude Include="src\resources\MeshRes.h" />
     <ClInclude Include="src\resources\Resources.h" />
-    <ClInclude Include="src\resources\Shader.h" />
+    <ClInclude Include="src\resources\TextureRes.h" />
     <ClInclude Include="src\scene\Camera.h" />
     <ClInclude Include="src\scene\GameObject.h" />
     <ClInclude Include="src\scene\Scene.h" />

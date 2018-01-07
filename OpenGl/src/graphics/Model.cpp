@@ -70,7 +70,7 @@ namespace MGLE {
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, res->ebo);
 		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
+		
 		//glDepthMask(GL_TRUE);
 		glDrawElements(GL_TRIANGLES,res->mData.indices.size(),GL_UNSIGNED_SHORT,(void*)0);
 
