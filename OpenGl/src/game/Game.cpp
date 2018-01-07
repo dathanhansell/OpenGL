@@ -58,7 +58,7 @@ namespace MGLE {
 		bas.AddUniform("MVP");
 		bas.AddUniform("tex");
 		activeShader = &reg;
-		mon.CreateModel("sphere", "uvCube.obj");
+		mon.CreateModel("sphere", "bottle.obj");
 		suz.CreateModel("suzanne", "wrong_on_purpose.butts");
 		activeModel = &suz;
 		pos = { 0,0,4 };
