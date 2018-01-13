@@ -37,7 +37,7 @@ namespace MGLE {
 		return true;
 	}
 	bool cTextureRes::LoadFromFile(tString cubeArray[]) {
-
+		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 		glGenTextures(1, &texID);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
@@ -52,6 +52,7 @@ namespace MGLE {
 			unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 			if (data)
 			{
+				
 					glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					Log("Loaded cubemap segment %s w %i h %i \n", debug[i], width, height);
 			}
@@ -61,11 +62,10 @@ namespace MGLE {
 			}
 			stbi_image_free(data);
 		}
-		//glTexParameteri(GL_TEXTURE_BASE_LEVEL,
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 		return true;

@@ -16,11 +16,12 @@ namespace MGLE {
 	Shader reg, ref, bas;
 	cModel* activeModel;
 	cModel testModel, sBox;
-	cCubemap cubemap;
+	cCubemap* activeCube;
+	cCubemap c1, c2, c3;
 
 	Game::~Game()
 	{
-		
+
 		Log("Exiting\n");
 		OpenBar();
 		delete graphics;
@@ -33,18 +34,18 @@ namespace MGLE {
 		Log("Exit Success!\n");
 	}
 	Vector3 pos, tar;
-	
+
 	void Game::Init() {
-		
+
 		graphics = new Graphics();
-		
+
 		glClearColor(.85, .85, .85, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		graphics->window->Display();
 		input = new Input();
-		
+
 		resources = new Resources();
-		
+
 		Shader::Init();
 		cModel::Init();
 
@@ -68,13 +69,17 @@ namespace MGLE {
 		testModel.CreateModel("testModel", "suz.obj");
 		activeModel = &testModel;
 		pos = { 0,0,4 };
-		cubemap.LoadFromFile("posx.jpg", "negx.jpg", "posy.jpg", "negy.jpg","posz.jpg", "negz.jpg");
+		c1.LoadFromFile("posx.jpg", "negx.jpg", "posy.jpg", "negy.jpg", "posz.jpg", "negz.jpg");
+		activeCube = &c1;
+		activeCube->Bind();
+		c3.LoadFromFile("posx2.jpg", "negx2.jpg", "posy2.jpg", "negy2.jpg", "posz2.jpg", "negz2.jpg");
+		c2.LoadFromFile("posx3.jpg", "negx3.jpg", "posy3.jpg", "negy3.jpg", "posz3.jpg", "negz3.jpg");
 		//cubemap.LoadFromFile("posx1.jpg", "posx1.jpg", "posy1.jpg", "posy1.jpg", "posx1.jpg", "posx1.jpg");
 		//cubemap.LoadFromFile("null.png", "null.png", "null.png", "null.png", "null.png", "null.png");
 
 	}
 	float x, y, zm = 5;
-	int size = 5;
+	int size = 5, kyoob = 0;
 	bool wf;
 	Vector3 scale = { 1,1,1 };
 	void Game::Update() {
@@ -103,6 +108,25 @@ namespace MGLE {
 		if (input->GetKeyDown(input->E)) size++;
 		if (input->GetKeyDown(input->Q)) size--;
 		if (input->GetKeyDown(input->F)) wf = !wf;
+		if (input->GetKeyDown(input->C)) {
+			switch (kyoob)
+			{
+			case 0:
+				activeCube = &c1;
+				break;
+			case 1:
+				activeCube = &c2;
+				break;
+			case 2:
+				activeCube = &c3;
+				kyoob =-1;
+				break;
+			default:
+				break;
+			}
+			kyoob++;
+			activeCube->Bind();
+		}
 		if (wf) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			glEnable(GL_CULL_FACE);
@@ -144,7 +168,7 @@ namespace MGLE {
 		v.View({ pos.x,pos.y,pos.z }, { tar.x, tar.y, tar.z }, { 0, 1, 0 });
 
 		glDisable(GL_DEPTH_TEST);
-		
+
 		input->Update();
 		m.Identity();
 		m.Translate(pos);
@@ -153,9 +177,6 @@ namespace MGLE {
 		activeShader = &bas;
 		activeShader->Bind();
 		activeShader->SetUniform("VP", MVP);
-
-
-		cubemap.Bind();
 		activeShader->SetUniform("cubemap", 0);
 		activeModel->Draw();
 		glEnable(GL_DEPTH_TEST);
@@ -170,12 +191,11 @@ namespace MGLE {
 		activeShader->SetUniform("V", v);
 		activeShader->SetUniform("P", p);
 		activeShader->SetUniform("cPos", pos);
-		cubemap.Bind();
 		activeShader->SetUniform("cubemap", 0);
 		activeModel->Draw();
 
-		
 
+/*
 		m.Identity();
 		MVP = m*v*p;
 		activeShader = &reg;
@@ -187,11 +207,11 @@ namespace MGLE {
 		m.Translate(tar);
 		m.Scale(.1f, .1f, .1f);
 		MVP = m*v*p;
-		
+
 		activeShader->SetUniform("MVP", MVP);
 		activeShader->SetUniform("bobs", { 1,0,1 });
 		Debug::DrawWireSphere({ 0,0,0 });
-		
+		*/
 		graphics->window->Display();
 	}
 }

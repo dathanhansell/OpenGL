@@ -106,6 +106,9 @@
     <ClCompile Include="src\resources\TextureRes.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\Material.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGLE.h" />
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="src\resources\TextureRes.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Material.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
