@@ -69,12 +69,12 @@ namespace MGLE {
 		testModel.CreateModel("testModel", "suz.obj");
 		activeModel = &testModel;
 		pos = { 0,0,4 };
+		c3.LoadFromFile("posx2.jpg", "negx2.jpg", "posy2.jpg", "negy2.jpg", "posz2.jpg", "negz2.jpg");
+		c2.LoadFromFile("posx3.jpg", "negx3.jpg", "posy3.jpg", "negy3.jpg", "posz3.jpg", "negz3.jpg");
 		c1.LoadFromFile("posx.jpg", "negx.jpg", "posy.jpg", "negy.jpg", "posz.jpg", "negz.jpg");
 		activeCube = &c1;
 		activeCube->Bind();
-		c3.LoadFromFile("posx2.jpg", "negx2.jpg", "posy2.jpg", "negy2.jpg", "posz2.jpg", "negz2.jpg");
-		c2.LoadFromFile("posx3.jpg", "negx3.jpg", "posy3.jpg", "negy3.jpg", "posz3.jpg", "negz3.jpg");
-		//cubemap.LoadFromFile("posx1.jpg", "posx1.jpg", "posy1.jpg", "posy1.jpg", "posx1.jpg", "posx1.jpg");
+		//c1.LoadFromFile("posx1.jpg", "posx1.jpg", "posy1.jpg", "posy1.jpg", "posx1.jpg", "posx1.jpg");
 		//cubemap.LoadFromFile("null.png", "null.png", "null.png", "null.png", "null.png", "null.png");
 
 	}
@@ -108,7 +108,9 @@ namespace MGLE {
 		if (input->GetKeyDown(input->E)) size++;
 		if (input->GetKeyDown(input->Q)) size--;
 		if (input->GetKeyDown(input->F)) wf = !wf;
+		
 		if (input->GetKeyDown(input->C)) {
+			kyoob++;
 			switch (kyoob)
 			{
 			case 0:
@@ -124,9 +126,10 @@ namespace MGLE {
 			default:
 				break;
 			}
-			kyoob++;
+			
 			activeCube->Bind();
 		}
+		
 		if (wf) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			glEnable(GL_CULL_FACE);
