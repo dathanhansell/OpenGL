@@ -8,11 +8,10 @@
 	}
 
 	void SFMLCanvas::onInit() {
-
+		m_editor.Start();
 	}
 
 	void SFMLCanvas::onUpdate() {
 		m_editor.Update();
-		RenderWindow::display();
 	}
 

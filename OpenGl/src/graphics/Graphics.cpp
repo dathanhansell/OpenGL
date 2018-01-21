@@ -1,5 +1,5 @@
 #include "Graphics.h"
-
+                     
 using namespace std;
 	Graphics::Graphics()
 	{
@@ -10,7 +10,7 @@ using namespace std;
 	{
 		delete renderer;
 		
-		delete window;
+		//delete window;
 	}
 	void Graphics::FPS() {
 		if (frameTimer.IsRunning() && frameTimer.ElapsedMilliseconds() >= 1000)
@@ -52,7 +52,23 @@ using namespace std;
 
 	bool Graphics::InitGL()
 	{
-		window = new Window();
+		Log("Creating SFML Window/Context...\n");
+
+		int width = 800;
+		int height = 800;
+
+		sf::ContextSettings settings;
+		settings.depthBits = 24;
+		settings.stencilBits = 8;
+		settings.antialiasingLevel = 4;
+		settings.majorVersion = 4;
+		settings.minorVersion = 4;
+
+		Log("Initializing OpenGL %i%s%i%s", settings.majorVersion, ".", settings.minorVersion, "...\n");
+		//window = new sf::RenderWindow(sf::VideoMode(width, height, 32), "Game", sf::Style::Default, settings);
+		
+		
+		//window = new Window();
 		return true;
 	}
 
@@ -61,7 +77,7 @@ using namespace std;
 		GLenum glewError = glewInit();
 		if (glewError != GLEW_OK)
 		{
-			FatalError("GLEW Init Did Not Return GLEW_OK\n");
+			FatalError("GLEW Init Did Not Return GLEW_OK %s\n", glewGetErrorString(glewError));
 			return false;
 		}
 		return true;

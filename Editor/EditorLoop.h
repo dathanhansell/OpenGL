@@ -6,7 +6,8 @@
 	public:
 		EditorLoop();
 		void Update();
-		Game m_game;
+		void Start();
+		Game* m_game;
 	};
 
 

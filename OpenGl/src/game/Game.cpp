@@ -35,7 +35,7 @@ using namespace std;
 
 		Log("Exiting\n");
 		OpenBar();
-		//delete graphics;
+		delete graphics;
 		Log("Done with Graphics\n");
 		delete input;
 		Log("Done with Input\n");
@@ -48,11 +48,11 @@ using namespace std;
 
 	void Game::Init() {
 		
-		//graphics = new Graphics();
+		graphics = new Graphics();
 
 		glClearColor(.85, .85, .85, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		graphics->window->Display();
+		//graphics->window->Display();
 		input = new Input();
 
 		resources = new Resources();
@@ -69,7 +69,7 @@ using namespace std;
 		refl.AddUniform("V");
 		refl.AddUniform("P");
 		refl.AddUniform("cPos");
-		refl.AddUniform("cubemap");
+		//refl.AddUniform("cubemap");
 
 		bas.CreateProgram("bas", "shaders\\skybox_v.glsl", "shaders\\skybox_f.glsl");
 		bas.AddUniform("VP");
@@ -96,6 +96,7 @@ using namespace std;
 	void Game::Update() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		sf::Event e;
+		/*
 		while (graphics->window->GetWindow()->pollEvent(e)) {
 			if (e.type == sf::Event::Closed)
 				graphics->window->GetWindow()->close();
@@ -109,6 +110,7 @@ using namespace std;
 				if (zm <= 0) zm = .5;
 			}
 		}
+		*/
 		if (GetActiveWindow() == 00000000) return;
 		if (input->GetKeyDown(input->W))      zm--;
 		if (input->GetKeyDown(input->S))      zm++;
@@ -177,7 +179,7 @@ using namespace std;
 		pos += tar;
 
 		m.Identity();
-		p.Perspective(90, (float)graphics->window->GetWidth() / (float)graphics->window->GetHeight(), 0.1f, 200);
+		p.Perspective(90,1, 0.1f, 200);
 		//p.Orthographic(-.05,.05,-.05,.05,.1,100);
 		v.View({ pos.x,pos.y,pos.z }, { tar.x, tar.y, tar.z }, { 0, 1, 0 });
 
@@ -205,7 +207,7 @@ using namespace std;
 		activeShader->SetUniform("V", v);
 		activeShader->SetUniform("P", p);
 		activeShader->SetUniform("cPos", pos);
-		activeShader->SetUniform("cubemap", 0);
+		//activeShader->SetUniform("cubemap", 0);
 		activeModel->Draw();
 
 
@@ -226,5 +228,5 @@ using namespace std;
 		activeShader->SetUniform("bobs", { 1,0,1 });
 		Debug::DrawWireSphere({ 0,0,0 });
 		*/
-		graphics->window->Display();
+		//graphics->window->Display();
 	}

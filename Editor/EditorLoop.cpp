@@ -4,11 +4,14 @@
 
 	EditorLoop::EditorLoop()
 	{
-		m_game.Init();
+		
+	}
+	void EditorLoop::Start() {
+		m_game = new Game();
 	}
 	void EditorLoop::Update() {
 		
-		m_game.Update();
+		m_game->Update();
 		
 	}
 

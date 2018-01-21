@@ -1,9 +1,9 @@
 #pragma once
 #include "tString.h"  // for string
-	//class Graphics;
+
+	class Graphics;
 	class Resources;
 	class Input;
-	class Graphics;
 	class Game {
 	public:
 		Input* input;

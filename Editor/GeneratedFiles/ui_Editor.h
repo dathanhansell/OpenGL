@@ -13,12 +13,15 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 #include "SFMLCanvas.h"
 
@@ -31,6 +34,9 @@ public:
     QAction *actionOpen;
     QAction *actionExit;
     QWidget *centralWidget;
+    QHBoxLayout *horizontalLayout;
+    QSplitter *splitter;
+    QTreeWidget *treeWidget;
     SFMLCanvas *widget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -51,9 +57,44 @@ public:
         actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(EditorClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        widget = new SFMLCanvas(centralWidget);
+        horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        splitter = new QSplitter(centralWidget);
+        splitter->setObjectName(QStringLiteral("splitter"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(splitter->sizePolicy().hasHeightForWidth());
+        splitter->setSizePolicy(sizePolicy);
+        splitter->setOrientation(Qt::Horizontal);
+        treeWidget = new QTreeWidget(splitter);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem(treeWidget);
+        new QTreeWidgetItem(__qtreewidgetitem);
+        QTreeWidgetItem *__qtreewidgetitem1 = new QTreeWidgetItem(treeWidget);
+        new QTreeWidgetItem(__qtreewidgetitem1);
+        treeWidget->setObjectName(QStringLiteral("treeWidget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(treeWidget->sizePolicy().hasHeightForWidth());
+        treeWidget->setSizePolicy(sizePolicy1);
+        treeWidget->setMaximumSize(QSize(100, 16777215));
+        treeWidget->setDragEnabled(true);
+        treeWidget->setDragDropMode(QAbstractItemView::InternalMove);
+        splitter->addWidget(treeWidget);
+        widget = new SFMLCanvas(splitter);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(70, 20, 481, 301));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy2);
+        splitter->addWidget(widget);
+
+        horizontalLayout->addWidget(splitter);
+
         EditorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EditorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -88,6 +129,21 @@ public:
         actionNew->setText(QApplication::translate("EditorClass", "New", Q_NULLPTR));
         actionOpen->setText(QApplication::translate("EditorClass", "Open", Q_NULLPTR));
         actionExit->setText(QApplication::translate("EditorClass", "Exit", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
+        ___qtreewidgetitem->setText(0, QApplication::translate("EditorClass", "Scene", Q_NULLPTR));
+
+        const bool __sortingEnabled = treeWidget->isSortingEnabled();
+        treeWidget->setSortingEnabled(false);
+        QTreeWidgetItem *___qtreewidgetitem1 = treeWidget->topLevelItem(0);
+        ___qtreewidgetitem1->setText(0, QApplication::translate("EditorClass", "One", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
+        ___qtreewidgetitem2->setText(0, QApplication::translate("EditorClass", "Child", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem3 = treeWidget->topLevelItem(1);
+        ___qtreewidgetitem3->setText(0, QApplication::translate("EditorClass", "Two", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem4 = ___qtreewidgetitem3->child(0);
+        ___qtreewidgetitem4->setText(0, QApplication::translate("EditorClass", "Child2", Q_NULLPTR));
+        treeWidget->setSortingEnabled(__sortingEnabled);
+
         menuFile->setTitle(QApplication::translate("EditorClass", "File", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("EditorClass", "Help", Q_NULLPTR));
     } // retranslateUi
