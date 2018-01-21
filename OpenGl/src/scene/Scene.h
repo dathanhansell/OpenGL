@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Maths.h"
-namespace MGLE {
+
 	class Scene
 	{
 		Camera mCamera;
@@ -11,5 +11,5 @@ namespace MGLE {
 		Scene();
 		~Scene();
 	};
-}
+
 

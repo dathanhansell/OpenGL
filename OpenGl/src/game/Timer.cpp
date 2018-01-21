@@ -1,5 +1,4 @@
 #include "Timer.h"
-namespace MGLE {
 	Timer::Timer() {
 
 	}
@@ -32,4 +31,3 @@ namespace MGLE {
 	{
 		return m_isRunning;
 	}
-}

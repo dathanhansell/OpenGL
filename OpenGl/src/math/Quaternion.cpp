@@ -1,5 +1,4 @@
 #include "Maths.h"
-namespace MGLE {
 	const float DEG2RAD = M_PI / 180.0f;
 	const float RAD2DEG = 180.0f / M_PI;
 	const float EPSILON = 0.00001f;
@@ -135,4 +134,3 @@ namespace MGLE {
 	void Quaternion::Print(std::string title) {
 		std::cout << title << this->ToString() << std::endl;
 	}
-}

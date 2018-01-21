@@ -1,10 +1,7 @@
 #pragma once
-#include "stdafx.h"
+#include <fstream>
 #include <windows.h>
 #include "MGLE.h"
-
-
-namespace MGLE {
 	class cLogger
 	{
 		void ReopenFile();
@@ -49,4 +46,3 @@ namespace MGLE {
 		~cLowLevelSystem();
 
 	};
-}

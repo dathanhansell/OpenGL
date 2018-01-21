@@ -1,5 +1,4 @@
 #include "Window.h"
-namespace MGLE {
 	void Window::Reshape(int w, int h) {
 		glViewport(0, 0, w, h);
 		width = w; height = h;
@@ -55,4 +54,3 @@ namespace MGLE {
 		window->display();
 		
 	}
-}

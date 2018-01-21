@@ -1,6 +1,5 @@
 #pragma once
 #include "TextureRes.h"
-namespace MGLE {
 	class cTexture
 	{
 		cTextureRes res;
@@ -11,5 +10,5 @@ namespace MGLE {
 		void Bind();
 		void LoadFromFile(tString asFileName);
 	};
-}
+
 

@@ -1,8 +1,10 @@
 #include "Input.h"
 #include "LowLevelSystem.h"
-#include <gl\glut.h>
+#include "SFML/System/Vector2.hpp"   // for Vector2i
+#include "SFML/Window/Keyboard.hpp"  // for Keyboard, Keyboard::Key
+#include "SFML/Window/Mouse.hpp"     // for Mouse, Mouse::Button
+#include "Vector2.h"                 // for Vector2
 using namespace std;
-namespace MGLE {
 	void MousePassive(int X, int Y)
 	{
 		
@@ -65,4 +67,3 @@ namespace MGLE {
 	{
 		return !sf::Keyboard::isKeyPressed((sf::Keyboard::Key)keycode) && lastKeys[keycode];
 	}
-}

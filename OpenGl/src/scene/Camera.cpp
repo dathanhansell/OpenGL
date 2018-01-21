@@ -1,8 +1,6 @@
 #include "Camera.h"
 #include "Window.h"
 #include <math.h>
-namespace MGLE {
-
 	Camera::Camera()
 	{
 	}
@@ -22,4 +20,3 @@ namespace MGLE {
 	Transform& Camera::GetTransform() {
 		return mTransform;
 	}
-}

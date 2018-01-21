@@ -3,7 +3,6 @@
 #include <iostream>
 #include <math.h>
 #include <sstream>
-namespace MGLE {
 	const float DEG2RAD = 3.141593f / 180.0f;
 	const float RAD2DEG = 180.0f / 3.141593f;
 	const float EPSILON = 0.00001f;
@@ -125,4 +124,3 @@ namespace MGLE {
 	Vector3 Vector3::up = { 0,1,0 };
 	Vector3 Vector3::right = { 1,0,0 };
 	Vector3 Vector3::forward = { 0,0,1 };
-}

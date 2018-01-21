@@ -4,7 +4,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <sstream>
-namespace MGLE {
+
 	const float DEG2RAD = 3.141593f / 180.0f;
 	const float RAD2DEG = 180.0f / 3.141593f;
 	const float EPSILON = 0.00001f;
@@ -208,4 +208,3 @@ namespace MGLE {
 		return Vector3(0, 0, 0);
 	}
 	*/
-}

@@ -1,9 +1,11 @@
 #pragma once
-#include "stdafx.h"
-#include "MGLE.h"
 #include <map>
+#include "GL/glew.h"  // for GLuint, GLint
+#include "Mat4x4.h"   // for Mat4x4
+#include "xstddef"    // for less
+#include "xstring"    // for basic_string, string
 
-namespace MGLE {
+
 	typedef std::string tString;
 	class Shader
 	{
@@ -34,5 +36,5 @@ namespace MGLE {
 		void SetUniform(tString uniformName, Mat4x4 value);
 		void AddUniform(tString uniform);
 	};
-}
+
 

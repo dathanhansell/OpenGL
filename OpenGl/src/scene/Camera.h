@@ -1,6 +1,5 @@
 #pragma once
 #include "Transform.h"
-namespace MGLE {
 	class Camera
 	{
 		Transform mTransform;
@@ -14,5 +13,5 @@ namespace MGLE {
 		Camera();
 		~Camera();
 	};
-}
+
 

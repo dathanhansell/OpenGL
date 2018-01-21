@@ -6,9 +6,6 @@
 #include "Maths.h"
 #include "LowLevelSystem.h"
 #include "tString.h"
-
-
-namespace MGLE {
 	class cTextureRes {
 		void SetNull();
 		GLuint texID;
@@ -20,4 +17,4 @@ namespace MGLE {
 		bool LoadFromFile(tString cubeArray[]);
 		GLuint GetTextureID();
 	};
-}
+

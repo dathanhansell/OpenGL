@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-namespace MGLE {
+
 
 	Renderer::Renderer()
 	{
@@ -14,4 +14,3 @@ namespace MGLE {
 	void Renderer::Init()
 	{
 	}
-}

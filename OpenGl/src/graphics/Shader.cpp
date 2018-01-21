@@ -1,7 +1,21 @@
 #include "Shader.h"
+#include "fstream"           // for basic_ifstream
+#include "ios"               // for basic_ios
+#include "iosfwd"            // for ifstream, ios
+#include "istream"           // for basic_istream
+#include "LowLevelSystem.h"  // for Log, Error, FatalError, Bar, OpenBar, CloseBar, GetAbsolutePath, Warning
+#include "map"               // for map
+#include "stdexcept"         // for out_of_range
+#include "string"            // for getline
+#include "type_traits"       // for move
+#include "utility"           // for swap
+#include "vcruntime_new.h"   // for operator new[]
+#include "vector"            // for vector
+#include "Vector3.h"         // for Vector3
+#include <stddef.h>          // for NULL
+#include <string>            // for char_traits
 
 
-namespace MGLE {
 	static tString nullVert = "#version 330 core\nlayout(location = 0) in vec3 vertexPosition;uniform mat4 MVP;void main() {gl_Position = MVP * vec4(vertexPosition,1);}";
 	static tString nullFrag = "#version 330 core\nout vec3 color;void main(){color = vec3(1, 0, 1);}";
 	static Shader null;
@@ -245,4 +259,4 @@ namespace MGLE {
 		}
 	}
 	
-}
+

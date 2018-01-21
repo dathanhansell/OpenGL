@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector3.h"
 #include "tString.h"
-namespace MGLE {
+
 	class Mat4x4 {
 	public:
 		float m[16];
@@ -122,4 +122,3 @@ namespace MGLE {
 			return Vector3(v.x*m[0] + v.y*m[1] + v.z*m[2], v.x*m[4] + v.y*m[5] + v.z*m[6], v.x*m[8] + v.y*m[9] + v.z*m[10]);
 		}
 	};
-}

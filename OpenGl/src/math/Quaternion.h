@@ -2,7 +2,6 @@
 #include "stdafx.h"
 #include "Vector3.h"
 #include "Mat4x4.h"
-namespace MGLE {
 	class Quaternion {
 	public:
 		float x, y, z, w;
@@ -17,4 +16,3 @@ namespace MGLE {
 		std::string ToString();
 		void Print(std::string title = "");
 	};
-}

@@ -1,5 +1,4 @@
 #include "Texture.h"
-namespace MGLE {
 
 	cTexture::cTexture()
 	{
@@ -20,4 +19,3 @@ namespace MGLE {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, res.GetTextureID());
 	}
-}

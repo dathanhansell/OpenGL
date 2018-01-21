@@ -15,20 +15,26 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QOpenGLWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "SFMLCanvas.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_EditorClass
 {
 public:
+    QAction *actionNew;
+    QAction *actionOpen;
+    QAction *actionExit;
     QWidget *centralWidget;
-    QOpenGLWidget *openGLWidget;
+    SFMLCanvas *widget;
     QMenuBar *menuBar;
+    QMenu *menuFile;
+    QMenu *menuHelp;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -37,15 +43,25 @@ public:
         if (EditorClass->objectName().isEmpty())
             EditorClass->setObjectName(QStringLiteral("EditorClass"));
         EditorClass->resize(600, 400);
+        actionNew = new QAction(EditorClass);
+        actionNew->setObjectName(QStringLiteral("actionNew"));
+        actionOpen = new QAction(EditorClass);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
+        actionExit = new QAction(EditorClass);
+        actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(EditorClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        openGLWidget = new QOpenGLWidget(centralWidget);
-        openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
-        openGLWidget->setGeometry(QRect(150, 70, 300, 200));
+        widget = new SFMLCanvas(centralWidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(70, 20, 481, 301));
         EditorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EditorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 600, 21));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuHelp = new QMenu(menuBar);
+        menuHelp->setObjectName(QStringLiteral("menuHelp"));
         EditorClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(EditorClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -53,6 +69,13 @@ public:
         statusBar = new QStatusBar(EditorClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         EditorClass->setStatusBar(statusBar);
+
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuHelp->menuAction());
+        menuFile->addAction(actionNew);
+        menuFile->addAction(actionOpen);
+        menuFile->addSeparator();
+        menuFile->addAction(actionExit);
 
         retranslateUi(EditorClass);
 
@@ -62,6 +85,11 @@ public:
     void retranslateUi(QMainWindow *EditorClass)
     {
         EditorClass->setWindowTitle(QApplication::translate("EditorClass", "Editor", Q_NULLPTR));
+        actionNew->setText(QApplication::translate("EditorClass", "New", Q_NULLPTR));
+        actionOpen->setText(QApplication::translate("EditorClass", "Open", Q_NULLPTR));
+        actionExit->setText(QApplication::translate("EditorClass", "Exit", Q_NULLPTR));
+        menuFile->setTitle(QApplication::translate("EditorClass", "File", Q_NULLPTR));
+        menuHelp->setTitle(QApplication::translate("EditorClass", "Help", Q_NULLPTR));
     } // retranslateUi
 
 };

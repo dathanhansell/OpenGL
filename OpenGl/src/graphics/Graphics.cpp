@@ -1,7 +1,6 @@
 #include "Graphics.h"
 
 using namespace std;
-namespace MGLE {
 	Graphics::Graphics()
 	{
 		Init();
@@ -69,4 +68,3 @@ namespace MGLE {
 	}
 
 
-}

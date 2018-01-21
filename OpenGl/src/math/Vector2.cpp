@@ -1,5 +1,12 @@
 #include "Vector2.h"
-namespace MGLE {
+#include "cmath"      // for sqrt
+#include "exception"  // for uncaught_exception
+#include "iosfwd"     // for ostringstream, ostream
+#include "iostream"   // for cout
+#include "ostream"    // for operator<<, basic_ostream, basic_ostream<>::_Myt, endl
+#include "sstream"    // for basic_ostringstream
+#include <string>     // for char_traits
+
 	Vector2::Vector2()
 	{
 		x = 0;
@@ -81,10 +88,9 @@ namespace MGLE {
 	{
 		std::cout << title << "X: " << x << " Y: " << y << std::endl;
 	}
-	std::string Vector2::ToString()
+	tString Vector2::ToString()
 	{
 		std::ostringstream buffer;
 		buffer << "X: " << x << " Y: " << y;
 		return buffer.str();
 	}
-}

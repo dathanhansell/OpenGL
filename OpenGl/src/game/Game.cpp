@@ -1,19 +1,30 @@
 #include "Game.h"
-#include "GameObject.h"
 #include "Cubemap.h"
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
+#include "cmath"                   // for cos, sin
+#include "GL/glew.h"               // for glClear, glDisable, glEnable, glPolygonMode, glClearColor, GL_COLOR_BUFFER_BIT, GL_CULL_FACE, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST, GL_FRONT_AND_BACK, GL_FILL, GL_LINE
+#include "Graphics.h"              // for Graphics
+#include "Input.h"                 // for Input
+#include "LowLevelSystem.h"        // for Log, CloseBar, OpenBar
+#include "Mat4x4.h"                // for Mat4x4
+#include "Model.h"                 // for cModel
+#include "Resources.h"             // for Resources
+#include "SFML/Window/Event.hpp"   // for Event, Event::(anonymous), Event::SizeEvent, Event::EventType::Closed, Event::EventType::MouseWheelMoved, Event::EventType::Resized, Event::MouseWheelEvent
+#include "SFML/Window/Window.hpp"  // for Window
+#include "Shader.h"                // for Shader
+#include "vcruntime_new.h"         // for operator delete, operator new
+#include "Vector2.h"               // for Vector2
+#include "Vector3.h"               // for Vector3
+#include "Window.h"                // for Window
+#include "WinUser.h"               // for GetActiveWindow
 
 using namespace std;
-namespace MGLE {
 	Game::Game()
 	{
 		Init();
 	}
 	Mat4x4 m, v, p, MVP;
 	Shader* activeShader;
-	Shader reg, ref, bas;
+	Shader reg, refl, bas;
 	cModel* activeModel;
 	cModel testModel, sBox;
 	cCubemap* activeCube;
@@ -24,7 +35,7 @@ namespace MGLE {
 
 		Log("Exiting\n");
 		OpenBar();
-		delete graphics;
+		//delete graphics;
 		Log("Done with Graphics\n");
 		delete input;
 		Log("Done with Input\n");
@@ -36,8 +47,8 @@ namespace MGLE {
 	Vector3 pos, tar;
 
 	void Game::Init() {
-
-		graphics = new Graphics();
+		
+		//graphics = new Graphics();
 
 		glClearColor(.85, .85, .85, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -53,12 +64,12 @@ namespace MGLE {
 		reg.AddUniform("MVP");
 		reg.AddUniform("bobs");
 
-		ref.CreateProgram("reflective", "shaders\\reflective_v.glsl", "shaders\\reflective_f.glsl");
-		ref.AddUniform("M");
-		ref.AddUniform("V");
-		ref.AddUniform("P");
-		ref.AddUniform("cPos");
-		ref.AddUniform("cubemap");
+		refl.CreateProgram("reflective", "shaders\\reflective_v.glsl", "shaders\\reflective_f.glsl");
+		refl.AddUniform("M");
+		refl.AddUniform("V");
+		refl.AddUniform("P");
+		refl.AddUniform("cPos");
+		refl.AddUniform("cubemap");
 
 		bas.CreateProgram("bas", "shaders\\skybox_v.glsl", "shaders\\skybox_f.glsl");
 		bas.AddUniform("VP");
@@ -79,7 +90,7 @@ namespace MGLE {
 
 	}
 	float x, y, zm = 5;
-	int size = 5, kyoob = 0;
+	int isize = 5, kyoob = 0;
 	bool wf;
 	Vector3 scale = { 1,1,1 };
 	void Game::Update() {
@@ -105,8 +116,8 @@ namespace MGLE {
 		if (input->GetKey(input->LControl));
 		if (input->GetKey(input->D));
 		if (input->GetKey(input->A));
-		if (input->GetKeyDown(input->E)) size++;
-		if (input->GetKeyDown(input->Q)) size--;
+		if (input->GetKeyDown(input->E)) isize++;
+		if (input->GetKeyDown(input->Q)) isize--;
 		if (input->GetKeyDown(input->F)) wf = !wf;
 		if (input->GetKeyDown(input->C)) {
 			switch (kyoob)
@@ -185,7 +196,7 @@ namespace MGLE {
 		m.Identity();
 		MVP = m*v*p;
 		activeModel = &testModel;
-		activeShader = &ref;
+		activeShader = &refl;
 		activeShader->Bind();
 		activeShader->SetUniform("M", m);
 		activeShader->SetUniform("V", v);
@@ -214,4 +225,3 @@ namespace MGLE {
 		*/
 		graphics->window->Display();
 	}
-}

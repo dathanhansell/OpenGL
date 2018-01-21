@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-namespace MGLE {
 	class Vector3
 	{
 	public:
@@ -31,4 +30,4 @@ namespace MGLE {
 		static Vector3 right;
 		static Vector3 forward;
 	};
-}
+

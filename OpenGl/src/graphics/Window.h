@@ -2,7 +2,6 @@
 #include <stdafx.h>
 #include <MGLE.h>
 #include<SFML/Window.hpp>
-namespace MGLE {
 	class Window {
 		static int height;
 		static int width;
@@ -23,4 +22,3 @@ namespace MGLE {
 		void Reshape(int w, int h);
 
 	};
-}

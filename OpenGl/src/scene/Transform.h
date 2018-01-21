@@ -1,6 +1,5 @@
 #pragma once
 #include "Maths.h"
-namespace MGLE {
 	class Transform
 	{
 		Mat4x4 mModel;
@@ -21,5 +20,5 @@ namespace MGLE {
 		Transform();
 		~Transform();
 	};
-}
+
 

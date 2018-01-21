@@ -1,9 +1,7 @@
 #pragma once
-#include "stdafx.h"
-namespace MGLE {
-	class Vector2
+#include "tString.h"
+	struct Vector2
 	{
-	public:
 		float x, y;
 		Vector2();
 		Vector2(float X, float Y);
@@ -23,7 +21,6 @@ namespace MGLE {
 		float magnitude();
 		void print();
 		void print(char* title);
-		std::string ToString();
+		tString ToString();
 		static Vector2 zero;
 	};
-}

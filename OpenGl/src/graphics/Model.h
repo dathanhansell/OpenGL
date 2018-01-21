@@ -4,7 +4,7 @@
 #include "LowLevelSystem.h"
 #include "tString.h"
 #include "MeshRes.h"
-namespace MGLE {
+
 	class cMeshRes;
 	class cModel
 	{
@@ -26,4 +26,3 @@ namespace MGLE {
 		void Draw();
 	};
 
-}

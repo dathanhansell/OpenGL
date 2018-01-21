@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Clock.h"
-namespace MGLE {
 	//Uint32 startTime;
 	Clock::Clock()
 	{
@@ -24,4 +23,3 @@ namespace MGLE {
 		return SDL_GetTicks() - startTime;
 	}
 	*/
-}

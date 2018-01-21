@@ -2,7 +2,7 @@
 #include "Maths.h"
 #include "Transform.h"
 #include "Model.h"
-namespace MGLE {
+
 	class GameObject
 	{
 		cModel m;
@@ -13,5 +13,5 @@ namespace MGLE {
 		void Render();
 		~GameObject();
 	};
-}
+
 

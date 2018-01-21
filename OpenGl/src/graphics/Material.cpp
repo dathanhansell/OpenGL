@@ -1,6 +1,5 @@
 #include "Material.h"
 
-namespace MGLE {
 
 	cMaterial::cMaterial()
 	{
@@ -10,4 +9,3 @@ namespace MGLE {
 	cMaterial::~cMaterial()
 	{
 	}
-}

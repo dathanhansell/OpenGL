@@ -1,7 +1,5 @@
 #pragma once
 #include <string>
-namespace MGLE {
-	
 	typedef std::string tString;
 	typedef std::wstring tWString;
 	class cString
@@ -12,4 +10,4 @@ namespace MGLE {
 		cString();
 		~cString();
 	};
-}
+

@@ -2,7 +2,6 @@
 #include "Shlwapi.h"
 #include "atlstr.h"
 using namespace std;
-namespace MGLE {
 	////////////////////////////
 	// Logger
 	////////////////////////////
@@ -176,4 +175,4 @@ namespace MGLE {
 		sMess += text;
 		mLogger.Print(sMess);
 	}
-}
+

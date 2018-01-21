@@ -1,7 +1,5 @@
 #include "GameObject.h"
 
-namespace MGLE {
-
 	GameObject::GameObject(tString asName, tString asModelFile)
 	{
 		mName = asName;
@@ -15,6 +13,3 @@ namespace MGLE {
 	GameObject::~GameObject()
 	{
 	}
-
-
-}

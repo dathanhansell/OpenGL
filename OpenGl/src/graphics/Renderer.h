@@ -1,5 +1,5 @@
 #pragma once
-namespace MGLE {
+
 	class Renderer
 	{
 	public:
@@ -7,5 +7,5 @@ namespace MGLE {
 		~Renderer();
 		void Init();
 	};
-}
+
 

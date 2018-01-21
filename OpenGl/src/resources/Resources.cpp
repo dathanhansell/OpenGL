@@ -1,5 +1,5 @@
 #include "Resources.h"
-namespace MGLE {
+
 	Resources::Resources() {
 
 		mLowLevelSystem = new cLowLevelSystem();
@@ -10,5 +10,3 @@ namespace MGLE {
 		delete mLowLevelSystem;
 	}
 	GLuint shader;
-
-}

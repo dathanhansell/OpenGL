@@ -1,6 +1,5 @@
 #pragma once
 #include "TextureRes.h"
-namespace MGLE {
 	class cCubemap
 	{
 		cTextureRes res;
@@ -11,5 +10,5 @@ namespace MGLE {
 		void LoadFromFile(tString cubeArray[]);
 		void Bind();
 	};
-}
+
 

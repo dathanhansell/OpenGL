@@ -23,7 +23,7 @@
     <ProjectGuid>{2F1282CB-2CB5-4B2A-AC48-AB55C1A5219E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OpenGl</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>Engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

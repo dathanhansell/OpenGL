@@ -1,7 +1,5 @@
 #include "Debug.h"
 #define _USE_MATH_DEFINES
-namespace MGLE {
-	
 	void Debug::DrawCardWireSphere(Vector3 p, float size, int verts, Vector3 angle) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		verts /= 2;
@@ -124,4 +122,3 @@ namespace MGLE {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	}
-}

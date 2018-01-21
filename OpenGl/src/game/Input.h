@@ -1,8 +1,7 @@
 #pragma once
-#include "stdafx.h"
-#include <SFML/Window.hpp>
-#include "Maths.h"
-namespace MGLE {
+#include "Vector2.h"     
+
+
 	class Input
 	{
 		bool lastKeys[101];
@@ -139,5 +138,3 @@ namespace MGLE {
 			KeyCount
 		};
 	};
-
-}

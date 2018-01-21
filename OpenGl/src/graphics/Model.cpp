@@ -4,7 +4,6 @@
 #include "Maths.h"
 #include "LowLevelSystem.h"
 #include "tString.h"
-namespace MGLE {
 
 	void cModel::Init() {
 		cMeshRes::InitErrorMdl();
@@ -80,4 +79,3 @@ namespace MGLE {
 	bool cModel::IsError() {
 		return res->mIsError;
 	}
-}

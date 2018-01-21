@@ -1,5 +1,4 @@
 #include "tString.h"
-namespace MGLE {
 
 	tWString cString::To16(const tString &asString)
 	{
@@ -18,4 +17,3 @@ namespace MGLE {
 		wcstombs(&sTemp[0], &awsString[0], needed);
 		return sTemp;
 	}
-}

@@ -1,6 +1,4 @@
 #pragma once
-
-namespace MGLE {
 	class Clock
 	{
 		float deltaReturn;
@@ -13,5 +11,3 @@ namespace MGLE {
 		void SetStartTicks();
 		//Uint32 GetTicks();
 	};
-
-}

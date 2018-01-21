@@ -3,12 +3,11 @@
 #include <gl\glut.h>
 #include <vector>
 #include <map>
-#include "Maths.h"
+#include "Vector3.h"
+#include "Vector2.h"
 #include "LowLevelSystem.h"
 #include "tString.h"
 
-
-namespace MGLE {
 	struct PackedVertex {
 		Vector3 position;
 		Vector2 uv;
@@ -54,4 +53,4 @@ namespace MGLE {
 		void LoadOBJFromFile(tString asFileName);
 		void LoadOBJFromSource(tString asSource);
 	};
-}
+

@@ -1,8 +1,6 @@
 #pragma once
 #include <stdafx.h>
 #include <MGLE.h>
-
-namespace MGLE {
 	class Timer;
 	class Window;
 	class Renderer;
@@ -24,4 +22,3 @@ namespace MGLE {
 		~Graphics();
 
 	};
-}

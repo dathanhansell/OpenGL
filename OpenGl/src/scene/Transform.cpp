@@ -1,7 +1,5 @@
 #include "Transform.h"
 
-namespace MGLE {
-
 	Transform::Transform()
 	{
 	}
@@ -48,4 +46,3 @@ namespace MGLE {
 	void Transform::SetScale(float x, float y, float z) {
 		mScale.x = x; mScale.y; mScale.z;
 	}
-}

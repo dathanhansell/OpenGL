@@ -3,7 +3,6 @@
 #include <gl\glut.h>
 #include "Maths.h"
 
-namespace MGLE {
 	class Debug
 	{
 	public:
@@ -16,4 +15,3 @@ namespace MGLE {
 		static void DrawWireBox(Vector3 p, Vector3 d, Vector3 color = { 1.0f,1.0f,1.0f });
 	};
 
-}

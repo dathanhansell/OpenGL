@@ -1,12 +1,9 @@
 #pragma once
-#include "stdafx.h"
-#include <MGLE.h>
-namespace MGLE {
-	class Graphics;
+#include "tString.h"  // for string
+	//class Graphics;
 	class Resources;
 	class Input;
-	class Timer;
-
+	class Graphics;
 	class Game {
 	public:
 		Input* input;
@@ -16,6 +13,6 @@ namespace MGLE {
 		~Game();
 		void Init();
 		void Update();
-		void drawText(std::string text, int x, int y);
+		void drawText(tString text, int x, int y);
 	};
-}
+

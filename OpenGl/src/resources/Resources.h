@@ -2,8 +2,6 @@
 #include "stdafx.h"
 #include "MGLE.h"
 
-namespace MGLE {
-
 	class cLowLevelSystem;
 	class Resources
 	{
@@ -15,5 +13,4 @@ namespace MGLE {
 
 
 	};
-}
 

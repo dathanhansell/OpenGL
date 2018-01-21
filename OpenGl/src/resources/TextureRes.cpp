@@ -1,7 +1,6 @@
 ﻿#include "TextureRes.h"
 #define STB_IMAGE_IMPLEMENTATION    
 #include "stb_image.h"
-namespace MGLE {
 	void cTextureRes::SetNull() {
 
 	}
@@ -79,4 +78,3 @@ namespace MGLE {
 	GLuint cTextureRes::GetTextureID() {
 		return texID;
 	}
-}

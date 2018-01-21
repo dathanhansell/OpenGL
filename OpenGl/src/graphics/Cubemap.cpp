@@ -1,7 +1,5 @@
 #include "Cubemap.h"
 
-namespace MGLE {
-
 	cCubemap::cCubemap()
 	{
 	}
@@ -31,4 +29,3 @@ namespace MGLE {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, res.GetTextureID());
 	}
-}

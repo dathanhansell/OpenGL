@@ -1,7 +1,6 @@
 ﻿#include "MeshRes.h"
 
 using namespace std;
-namespace MGLE {
 	static cMeshRes errorMdl;
 	void cMeshRes::InitErrorMdl() {
 		tString source =
@@ -255,4 +254,3 @@ namespace MGLE {
 		}
 		Log("Done!\n");
 	}
-}

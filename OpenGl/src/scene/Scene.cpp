@@ -1,7 +1,5 @@
 #include "Scene.h"
 
-namespace MGLE {
-
 	Scene::Scene()
 	{
 	}
@@ -12,4 +10,3 @@ namespace MGLE {
 	Camera& Scene::GetCamera() {
 		return mCamera;
 	}
-}
