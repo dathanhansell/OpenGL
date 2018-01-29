@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Editor.h"
-#include "GL/freeglut_std.h"  // for glutInit
+#include <GL/glut.h>  // for glutInit
 #include "qapplication.h"     // for QApplication
 	int main(int argc, char *argv[])
 	{

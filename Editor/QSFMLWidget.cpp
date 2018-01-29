@@ -27,13 +27,13 @@ void QSFMLWidget::showEvent(QShowEvent *event) {
 			sf::ContextSettings settings;
 		settings.depthBits = 24;
 		settings.stencilBits = 8;
-		settings.antialiasingLevel = 4;
+		settings.antialiasingLevel = 0;
 		settings.majorVersion = 4;
 		settings.minorVersion = 4;
 		sf::RenderWindow::create(reinterpret_cast<sf::WindowHandle>(winId()), settings);
 		onInit();
 		connect(&m_timer, SIGNAL(timeout()), this, SLOT(repaint()));
-		m_timer.start();
+		m_timer.start(16);
 		m_initialized = true;
 	}
 }
@@ -42,7 +42,6 @@ void QSFMLWidget::paintEvent(QPaintEvent *event) {
 	RenderWindow::clear();
 	onUpdate();
 	RenderWindow::display();
-	sf::sleep(sf::milliseconds(20));
 }
 
 void QSFMLWidget::onInit() {

@@ -20,10 +20,9 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
-#include "SFMLCanvas.h"
+#include "glwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -37,18 +36,17 @@ public:
     QHBoxLayout *horizontalLayout;
     QSplitter *splitter;
     QTreeWidget *treeWidget;
-    SFMLCanvas *widget;
+    GLWidget *widget;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *EditorClass)
     {
         if (EditorClass->objectName().isEmpty())
             EditorClass->setObjectName(QStringLiteral("EditorClass"));
-        EditorClass->resize(600, 400);
+        EditorClass->resize(802, 556);
         actionNew = new QAction(EditorClass);
         actionNew->setObjectName(QStringLiteral("actionNew"));
         actionOpen = new QAction(EditorClass);
@@ -68,29 +66,28 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(splitter->sizePolicy().hasHeightForWidth());
         splitter->setSizePolicy(sizePolicy);
+        splitter->setFrameShape(QFrame::StyledPanel);
         splitter->setOrientation(Qt::Horizontal);
+        splitter->setChildrenCollapsible(false);
         treeWidget = new QTreeWidget(splitter);
         QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem(treeWidget);
         new QTreeWidgetItem(__qtreewidgetitem);
         QTreeWidgetItem *__qtreewidgetitem1 = new QTreeWidgetItem(treeWidget);
         new QTreeWidgetItem(__qtreewidgetitem1);
         treeWidget->setObjectName(QStringLiteral("treeWidget"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(treeWidget->sizePolicy().hasHeightForWidth());
         treeWidget->setSizePolicy(sizePolicy1);
-        treeWidget->setMaximumSize(QSize(100, 16777215));
+        treeWidget->setMaximumSize(QSize(16777215, 16777215));
+        treeWidget->setFocusPolicy(Qt::NoFocus);
+        treeWidget->setFrameShape(QFrame::StyledPanel);
         treeWidget->setDragEnabled(true);
         treeWidget->setDragDropMode(QAbstractItemView::InternalMove);
         splitter->addWidget(treeWidget);
-        widget = new SFMLCanvas(splitter);
+        widget = new GLWidget(splitter);
         widget->setObjectName(QStringLiteral("widget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy2);
         splitter->addWidget(widget);
 
         horizontalLayout->addWidget(splitter);
@@ -98,15 +95,12 @@ public:
         EditorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EditorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 21));
+        menuBar->setGeometry(QRect(0, 0, 802, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         EditorClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(EditorClass);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        EditorClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(EditorClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         EditorClass->setStatusBar(statusBar);

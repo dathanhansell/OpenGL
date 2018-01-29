@@ -60,8 +60,11 @@
     <ClCompile Include="SFMLCanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorLoop.cpp">
+    <ClCompile Include="GLWidget.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GLWidget.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_Editor.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorLoop.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="SFMLCanvas.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GLWidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

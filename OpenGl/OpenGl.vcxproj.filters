@@ -109,6 +109,9 @@
     <ClCompile Include="src\graphics\Material.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\scene\Tree.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGLE.h" />
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="src\graphics\Material.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\Tree.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

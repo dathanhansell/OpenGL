@@ -185,6 +185,7 @@
     <ClCompile Include="src\scene\GameObject.cpp" />
     <ClCompile Include="src\scene\Scene.cpp" />
     <ClCompile Include="src\scene\Transform.cpp" />
+    <ClCompile Include="src\scene\Tree.cpp" />
     <ClCompile Include="src\Scratch.cpp" />
     <ClCompile Include="src\system\LowLevelSystem.cpp" />
     <ClCompile Include="src\system\tString.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="src\scene\GameObject.h" />
     <ClInclude Include="src\scene\Scene.h" />
     <ClInclude Include="src\scene\Transform.h" />
+    <ClInclude Include="src\scene\Tree.h" />
     <ClInclude Include="src\system\LowLevelSystem.h" />
     <ClInclude Include="src\system\tString.h" />
     <ClInclude Include="stdafx.h" />

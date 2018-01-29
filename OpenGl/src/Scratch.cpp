@@ -1,4 +1,49 @@
 /*
+if (GetActiveWindow() == 00000000) return;
+if (input->GetKeyDown(input->W))      zm--;
+if (input->GetKeyDown(input->S))      zm++;
+if (input->GetKey(input->Space));
+if (input->GetKey(input->LControl));
+if (input->GetKey(input->D));
+if (input->GetKey(input->A));
+if (input->GetKeyDown(input->E)) isize++;
+if (input->GetKeyDown(input->Q)) isize--;
+if (input->GetKeyDown(input->F)) wf = !wf;
+
+if (wf) {
+glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+glEnable(GL_CULL_FACE);
+}
+else {
+glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+glDisable(GL_CULL_FACE);
+}
+pos = { 4,4,4 };
+pos += { -sin(x)* cos(y),
+sin(y),
+cos(x) * cos(y)};
+pos *= zm;
+if (input->GetMouseButton(input->Middle)) {
+if (!input->GetKey(input->LShift)) {
+x += input->GetMouse().x;
+y -= input->GetMouse().y;
+if (y >= 1.57) y = 1.569f;
+if (y <= -1.57) y = -1.569f;
+}
+else {
+Vector3 f = pos.normalized();
+Vector3 r = Vector3::Cross(f, { 0,1,0 });
+f.y = 0;
+r.Normalize();
+f.Normalize();
+f *= input->GetMouse().y;
+r *= input->GetMouse().x;
+f += r;
+tar += f;
+}
+}
+
+pos += tar;
 ////Matrix Junk////
 #include "Game.h"
 #include <stdio.h>

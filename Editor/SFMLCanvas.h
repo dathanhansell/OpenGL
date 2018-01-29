@@ -1,7 +1,7 @@
 #pragma once
 
 #include "QSFMLWidget.h"
-#include "EditorLoop.h"
+#include <Game.h>
 class QWidget;
 
 	class SFMLCanvas : public QSFMLWidget
@@ -13,6 +13,6 @@ class QWidget;
 		void onUpdate() override;
 
 	private:
-		EditorLoop m_editor;
+		Game m_editor;
 	};
 

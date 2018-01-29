@@ -5,10 +5,11 @@
 
 	SFMLCanvas::SFMLCanvas(QWidget *parent) : QSFMLWidget(parent)
 	{
+		
 	}
 
 	void SFMLCanvas::onInit() {
-		m_editor.Start();
+		m_editor.Init();
 	}
 
 	void SFMLCanvas::onUpdate() {
