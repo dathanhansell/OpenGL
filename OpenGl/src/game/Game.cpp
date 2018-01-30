@@ -40,50 +40,13 @@ using namespace std;
 	Vector3 pos, tar;
 
 	void Game::Init() {
-		
 		graphics = new Graphics();
 		input = new Input();
 		resources = new Resources();
 		Shader::Init();
 		cModel::Init();
-		reg.CreateProgram("reg", "shaders\\solid_v.glsl", "shaders\\solid_f.glsl");
-		reg.AddUniform("MVP");
-		reg.AddUniform("bobs");
-		testModel.CreateModel("suzanne","suz.obj");
-		activeShader = &reg;
-		activeShader->Bind();
-		pos = { 4,4,4 };
 	}
-	int zm=5, isize=5;
-	bool wf;
-	float x, y, z;
 	void Game::Update() {
 		glClearColor(.85, .85, .85, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		
-		m.Identity();
-		p.Perspective(90,1, 0.1f, 200);
-		v.View({ pos.x,pos.y,pos.z }, { tar.x, tar.y, tar.z }, { 0, 1, 0 });
-		m.Identity();
-		MVP = m*v*p;
-		activeShader->SetUniform("MVP", MVP);
-		activeShader->SetUniform("bobs", { .4f,.4f,.4f });
-		Debug::DrawGrid(5);
-
-		m.Identity();
-		MVP = m*v*p;
-		activeModel = &testModel;
-		activeShader->SetUniform("MVP", MVP);
-		activeShader->SetUniform("bobs", { 1,0,0 });
-		activeModel->Draw();
-
-		
-		m.Translate(tar);
-		m.Scale(.1f, .1f, .1f);
-		MVP = m*v*p;
-		activeShader->SetUniform("MVP", MVP);
-		activeShader->SetUniform("bobs", { 1,0,1 });
-		Debug::DrawWireSphere({ 0,0,0 });
-
 	}

@@ -5,7 +5,7 @@
 GLWidget::GLWidget(QWidget *parent)
 	: QGLWidget(parent)
 {
-
+	
 }
 void GLWidget::resizeGL(int width, int height) {
 	glViewport(0, 0, width, height);

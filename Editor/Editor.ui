@@ -32,57 +32,7 @@
       <property name="childrenCollapsible">
        <bool>false</bool>
       </property>
-      <widget class="QTreeWidget" name="treeWidget">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::InternalMove</enum>
-       </property>
-       <column>
-        <property name="text">
-         <string>Scene</string>
-        </property>
-       </column>
-       <item>
-        <property name="text">
-         <string>One</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>Child</string>
-         </property>
-        </item>
-       </item>
-       <item>
-        <property name="text">
-         <string>Two</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>Child2</string>
-         </property>
-        </item>
-       </item>
-      </widget>
+      <widget class="HierarchyView" name="treeWidget"/>
       <widget class="GLWidget" name="widget" native="true"/>
      </widget>
     </item>
@@ -138,6 +88,11 @@
    <extends>QWidget</extends>
    <header>glwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HierarchyView</class>
+   <extends>QTreeWidget</extends>
+   <header>hierarchyview.h</header>
   </customwidget>
  </customwidgets>
  <resources>
