@@ -12,23 +12,19 @@ public:
 	Node(tString asName);
 	Node(tString asName, T* asItem);
 	void AddChild(Node asNode);
-	void RemoveChild(Node asNode);
-	void RemoveAllChildren();
 	void AddChild(tString asName);
+	void RemoveChild(Node asNode);
 	void RemoveChild(tString asName);
+	void RemoveAllChildren();
 	void ChangeItem(T* asItem);
+	std::vector<Node> GetChildren();
 	T* GetItem();
 	~Node();
 };
 template <typename T>
-class Tree
+class Tree:public Node<T>
 {
-	Node<T> root;
 public:
-	Node<T> GetRootNode();
-	void AddBaseNode(tString asName);
-	void AddBaseNode(tString asName, T* asitem);
-	void AddBaseNode(Node<T> asNode);
 	Tree();
 	~Tree();
 };

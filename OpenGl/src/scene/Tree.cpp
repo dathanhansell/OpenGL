@@ -11,23 +11,6 @@ template <typename T>
 		root.~Node();
 	}
 	template <typename T>
-	Node<T> Tree<T>::GetRootNode() {
-		return root;
-	}
-	template <typename T>
-	void Tree<T>::AddBaseNode(tString asName) {
-		root.AddChild(asName);
-	}
-
-	template <typename T>
-	void Tree<T>::AddBaseNode(tString asName, T* asitem) {
-		root.AddChild(Node<T>(asName, asitem));
-	}
-	template <typename T>
-	void Tree<T>::AddBaseNode(Node<T> asNode) {
-		root.AddChild(asNode);
-	}
-	template <typename T>
 	Node<T>::Node() {
 		name = "noName";
 	}
@@ -77,6 +60,10 @@ template <typename T>
 	template <typename T>
 	T* Node<T>::GetItem() {
 		return item;
+	}
+	template <typename T>
+	std::vector<Node<T>> Node<T>::GetChildren() {
+		return children;
 	}
 	template <typename T>
 	Node<T>::~Node() {
