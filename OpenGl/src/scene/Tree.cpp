@@ -1,50 +1,40 @@
 #include "Tree.h"
-template <typename T>
-	Tree<T>::Tree()
+	Tree::Tree()
 	{
-		root = {"_root"};
+		
 	}
-	template <typename T>
-	Tree<T>::~Tree()
+	Tree::~Tree()
 	{
-		root.RemoveAllChildren();
-		root.~Node();
+		RemoveAllChildren();
+		
 	}
-	template <typename T>
-	Node<T>::Node() {
+	Node::Node() {
 		name = "noName";
 	}
-	template <typename T>
-	Node<T>::Node(tString asName) {
+	Node::Node(tString asName) {
 		name = asName;
 	}
-	template <typename T>
-	Node<T>::Node(tString asName, T* asitem) {
+	Node::Node(tString asName, int asitem) {
 		name = asName;
 		item = asitem;
 	}
-	template <typename T>
-	void Node<T>::AddChild(Node asnode) {
+	void Node::AddChild(Node asnode) {
 		children.push_back(asnode);
 	}
-	template <typename T>
-	void Node<T>::RemoveChild(Node asnode) {
+	void Node::RemoveChild(Node asnode) {
 		RemoveChild(asnode.name);
 	}
 
-	template <typename T>
-	void Node<T>::RemoveAllChildren() {
+	void Node::RemoveAllChildren() {
 		for (int i = 0; i < children.size(); i++) {
 				children.erase(children.begin() + i);
 		}
 	}
 
-	template <typename T>
-	void Node<T>::AddChild(tString asName) {
+	void Node::AddChild(tString asName) {
 		AddChild(Node(asName));
 	}
-	template <typename T>
-	void Node<T>::RemoveChild(tString asName) {
+	void Node::RemoveChild(tString asName) {
 		for (int i = 0; i < children.size(); i++) {
 			if (children[i].name == asName) {
 				children.erase(children.begin() + i);
@@ -53,20 +43,13 @@ template <typename T>
 		}
 	}
 
-	template <typename T>
-	void Node<T>::ChangeItem(T* asItem) {
+	void Node::ChangeItem(int asItem) {
 		item = asItem;
 	}
-	template <typename T>
-	T* Node<T>::GetItem() {
+	int Node::GetItem() {
 		return item;
 	}
-	template <typename T>
-	std::vector<Node<T>> Node<T>::GetChildren() {
-		return children;
-	}
-	template <typename T>
-	Node<T>::~Node() {
+	Node::~Node() {
 		RemoveAllChildren();
-		delete item;
+		
 	}
