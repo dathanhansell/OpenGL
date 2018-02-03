@@ -71,6 +71,8 @@ public:
         splitter->setChildrenCollapsible(false);
         treeWidget = new HierarchyView(splitter);
         treeWidget->setObjectName(QStringLiteral("treeWidget"));
+        treeWidget->setAcceptDrops(true);
+        treeWidget->setDragDropMode(QAbstractItemView::InternalMove);
         splitter->addWidget(treeWidget);
         widget = new GLWidget(splitter);
         widget->setObjectName(QStringLiteral("widget"));

@@ -1,28 +1,27 @@
 #pragma once
 #include <vector>
 #include "tString.h"
-template <class T>
 class Node
 {
-	std::vector<Node> children;
-	T* item;
-	tString name;
+	
+	int item;
+	
 public:
+	tString name = "";
 	Node();
 	Node(tString asName);
-	Node(tString asName, T* asItem);
+	Node(tString asName, int asItem);
 	void AddChild(Node asNode);
 	void AddChild(tString asName);
 	void RemoveChild(Node asNode);
 	void RemoveChild(tString asName);
 	void RemoveAllChildren();
-	void ChangeItem(T* asItem);
-	std::vector<Node> GetChildren();
-	T* GetItem();
+	void ChangeItem(int asItem);
+	std::vector<Node> children;
+	int GetItem();
 	~Node();
 };
-template <typename T>
-class Tree:public Node<T>
+class Tree:public Node
 {
 public:
 	Tree();

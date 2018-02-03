@@ -11,3 +11,4 @@
 	Camera& Scene::GetCamera() {
 		return mCamera;
 	}
+
