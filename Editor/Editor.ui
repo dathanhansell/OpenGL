@@ -32,7 +32,14 @@
       <property name="childrenCollapsible">
        <bool>false</bool>
       </property>
-      <widget class="HierarchyView" name="treeWidget"/>
+      <widget class="HierarchyView" name="treeWidget">
+       <property name="acceptDrops">
+        <bool>true</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::InternalMove</enum>
+       </property>
+      </widget>
       <widget class="GLWidget" name="widget" native="true"/>
      </widget>
     </item>

@@ -1,72 +1,79 @@
 #include "Tree.h"
-template <typename T>
-	Tree<T>::Tree()
+	Tree::Tree()
 	{
-		root = {"_root"};
+		
 	}
-	template <typename T>
-	Tree<T>::~Tree()
+	Tree::~Tree()
 	{
-		root.RemoveAllChildren();
-		root.~Node();
+		RemoveAllChildren();
+		
 	}
-	template <typename T>
-	Node<T>::Node() {
+	Node::Node() {
 		name = "noName";
 	}
-	template <typename T>
-	Node<T>::Node(tString asName) {
+	Node::Node(tString asName) {
 		name = asName;
 	}
-	template <typename T>
-	Node<T>::Node(tString asName, T* asitem) {
+	Node::Node(tString asName, int asitem) {
 		name = asName;
 		item = asitem;
 	}
-	template <typename T>
-	void Node<T>::AddChild(Node asnode) {
+	void Node::AddChild(tString asName) {
+		AddChild(new Node(asName));
+	}
+	void Node::AddChild(Node* asnode) {
 		children.push_back(asnode);
+		asnode->parent = this;
 	}
-	template <typename T>
-	void Node<T>::RemoveChild(Node asnode) {
-		RemoveChild(asnode.name);
+	void Node::RemoveChild(tString asName) {
+		RemoveChild(GetChild(asName));
 	}
+	void Node::RemoveChild(Node* asnode) {
 
-	template <typename T>
-	void Node<T>::RemoveAllChildren() {
+		RemoveChild(asnode->name);
+	}
+	void Node::RemoveAllChildren() {
 		for (int i = 0; i < children.size(); i++) {
-				children.erase(children.begin() + i);
+			children.erase(children.begin() + i);
 		}
 	}
-
-	template <typename T>
-	void Node<T>::AddChild(tString asName) {
-		AddChild(Node(asName));
-	}
-	template <typename T>
-	void Node<T>::RemoveChild(tString asName) {
-		for (int i = 0; i < children.size(); i++) {
-			if (children[i].name == asName) {
+	void Node::ChangeParent(Node* newParent) {
+		for (int i = 0; i < parent->children.size(); i++) {
+			if (children[i]->name == this->name) {
 				children.erase(children.begin() + i);
 				break;
 			}
 		}
+		parent = newParent;
+		parent->AddChild(this);
 	}
-
-	template <typename T>
-	void Node<T>::ChangeItem(T* asItem) {
+	void Node::ChangeItem(int asItem) {
 		item = asItem;
 	}
-	template <typename T>
-	T* Node<T>::GetItem() {
+	bool Node::IsAncestor(Node* asNode) {
+		if (IsChild(asNode))return true;
+		for (int x = 0; x < asNode->children.size(); x++) {
+			return IsAncestor(asNode->children[x]);
+		};
+	}
+	bool Node::IsChild(Node* asNode) {
+		for (int i = 0; i < asNode->children.size(); i++) {
+			if (asNode->children[i]->name == asNode->name) {
+				return true;
+			}
+		}
+		return false;
+	}
+	Node* Node::GetChild(tString asName) {
+		for (int i = 0; i < children.size(); i++) {
+			if (children[i]->name == asName) {
+				return children[i];
+			}
+		}
+	}
+	int Node::GetItem() {
 		return item;
 	}
-	template <typename T>
-	std::vector<Node<T>> Node<T>::GetChildren() {
-		return children;
-	}
-	template <typename T>
-	Node<T>::~Node() {
+	Node::~Node() {
 		RemoveAllChildren();
-		delete item;
 	}
