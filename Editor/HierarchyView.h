@@ -2,10 +2,10 @@
 #include <Scene.h>
 #include <QObject>
 
-class HierarchyView : public QTreeWidget
+class HierarchyView : public QTreeWidget,public Tree
 {
 	Q_OBJECT
-		void ChildAdd(Node node, QTreeWidgetItem *parent);
+		void ChildAdd(Node* node, QTreeWidgetItem *parent);
 public:
 	explicit HierarchyView(QWidget *parent);
 	void HierarchyView::ChangeOpenHeaderTitle(QString title);
