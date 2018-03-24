@@ -8,8 +8,9 @@ HierarchyView::HierarchyView(QWidget *parent)
 	ChangeOpenHeaderTitle("New Scene");
 	open.Hierarchy.AddChild("root1");
 	open.Hierarchy.children[0].AddChild("child1");
-	open.Hierarchy.children[0].AddChild("child1.1");
+	open.Hierarchy.children[0].AddChild("child2");
 	open.Hierarchy.children[0].children[0].AddChild("grandchild1");
+	open.Hierarchy.children[0].children[0].children[0].AddChild("greatgrandchild1");
 	CreateFromScene(open);
 		
 
