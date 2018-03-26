@@ -10,7 +10,7 @@ HierarchyView::HierarchyView(QWidget *parent)
 	open.Hierarchy.children[0]->AddChild("child1");
 	open.Hierarchy.children[0]->AddChild("child1.1");
 	open.Hierarchy.children[0]->children[0]->AddChild("grandchild1");
-	open.Hierarchy.children[0]->ChangeParent(open.Hierarchy.children[0]->children[0]);
+	//open.Hierarchy.children[0]->ChangeParent(open.Hierarchy.children[0]->children[0]);
 	CreateFromScene(open);
 		
 
