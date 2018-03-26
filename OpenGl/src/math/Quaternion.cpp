@@ -59,44 +59,32 @@
 		e.y = asin(std::max(-1.0f, std::min(-2 * (q.x * q.z - q.w * q.y), 1.0f)));
 		e.z = atan2(2.0f * (q.x * q.y + q.w * q.z), q.w * q.w + q.x * q.x - q.y * q.y - q.z * q.z);
 		return e* RAD2DEG;
-
 		*/
-
 		///////
-		//Method2
+		//Method3
 		///////
+		Print();
 		float sqw = w*w;
 		float sqx = x*x;
 		float sqy = y*y;
 		float sqz = z*z;
-
-		Vector3 euler;
-		euler.x = atan2f(2.f * (z*y + x*w), 1 - 2 * (sqx + sqy));
-		euler.y = asinf(-2.f * (x*z - y*w));
-		euler.z = atan2f(2.f * (x*y + z*w), 1 - 2 * (sqy + sqz));
-		return euler * RAD2DEG;
-
-		/*
-		///////
-		//Method3
-		///////
 		Vector3 e;
 		float sx = 2 * (w * x + y * z);
-		float cx = 1 - 2 * (x * x + y * y);
+		float cx = 1 - 2 * (sqx + sqy);
 		e.x = atan2(sx, cx);
 
 		float sy = 2 * (w * y - z * x);
-		if (fabs(sx) >= 1)
-			e.y = copysign(M_PI / 2, sx);
-		else
-			e.y = asin(sx);
+		if (fabs(sy) >= 1) 
+			e.y = copysign(M_PI / 2, sy);
+		else 
+			e.y = asin(sy);
 
 		float sz = 2 * (w * z + x * y);
-		float cz = 1 - 2 * (y * y + z * z);
-		e.z = atan2(sy, cz);
+		float cz = 1 - 2 * (sqy + sqz);
+		e.z = atan2(sz, cz);
 		return e * RAD2DEG;
 
-
+		/*
 		///////
 		//Method4
 		///////
