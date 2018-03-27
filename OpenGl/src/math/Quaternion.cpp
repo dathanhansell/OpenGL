@@ -63,6 +63,7 @@
 		///////
 		//Method3
 		///////
+		/*
 		Print();
 		float sqw = w*w;
 		float sqx = x*x;
@@ -83,7 +84,26 @@
 		float cz = 1 - 2 * (sqy + sqz);
 		e.z = atan2(sz, cz);
 		return e * RAD2DEG;
-
+		
+		float sqw = w * w;
+		float sqx = x * x;
+		float sqy = y * y;
+		float sqz = z * z;
+		Vector3 e;
+		e.x = atan2(2 * (z*w + x * y), 2 * (sqz, sqw) - 1);
+		e.y = atan2(-2 * (y*w-x-z),sqrt(pow(2 *(z*w + x*y),2)+ pow(2 * (sqz + sqw)-2, 2)));
+		e.z = atan2(2 * (y*z + x * w), 2 * (sqx + sqy) - 1);
+		return e * RAD2DEG;
+		*/
+		float sqw = w * w;
+		float sqx = x * x;
+		float sqy = y * y;
+		float sqz = z * z;
+		Vector3 e;
+		e.x = atan2(2*(sqx + sqz) - 1, 2*(y*w + x * z));
+		e.y = atan2(sqrt(pow(2 * (y*w + x * z), 2) + pow(2 * (z*w - x * y) - 2, 2)), 2 * (sqx + sqw) - 1);
+		e.z = atan2(2 * (z*w + x * y), -2 * (y*w - x * z));
+		return e * RAD2DEG;
 		/*
 		///////
 		//Method4

@@ -53,7 +53,7 @@
    private:
 #endif
 
-// Visual Studio 2010, 2012, and 2013 define symbols in std::tr1 that conflict
+// Visual Studio 2010, 2012, and 2013 define symbols in std that conflict
 // with our own definitions. Therefore using our own tuple does not work on
 // those compilers.
 #if defined(_MSC_VER) && _MSC_VER >= 1600  /* 1600 is Visual Studio 2010 */
@@ -129,7 +129,7 @@ template <typename T>
 struct ByRef<T&> { typedef T& type; };  // NOLINT
 
 // A handy wrapper for ByRef.
-#define GTEST_BY_REF_(T) typename ::std::tr1::gtest_internal::ByRef<T>::type
+#define GTEST_BY_REF_(T) typename ::std::gtest_internal::ByRef<T>::type
 
 // AddRef<T>::type is T if T is a reference; otherwise it's T&.  This
 // is the same as tr1::add_reference<T>::type.
@@ -139,7 +139,7 @@ template <typename T>
 struct AddRef<T&> { typedef T& type; };  // NOLINT
 
 // A handy wrapper for AddRef.
-#define GTEST_ADD_REF_(T) typename ::std::tr1::gtest_internal::AddRef<T>::type
+#define GTEST_ADD_REF_(T) typename ::std::gtest_internal::AddRef<T>::type
 
 // A helper for implementing get<k>().
 template <int k> class Get;
@@ -669,7 +669,7 @@ class tuple {
 // 6.1.3.2 Tuple creation functions.
 
 // Known limitations: we don't support passing an
-// std::tr1::reference_wrapper<T> to make_tuple().  And we don't
+// std::reference_wrapper<T> to make_tuple().  And we don't
 // implement tie().
 
 inline tuple<> make_tuple() { return tuple<>(); }
@@ -964,7 +964,7 @@ struct SameSizeTuplePrefixComparator<k, k> {
   template <class Tuple1, class Tuple2>
   static bool Eq(const Tuple1& t1, const Tuple2& t2) {
     return SameSizeTuplePrefixComparator<k - 1, k - 1>::Eq(t1, t2) &&
-        ::std::tr1::get<k - 1>(t1) == ::std::tr1::get<k - 1>(t2);
+        ::std::get<k - 1>(t1) == ::std::get<k - 1>(t2);
   }
 };
 

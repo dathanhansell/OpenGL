@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)$(SolutionDir)\mid\gtest;$(SolutionDir)\mid\include\SFML;$(SolutionDir)\mid\include\freeglut;$(SolutionDir)\mid\include\glew-2.1.0;$(SolutionDir)\OpenGL\src;$(SolutionDir)\OpenGL;$(SolutionDir)\OpenGL\src\math;$(SolutionDir)\OpenGL\src\graphics;$(SolutionDir)\OpenGL\src\game;$(SolutionDir)\OpenGL\src\resources;$(SolutionDir)\OpenGL\src\scene;$(SolutionDir)\OpenGL\src\system</IncludePath>
-    <LibraryPath>C:\Users\Dathan Hansell\Desktop\OpenGL\mid\lib\freeglut;$(LibraryPath)$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <LibraryPath>$(SolutionDir)\mid\lib\freeglut;$(LibraryPath)$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -98,6 +98,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
