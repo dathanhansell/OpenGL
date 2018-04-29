@@ -30,7 +30,7 @@ QTreeWidgetItem * HierarchyView::AddChild(QTreeWidgetItem *parent, QString name)
 	parent->addChild(itm);
 	return itm;
 }
-void HierarchyView::ChildAdd(Node node, QTreeWidgetItem *parent) {
+void HierarchyView::ChildAdd(Node* node, QTreeWidgetItem *parent) {
 	QTreeWidgetItem *itm = AddChild(parent, QString::fromStdString(node.name));
 	for (int x = 0; x < node.children.size(); x++) {
 		ChildAdd(node.children[x],itm);

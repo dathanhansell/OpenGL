@@ -683,7 +683,7 @@ struct _RTL_CRITICAL_SECTION;
 // them.
 #if GTEST_HAS_TR1_TUPLE
 # ifndef GTEST_TUPLE_NAMESPACE_
-#  define GTEST_TUPLE_NAMESPACE_ ::std::tr1
+#  define GTEST_TUPLE_NAMESPACE_ ::std
 # endif  // GTEST_TUPLE_NAMESPACE_
 
 # if GTEST_USE_OWN_TR1_TUPLE
@@ -691,7 +691,7 @@ struct _RTL_CRITICAL_SECTION;
 # elif GTEST_ENV_HAS_STD_TUPLE_
 #  include <tuple>
 // C++11 puts its tuple into the ::std namespace rather than
-// ::std::tr1.  gtest expects tuple to live in ::std::tr1, so put it there.
+// ::std.  gtest expects tuple to live in ::std, so put it there.
 // This causes undefined behavior, but supported compilers react in
 // the way we intend.
 namespace std {
